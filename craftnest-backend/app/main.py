@@ -20,6 +20,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.core.logging import logger
 from structlog.contextvars import bind_contextvars, clear_contextvars
 
+from app.core.rate_limit import limiter
+from slowapi.errors import RateLimitExceeded
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup log
@@ -59,6 +62,19 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+# Attach limiter to application state
+app.state.limiter = limiter
+
+# Register rate limit exceeded exception handler
+@app.exception_handler(RateLimitExceeded)
+async def custom_rate_limit_handler(request: Request, exc: RateLimitExceeded):
+    retry_after = getattr(exc, "retry_after", 60)
+    return JSONResponse(
+        status_code=429,
+        content={"detail": f"Too many requests, try again in {retry_after} seconds"},
+        headers={"Retry-After": str(retry_after)}
+    )
+
 app.include_router(auth_router)
 app.include_router(items_router)
 
@@ -77,7 +93,8 @@ async def structlog_middleware(request: Request, call_next):
             parts = auth_header.split()
             if len(parts) == 2 and parts[0].lower() == "bearer":
                 token = parts[1]
-                payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+                # Use JWT_SECRET instead of legacy SECRET_KEY
+                payload = jwt.decode(token, settings.JWT_SECRET, algorithms=[settings.ALGORITHM])
                 user_id = payload.get("sub")
         except Exception:
             user_id = None
@@ -126,6 +143,7 @@ async def structlog_middleware(request: Request, call_next):
         raise exc
     finally:
         clear_contextvars()
+
 
 app.add_middleware(
     CORSMiddleware,

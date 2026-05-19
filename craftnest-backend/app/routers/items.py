@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from app.core.database import get_db
@@ -6,11 +6,14 @@ from app.models.item import Item
 from app.models.user import User
 from app.schemas.item import ItemCreate, ItemResponse
 from app.routers.deps import get_current_user, RoleChecker
+from app.core.rate_limit import rate_limit_by_user
 
 router = APIRouter(prefix="/api/v1/items", tags=["Items"])
 
 @router.post("", response_model=ItemResponse, status_code=status.HTTP_201_CREATED)
+@rate_limit_by_user("120/minute")
 async def create_item(
+    request: Request,
     item_in: ItemCreate,
     db: AsyncSession = Depends(get_db),
     current_user: User = Depends(RoleChecker(["seller", "admin"]))
@@ -32,7 +35,9 @@ async def create_item(
     return db_item
 
 @router.get("/{item_id}", response_model=ItemResponse)
+@rate_limit_by_user("120/minute")
 async def read_item(
+    request: Request,
     item_id: int,
     db: AsyncSession = Depends(get_db),
     current_user: User = Depends(get_current_user)
@@ -44,7 +49,9 @@ async def read_item(
     return item
 
 @router.put("/{item_id}", response_model=ItemResponse)
+@rate_limit_by_user("120/minute")
 async def update_item(
+    request: Request,
     item_id: int,
     item_in: ItemCreate,
     db: AsyncSession = Depends(get_db),
@@ -68,7 +75,9 @@ async def update_item(
     return item
 
 @router.delete("/{item_id}", status_code=status.HTTP_204_NO_CONTENT)
+@rate_limit_by_user("120/minute")
 async def delete_item(
+    request: Request,
     item_id: int,
     db: AsyncSession = Depends(get_db),
     current_user: User = Depends(get_current_user)
@@ -86,3 +95,4 @@ async def delete_item(
         
     await db.delete(item)
     await db.flush()
+

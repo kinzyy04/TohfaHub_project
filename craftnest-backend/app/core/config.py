@@ -15,6 +15,8 @@ class Settings(BaseSettings):
     JWT_REFRESH_SECRET: str = "your-super-refresh-secret-key-change-in-production"
     ENV: str = "development"
     CORS_ORIGINS: list[str] = ["https://localhost:8443", "http://127.0.0.1:5500"]
+    TRUSTED_PROXY: bool = False
+
 
     model_config = SettingsConfigDict(
         env_file=".env", 

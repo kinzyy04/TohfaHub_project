@@ -109,3 +109,11 @@ async def seller_token(client) -> str:
 async def admin_token(client) -> str:
     """Create a fresh admin user and return their access token."""
     return await create_user_token_helper(client, "admin")
+
+
+@pytest.fixture(autouse=True)
+def reset_rate_limiter():
+    """Autouse fixture to reset the slowapi rate limiter storage before each test."""
+    from app.core.rate_limit import limiter
+    limiter.reset()
+
