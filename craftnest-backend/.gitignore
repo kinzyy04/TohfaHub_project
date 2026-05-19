@@ -1,0 +1,25 @@
+# Virtual environment
+.venv/
+env/
+venv/
+ENV/
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Databases
+*.db
+*.sqlite3
+
+# Environment files
+.env
+.env.local
+
+# Certificates & Keys
+certs/
+*.pem
+*.key

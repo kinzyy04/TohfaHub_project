@@ -1,0 +1,159 @@
+import sys
+import asyncio
+
+# Set the selector event loop policy on Windows for psycopg async compatibility
+if sys.platform == "win32":
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+import uuid
+import time
+from fastapi import FastAPI, Depends, status, Request
+from fastapi.responses import JSONResponse
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import text
+from contextlib import asynccontextmanager
+from jose import jwt
+
+from app.core.database import engine, get_db, SessionLocal
+from app.core.config import settings
+from fastapi.middleware.cors import CORSMiddleware
+from app.core.logging import logger
+from structlog.contextvars import bind_contextvars, clear_contextvars
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup log
+    logger.info("DB engine ready")
+    
+    # Check DB user to prevent connecting as superuser
+    try:
+        async with SessionLocal() as session:
+            result = await session.execute(text("SELECT current_user;"))
+            current_user = result.scalar()
+            
+            if current_user and ("postgres" in current_user.lower() or "superuser" in current_user.lower()):
+                logger.critical(
+                    "Security risk: Application connected to DB as highly privileged user. Refusing to start.",
+                    current_user=current_user
+                )
+                sys.exit(1)
+            else:
+                logger.info("Connected as DB user", current_user=current_user)
+    except SystemExit:
+        raise
+    except Exception as e:
+        logger.error("Failed to verify database user during startup", error=str(e))
+
+    yield
+    # Clean shutdown
+    await engine.dispose()
+    logger.info("DB engine disposed cleanly")
+
+from app.routers.auth import router as auth_router
+from app.routers.items import router as items_router
+
+app = FastAPI(
+    title="CraftNest API",
+    description="Backend API for CraftNest marketplace",
+    version="0.1.0",
+    lifespan=lifespan,
+)
+
+app.include_router(auth_router)
+app.include_router(items_router)
+
+@app.middleware("http")
+async def structlog_middleware(request: Request, call_next):
+    # 1. Generate or extract Request ID
+    request_id = request.headers.get("x-request-id")
+    if not request_id:
+        request_id = str(uuid.uuid4())
+        
+    # 2. Extract user identity if Authorization header is present
+    user_id = None
+    auth_header = request.headers.get("authorization")
+    if auth_header:
+        try:
+            parts = auth_header.split()
+            if len(parts) == 2 and parts[0].lower() == "bearer":
+                token = parts[1]
+                payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+                user_id = payload.get("sub")
+        except Exception:
+            user_id = None
+
+    # 3. Bind request context variables
+    ip = request.client.host if request.client else "unknown"
+    bind_contextvars(
+        request_id=request_id,
+        user_id=user_id,
+        path=request.url.path,
+        method=request.method,
+        ip=ip
+    )
+
+    start_time = time.perf_counter()
+    try:
+        response = await call_next(request)
+        duration_ms = round((time.perf_counter() - start_time) * 1000, 2)
+        
+        status_code = response.status_code
+        if status_code >= 400:
+            logger.warn(
+                "Request completed with error status",
+                status_code=status_code,
+                duration_ms=duration_ms,
+            )
+        else:
+            logger.info(
+                "Request completed successfully",
+                status_code=status_code,
+                duration_ms=duration_ms,
+            )
+            
+        response.headers["X-Request-Id"] = request_id
+        return response
+        
+    except Exception as exc:
+        duration_ms = round((time.perf_counter() - start_time) * 1000, 2)
+        logger.error(
+            "Request failed with unhandled exception",
+            exception_type=type(exc).__name__,
+            exception_message=str(exc),
+            status_code=500,
+            duration_ms=duration_ms,
+        )
+        raise exc
+    finally:
+        clear_contextvars()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.CORS_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type"],
+    max_age=600,
+)
+
+@app.get("/health", tags=["Health Check"])
+async def health_check():
+    return {"status": "ok"}
+
+@app.get("/api/v1/health", tags=["Health Check"])
+async def api_health_check():
+    return {"status": "ok"}
+
+@app.get("/api/v1/health/db", tags=["Health Check"])
+async def health_db_check(db: AsyncSession = Depends(get_db)):
+    try:
+        result = await db.execute(text("SELECT 1"))
+        result.fetchone()
+        return {"db": "ok"}
+    except Exception as e:
+        logger.error("Database health check failed", error=str(e))
+        return JSONResponse(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            content={"db": "error", "detail": str(e)},
+        )
+
