@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CraftNest - Upload Product</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&amp;family=Be+Vietnam+Pro:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-container-low": "#faf2e9",
+                "surface-container-high": "#efe7dd",
+                "on-tertiary": "#ffffff",
+                "background": "#fff8f1",
+                "surface-variant": "#e9e1d8",
+                "surface-container": "#f4ede3",
+                "secondary-container": "#f7d5f8",
+                "inverse-surface": "#33302a",
+                "surface-bright": "#fff8f1",
+                "inverse-on-surface": "#f7f0e6",
+                "primary-fixed": "#dbe8bf",
+                "secondary-fixed-dim": "#ddbcdf",
+                "surface-container-lowest": "#ffffff",
+                "on-error": "#ffffff",
+                "error": "#ba1a1a",
+                "on-surface": "#1e1b15",
+                "on-secondary": "#ffffff",
+                "tertiary-container": "#b3afa7",
+                "on-secondary-fixed-variant": "#573e5b",
+                "on-tertiary-fixed-variant": "#494740",
+                "primary-container": "#a8b48e",
+                "on-primary-fixed": "#151e05",
+                "on-primary": "#ffffff",
+                "primary": "#576242",
+                "on-tertiary-fixed": "#1d1c16",
+                "on-secondary-container": "#745a78",
+                "inverse-primary": "#bfcba4",
+                "tertiary-fixed-dim": "#cac6be",
+                "outline": "#76786e",
+                "secondary-fixed": "#fad8fb",
+                "on-error-container": "#93000a",
+                "surface-dim": "#e0d9cf",
+                "secondary": "#705673",
+                "error-container": "#ffdad6",
+                "on-secondary-fixed": "#28132d",
+                "on-background": "#1e1b15",
+                "on-surface-variant": "#45483f",
+                "primary-fixed-dim": "#bfcba4",
+                "surface-tint": "#576242",
+                "surface": "#fff8f1",
+                "outline-variant": "#c6c7bb",
+                "on-tertiary-container": "#44423c",
+                "tertiary-fixed": "#e7e2d9",
+                "tertiary": "#615e57",
+                "surface-container-highest": "#e9e1d8",
+                "on-primary-fixed-variant": "#404a2c",
+                "on-primary-container": "#3c4628"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "container-max": "1200px",
+                "unit": "8px",
+                "margin-mobile": "20px",
+                "gutter": "24px",
+                "margin-desktop": "80px"
+            },
+            "fontFamily": {
+                "headline-lg": ["EB Garamond"],
+                "headline-md": ["EB Garamond"],
+                "display-lg": ["EB Garamond"],
+                "body-md": ["Be Vietnam Pro"],
+                "body-lg": ["Be Vietnam Pro"],
+                "headline-lg-mobile": ["EB Garamond"],
+                "label-sm": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "300"}],
+                "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "300"}],
+                "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                "label-sm": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.1em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .botanical-bg {
+            background-image: radial-gradient(circle at 10% 20%, rgba(168, 180, 142, 0.05) 0%, transparent 40%),
+                              radial-gradient(circle at 90% 80%, rgba(112, 86, 115, 0.05) 0%, transparent 40%);
+        }
+        .custom-scrollbar::-webkit-scrollbar { height: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #c6c7bb; border-radius: 10px; }
+        
+        .toggle-checkbox:checked { right: 0; border-color: #576242; }
+        .toggle-checkbox:checked + .toggle-label { background-color: #a8b48e; }
+
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container/30 overflow-x-hidden botanical-bg">
+<!-- Top Profile Header -->
+<header class="w-full bg-background/80 backdrop-blur-sm sticky top-0 z-50 border-b border-outline-variant/20">
+<div class="max-w-4xl mx-auto px-margin-mobile py-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<img alt="Artisan Profile Photo" class="w-12 h-12 rounded-full object-cover grayscale-[0.3]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0ZZiz2xrOjB6edMsuV3bGux3OULLmq9APOA9cTZadUE_yaGw2Xv9JbMEt6actP8n8rg2jzExZG26CzNr9SovlHCpDXu4R8I6-JgpKk8QWEkstnWW3rGStFyx0SwCJV5HGr1R8Q7q_qCj8ZWZtYpNrGFFrjlIC5KlE3isvtp8F8-yrQTpLQ228ukm-BxmUFg0KFqgvBWeCRAcQKqxvDXKFo08dolw3CJSvvt2Y8nPZTUgFNH5RzSmBj3pMttiL3dy7XzdAhBkGYBw"/>
+<div>
+<div class="font-headline-md text-headline-md text-primary leading-none">Artisan Name</div>
+<div class="text-[12px] text-on-surface-variant font-body-md mt-1">Crafting since 2024</div>
+</div>
+</div>
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-bold tracking-tight">CraftNest</div>
+</div>
+<!-- Horizontal Navigation Bar -->
+<div class="max-w-4xl mx-auto px-margin-mobile">
+<nav class="flex items-center gap-8 overflow-x-auto hide-scrollbar">
+<a class="py-4 text-on-surface-variant font-body-lg text-body-lg whitespace-nowrap hover:text-primary transition-colors border-b-2 border-transparent" href="#">Upload Reel</a>
+<a class="py-4 text-primary font-bold font-body-lg text-body-lg whitespace-nowrap border-b-2 border-primary" href="#">Upload Product</a>
+<a class="py-4 text-on-surface-variant font-body-lg text-body-lg whitespace-nowrap hover:text-primary transition-colors border-b-2 border-transparent" href="#">Activity</a>
+<a class="py-4 text-on-surface-variant font-body-lg text-body-lg whitespace-nowrap hover:text-primary transition-colors border-b-2 border-transparent" href="#">Dashboard</a>
+</nav>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="py-12 px-margin-mobile max-w-4xl mx-auto">
+<div class="mb-10 relative">
+<h1 class="font-display-lg text-display-lg text-on-surface leading-tight mb-2">Upload New Creation</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">Share your latest masterpiece with the world. Detail the artistry and heart behind your work.</p>
+<!-- Decorative botanical line art placeholder -->
+<div class="absolute -top-12 -right-12 opacity-10 pointer-events-none hidden lg:block">
+<span class="material-symbols-outlined text-[160px]" data-icon="spa">spa</span>
+</div>
+</div>
+<form class="space-y-12" id="productForm">
+<!-- Section 1: Product Information -->
+<section class="space-y-6">
+<div class="flex items-center gap-2 mb-4 border-b border-outline-variant/30 pb-2">
+<span class="material-symbols-outlined text-primary" data-icon="edit_note">edit_note</span>
+<h2 class="font-headline-md text-headline-md text-primary">Identity &amp; Details</h2>
+</div>
+<div class="space-y-8">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="product_name">PRODUCT NAME</label>
+<input class="w-full bg-transparent border-b border-outline-variant focus:border-primary focus:ring-0 transition-all py-3 font-headline-md text-headline-md text-on-surface placeholder:text-outline-variant/50" id="product_name" placeholder="e.g., Hand-Thrown Sage Ceramic Vase" type="text"/>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-4">SELECT CATEGORY</label>
+<div class="flex gap-4 overflow-x-auto pb-4 custom-scrollbar">
+<label class="cursor-pointer flex-shrink-0 group">
+<input checked="" class="hidden peer" name="category" type="radio"/>
+<div class="px-8 py-4 border border-outline-variant rounded-full flex items-center gap-2 peer-checked:bg-primary-container peer-checked:text-on-primary-container peer-checked:border-primary transition-all group-hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-[20px]" data-icon="coffee">coffee</span>
+<span class="font-label-sm text-label-sm whitespace-nowrap">CERAMICS</span>
+</div>
+</label>
+<label class="cursor-pointer flex-shrink-0 group">
+<input class="hidden peer" name="category" type="radio"/>
+<div class="px-8 py-4 border border-outline-variant rounded-full flex items-center gap-2 peer-checked:bg-primary-container peer-checked:text-on-primary-container peer-checked:border-primary transition-all group-hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-[20px]" data-icon="apparel">apparel</span>
+<span class="font-label-sm text-label-sm whitespace-nowrap">TEXTILES</span>
+</div>
+</label>
+<label class="cursor-pointer flex-shrink-0 group">
+<input class="hidden peer" name="category" type="radio"/>
+<div class="px-8 py-4 border border-outline-variant rounded-full flex items-center gap-2 peer-checked:bg-primary-container peer-checked:text-on-primary-container peer-checked:border-primary transition-all group-hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-[20px]" data-icon="diamond">diamond</span>
+<span class="font-label-sm text-label-sm whitespace-nowrap">JEWELRY</span>
+</div>
+</label>
+<label class="cursor-pointer flex-shrink-0 group">
+<input class="hidden peer" name="category" type="radio"/>
+<div class="px-8 py-4 border border-outline-variant rounded-full flex items-center gap-2 peer-checked:bg-primary-container peer-checked:text-on-primary-container peer-checked:border-primary transition-all group-hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-[20px]" data-icon="key">key</span>
+<span class="font-label-sm text-label-sm whitespace-nowrap">KEYCHAINS</span>
+</div>
+</label>
+<label class="cursor-pointer flex-shrink-0 group">
+<input class="hidden peer" name="category" type="radio"/>
+<div class="px-8 py-4 border border-outline-variant rounded-full flex items-center gap-2 peer-checked:bg-primary-container peer-checked:text-on-primary-container peer-checked:border-primary transition-all group-hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-[20px]" data-icon="grid_view">grid_view</span>
+<span class="font-label-sm text-label-sm whitespace-nowrap">OTHER</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Media Upload -->
+<section class="space-y-6">
+<div class="flex items-center gap-2 mb-4 border-b border-outline-variant/30 pb-2">
+<span class="material-symbols-outlined text-primary" data-icon="photo_library">photo_library</span>
+<h2 class="font-headline-md text-headline-md text-primary">Studio Gallery</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 h-80">
+<!-- Main Image Dropzone -->
+<div class="md:col-span-2 border-2 border-dashed border-outline-variant rounded-xl bg-surface-container-low flex flex-col items-center justify-center p-8 group hover:border-primary transition-colors cursor-pointer relative overflow-hidden">
+<div class="text-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-4xl text-outline mb-3" data-icon="add_photo_alternate">add_photo_alternate</span>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-1">Upload Product Photos</p>
+<p class="text-[12px] text-outline">High resolution images (JPEG, PNG)</p>
+</div>
+<input accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer" multiple="" type="file"/>
+</div>
+<!-- Video/Reel Dropzone -->
+<div class="border-2 border-dashed border-outline-variant rounded-xl bg-surface-container-low flex flex-col items-center justify-center p-8 group hover:border-secondary transition-colors cursor-pointer relative">
+<div class="text-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-4xl text-secondary/60 mb-3" data-icon="movie_filter">movie_filter</span>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-1">Add Studio Reel</p>
+<p class="text-[12px] text-outline">MP4, MOV (max 30s)</p>
+</div>
+<input accept="video/*" class="absolute inset-0 opacity-0 cursor-pointer" type="file"/>
+</div>
+</div>
+</section>
+<!-- Section 3: Pricing & Finance -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<div class="space-y-6">
+<div class="flex items-center gap-2 mb-4 border-b border-outline-variant/30 pb-2">
+<span class="material-symbols-outlined text-primary" data-icon="payments">payments</span>
+<h2 class="font-headline-md text-headline-md text-primary">Value &amp; Ethics</h2>
+</div>
+<div class="space-y-6">
+<div class="flex items-center justify-between gap-4">
+<div class="flex-1">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="base_price">BASE PRICE ($)</label>
+<input class="w-full bg-transparent border-b border-outline-variant focus:border-primary focus:ring-0 py-2 font-headline-md text-headline-md" id="base_price" step="0.01" type="number" value="0.00"/>
+</div>
+<div class="flex-1">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="discount">DISCOUNT (%)</label>
+<input class="w-full bg-transparent border-b border-outline-variant focus:border-primary focus:ring-0 py-2 font-headline-md text-headline-md" id="discount" max="100" min="0" type="number" value="0"/>
+</div>
+</div>
+<!-- Final Price Display Card -->
+<div class="p-6 bg-surface-container rounded-xl border border-outline-variant/30 relative overflow-hidden">
+<div class="relative z-10 flex justify-between items-end">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">ESTIMATED FINAL PRICE</p>
+<div class="font-display-lg text-display-lg text-primary">$<span id="final_price_display">0.00</span></div>
+</div>
+<div class="text-right">
+<p class="text-[12px] text-outline italic">Includes CraftNest Studio fee</p>
+</div>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-7xl opacity-5 rotate-12" data-icon="verified">verified</span>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<div class="flex items-center gap-2 mb-4 border-b border-outline-variant/30 pb-2">
+<span class="material-symbols-outlined text-primary" data-icon="feature_search">feature_search</span>
+<h2 class="font-headline-md text-headline-md text-primary">Artisan Touches</h2>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 border border-outline-variant rounded-xl">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="redeem">redeem</span>
+<div>
+<p class="font-body-lg text-body-lg font-bold">Artisanal Gift Wrap</p>
+<p class="text-[12px] text-on-surface-variant">Pressed flowers &amp; linen twine</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" id="gift_wrap_toggle" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="opacity-0 max-h-0 overflow-hidden transition-all duration-300" id="gift_wrap_cost_container">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="gift_wrap_cost">GIFT WRAP FEE ($)</label>
+<input class="w-full bg-transparent border-b border-outline-variant focus:border-primary focus:ring-0 py-2 font-headline-md text-headline-md" id="gift_wrap_cost" step="0.50" type="number" value="5.00"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Form Actions -->
+<div class="flex flex-col sm:flex-row gap-4 pt-8 border-t border-outline-variant/30">
+<button class="flex-1 py-4 px-6 border border-outline text-on-surface-variant font-body-lg text-body-lg rounded-xl hover:bg-surface-container-high transition-all flex items-center justify-center gap-2 active:scale-95" type="button">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+                Preview Creation
+            </button>
+<button class="flex-[2] py-4 px-6 bg-primary text-on-primary font-body-lg text-body-lg font-bold rounded-xl hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-95" type="submit">
+<span class="material-symbols-outlined" data-icon="publish" style="font-variation-settings: 'FILL' 1;">publish</span>
+                Publish Product
+            </button>
+</div>
+</form>
+</main>
+<script>
+    // Calculation Logic
+    const basePriceInput = document.getElementById('base_price');
+    const discountInput = document.getElementById('discount');
+    const finalPriceDisplay = document.getElementById('final_price_display');
+    const giftWrapToggle = document.getElementById('gift_wrap_toggle');
+    const giftWrapCostContainer = document.getElementById('gift_wrap_cost_container');
+    const giftWrapCostInput = document.getElementById('gift_wrap_cost');
+
+    function calculateFinalPrice() {
+        const base = parseFloat(basePriceInput.value) || 0;
+        const discount = parseFloat(discountInput.value) || 0;
+        const wrapCost = giftWrapToggle.checked ? (parseFloat(giftWrapCostInput.value) || 0) : 0;
+        
+        const discounted = base - (base * (discount / 100));
+        const final = discounted + wrapCost;
+        
+        finalPriceDisplay.innerText = final.toFixed(2);
+    }
+
+    basePriceInput.addEventListener('input', calculateFinalPrice);
+    discountInput.addEventListener('input', calculateFinalPrice);
+    giftWrapCostInput.addEventListener('input', calculateFinalPrice);
+    
+    giftWrapToggle.addEventListener('change', () => {
+        if(giftWrapToggle.checked) {
+            giftWrapCostContainer.classList.remove('opacity-0', 'max-h-0');
+            giftWrapCostContainer.classList.add('opacity-100', 'max-h-24', 'mt-4');
+        } else {
+            giftWrapCostContainer.classList.add('opacity-0', 'max-h-0');
+            giftWrapCostContainer.classList.remove('opacity-100', 'max-h-24', 'mt-4');
+        }
+        calculateFinalPrice();
+    });
+
+    // Form Submit micro-interaction
+    document.getElementById('productForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const btn = e.target.querySelector('button[type="submit"]');
+        const originalContent = btn.innerHTML;
+        btn.innerHTML = `<span class="material-symbols-outlined animate-spin" data-icon="progress_activity">progress_activity</span> Publishing...`;
+        btn.disabled = true;
+        
+        setTimeout(() => {
+            btn.innerHTML = `<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span> Success!`;
+            btn.classList.replace('bg-primary', 'bg-secondary');
+            setTimeout(() => {
+                btn.innerHTML = originalContent;
+                btn.classList.replace('bg-secondary', 'bg-primary');
+                btn.disabled = false;
+            }, 2000);
+        }, 1500);
+    });
+</script>
+</body></html>

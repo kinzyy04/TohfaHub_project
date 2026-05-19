@@ -14,7 +14,14 @@ class Settings(BaseSettings):
     JWT_SECRET: str = "your-super-secret-key-change-in-production"
     JWT_REFRESH_SECRET: str = "your-super-refresh-secret-key-change-in-production"
     ENV: str = "development"
-    CORS_ORIGINS: list[str] = ["https://localhost:8443", "http://127.0.0.1:5500"]
+    CORS_ORIGINS: list[str] = [
+        "https://localhost:8443",
+        "http://127.0.0.1:5500",
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
+        "http://localhost:3000",
+        "http://localhost:5173"
+    ]
     TRUSTED_PROXY: bool = False
 
 

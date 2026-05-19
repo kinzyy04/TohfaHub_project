@@ -9,6 +9,7 @@ import uuid
 import time
 from fastapi import FastAPI, Depends, status, Request
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
 from contextlib import asynccontextmanager
@@ -28,24 +29,35 @@ async def lifespan(app: FastAPI):
     # Startup log
     logger.info("DB engine ready")
     
-    # Check DB user to prevent connecting as superuser
-    try:
-        async with SessionLocal() as session:
-            result = await session.execute(text("SELECT current_user;"))
-            current_user = result.scalar()
-            
-            if current_user and ("postgres" in current_user.lower() or "superuser" in current_user.lower()):
-                logger.critical(
-                    "Security risk: Application connected to DB as highly privileged user. Refusing to start.",
-                    current_user=current_user
-                )
-                sys.exit(1)
-            else:
-                logger.info("Connected as DB user", current_user=current_user)
-    except SystemExit:
-        raise
-    except Exception as e:
-        logger.error("Failed to verify database user during startup", error=str(e))
+    # Check DB user or initialize SQLite
+    if "sqlite" in str(engine.url):
+        try:
+            logger.info("Using SQLite database. Initializing tables...")
+            from app.core.database import Base
+            async with engine.begin() as conn:
+                await conn.run_sync(Base.metadata.create_all)
+            logger.info("SQLite database tables initialized successfully.")
+        except Exception as e:
+            logger.error("Failed to initialize SQLite database tables", error=str(e))
+    else:
+        # Check DB user to prevent connecting as superuser
+        try:
+            async with SessionLocal() as session:
+                result = await session.execute(text("SELECT current_user;"))
+                current_user = result.scalar()
+                
+                if current_user and ("postgres" in current_user.lower() or "superuser" in current_user.lower()):
+                    logger.critical(
+                        "Security risk: Application connected to DB as highly privileged user. Refusing to start.",
+                        current_user=current_user
+                    )
+                    sys.exit(1)
+                else:
+                    logger.info("Connected as DB user", current_user=current_user)
+        except SystemExit:
+            raise
+        except Exception as e:
+            logger.error("Failed to verify database user during startup", error=str(e))
 
     yield
     # Clean shutdown
@@ -174,4 +186,7 @@ async def health_db_check(db: AsyncSession = Depends(get_db)):
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             content={"db": "error", "detail": str(e)},
         )
+
+
+app.mount("/", StaticFiles(directory="frontend", html=True), name="static")
 

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Seller Profile | CraftNest</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Be+Vietnam+Pro:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#ddbcdf",
+                        "primary-container": "#a8b48e",
+                        "on-secondary-container": "#745a78",
+                        "on-tertiary-fixed-variant": "#494740",
+                        "on-surface-variant": "#45483f",
+                        "surface-bright": "#fff8f1",
+                        "secondary-container": "#f7d5f8",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#1d1c16",
+                        "tertiary-container": "#b3afa7",
+                        "surface-container-low": "#faf2e9",
+                        "surface-container": "#f4ede3",
+                        "on-primary-fixed-variant": "#404a2c",
+                        "primary": "#576242",
+                        "surface-variant": "#e9e1d8",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c6c7bb",
+                        "secondary-fixed": "#fad8fb",
+                        "outline": "#76786e",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#dbe8bf",
+                        "on-tertiary-container": "#44423c",
+                        "surface-container-high": "#efe7dd",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f7f0e6",
+                        "background": "#fff8f1",
+                        "on-secondary-fixed-variant": "#573e5b",
+                        "surface-tint": "#576242",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#615e57",
+                        "surface-container-highest": "#e9e1d8",
+                        "primary-fixed-dim": "#bfcba4",
+                        "on-primary-container": "#3c4628",
+                        "tertiary-fixed": "#e7e2d9",
+                        "inverse-surface": "#33302a",
+                        "inverse-primary": "#bfcba4",
+                        "surface-dim": "#e0d9cf",
+                        "on-surface": "#1e1b15",
+                        "surface": "#fff8f1",
+                        "tertiary-fixed-dim": "#cac6be",
+                        "secondary": "#705673",
+                        "on-secondary-fixed": "#28132d",
+                        "on-primary-fixed": "#151e05",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#1e1b15",
+                        "custom-primary": "#a8b48e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "container-max": "1200px",
+                        "margin-desktop": "80px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["EB Garamond", "serif"],
+                        "headline-lg": ["EB Garamond", "serif"],
+                        "body-md": ["Be Vietnam Pro", "sans-serif"],
+                        "headline-lg-mobile": ["EB Garamond", "serif"],
+                        "body-lg": ["Be Vietnam Pro", "sans-serif"],
+                        "label-sm": ["Be Vietnam Pro", "sans-serif"],
+                        "display-lg": ["EB Garamond", "serif"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "300"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "300"}],
+                        "label-sm": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #fff8f1; color: #1e1b15; }
+        h1, h2, h3, .font-headline { font-family: 'EB Garamond', serif; color: #1e1b15; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .active-tab { border-bottom: 2px solid #a8b48e; color: #a8b48e; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="min-h-screen opacity-0 transition-opacity duration-300" id="body-content">
+<!-- Top Navigation -->
+<nav class="sticky top-0 z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 px-margin-mobile md:px-margin-desktop py-4 flex justify-between items-center">
+<div class="h-8 flex items-center">
+<span class="font-headline-lg text-on-background text-2xl" style="font-family: 'EB Garamond', serif;">CraftNest Studio</span>
+</div>
+<div class="flex gap-4 items-center">
+<button id="logout-btn" class="p-2 hover:bg-surface-container rounded-full transition-colors flex items-center justify-center" title="Logout">
+<span class="material-symbols-outlined text-on-surface text-2xl hover:text-error transition-colors">logout</span>
+</button>
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface text-2xl">menu</span>
+</button>
+</div>
+</nav>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-10 pb-20">
+<!-- Artisan Header -->
+<section class="flex flex-col md:flex-row items-center md:items-end gap-8 mb-12">
+<div class="relative">
+<div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-surface-container-high shadow-sm">
+<img alt="Kshitija S. Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyx8cTgh0ysAX5AEJkAijVwfIu9t--iHWfefNfOQXTyBemA96kCFoa7R08AIlbw-KgpEvIBL2x7VgYWtCeBHb2w7cIxdy23PnUAcudhyhs57g-DO56lzzjvC8_QF5TXqKmHtR56y0dQtxDARdJrvIj9ZXWRIVrUaQL1XqItfhuII5EGxisXjJR-QjPue0hnK9sWF7xI0vRN7lboK9hJg3s2_JJD4c_8PuxuaoPfcqeu3xOdZtNzjLEzKq6W3kYuS87dNzJHBP6eI4"/>
+</div>
+<div class="absolute bottom-1 right-1 bg-custom-primary text-on-primary p-1 rounded-full border-2 border-surface">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="flex-grow text-center md:text-left">
+<h1 id="user-fullname" class="font-headline-md text-3xl mb-1">Kshitija S.</h1>
+<p class="font-body-md text-on-surface-variant mb-2 flex items-center justify-center md:justify-start gap-1">
+                    Artisan Studio <span class="w-1 h-1 rounded-full bg-outline mx-1"></span> Pune, India
+                </p>
+<p id="user-email" class="font-body-md text-sm text-on-surface-variant mb-6"></p>
+<div class="flex gap-10 justify-center md:justify-start border-t border-outline-variant/30 pt-6">
+<div>
+<div class="text-xl font-semibold">2.4k</div>
+<div class="text-xs uppercase tracking-wider text-on-surface-variant font-medium">Followers</div>
+</div>
+<div>
+<div class="text-xl font-semibold">184</div>
+<div class="text-xs uppercase tracking-wider text-on-surface-variant font-medium">Following</div>
+</div>
+<div>
+<div class="text-xl font-semibold">1.2k</div>
+<div class="text-xs uppercase tracking-wider text-on-surface-variant font-medium">Items Sold</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3 w-full md:w-auto">
+<button class="bg-custom-primary text-on-primary py-2.5 px-8 rounded-full font-semibold text-sm hover:opacity-90 transition-all shadow-md">Edit Profile</button>
+<button class="border border-outline text-on-surface py-2.5 px-8 rounded-full font-semibold text-sm hover:bg-surface-container transition-all">Share Studio</button>
+</div>
+</section>
+<!-- Tabs Section -->
+<nav class="flex border-b border-outline-variant/50 mb-10 overflow-x-auto no-scrollbar">
+<button class="flex-1 py-4 text-sm font-semibold uppercase tracking-wider text-on-surface-variant hover:text-custom-primary transition-colors whitespace-nowrap px-4">Upload Reel</button>
+<button class="flex-1 py-4 text-sm font-semibold uppercase tracking-wider text-on-surface-variant hover:text-custom-primary transition-colors whitespace-nowrap px-4">Upload Product</button>
+<button class="flex-1 py-4 text-sm font-semibold uppercase tracking-wider text-on-surface-variant hover:text-custom-primary transition-colors whitespace-nowrap px-4">Activity</button>
+<button class="flex-1 py-4 text-sm font-semibold uppercase tracking-wider active-tab transition-colors whitespace-nowrap px-4">Dashboard</button>
+</nav>
+<!-- Dashboard Content (Active) -->
+<div class="space-y-12">
+<!-- Analytics Cards -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-headline-md text-2xl">Studio Analytics</h2>
+<span class="text-xs font-semibold px-3 py-1 bg-surface-container rounded-full text-on-surface-variant">LAST 30 DAYS</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-surface-container p-6 rounded-xl border border-outline-variant/20 shadow-sm">
+<div class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Revenue</div>
+<div class="text-2xl font-bold text-custom-primary mb-1">₹84,200</div>
+<div class="flex items-center gap-1 text-sm text-custom-primary font-medium">
+<span class="material-symbols-outlined text-sm">trending_up</span> +12.4%
+                        </div>
+</div>
+<div class="bg-surface-container p-6 rounded-xl border border-outline-variant/20 shadow-sm">
+<div class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Items Sold</div>
+<div class="text-2xl font-bold text-custom-primary mb-1">152</div>
+<div class="flex items-center gap-1 text-sm text-custom-primary font-medium">
+<span class="material-symbols-outlined text-sm">trending_up</span> +5.2%
+                        </div>
+</div>
+<div class="bg-surface-container p-6 rounded-xl border border-outline-variant/20 shadow-sm">
+<div class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Views</div>
+<div class="text-2xl font-bold text-custom-primary mb-1">18.4k</div>
+<div class="text-sm text-on-surface-variant">Daily avg: 613</div>
+</div>
+<div class="bg-surface-container p-6 rounded-xl border border-outline-variant/20 shadow-sm">
+<div class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Conversion</div>
+<div class="text-2xl font-bold text-custom-primary mb-1">3.2%</div>
+<div class="text-sm text-on-surface-variant">Market avg: 2.1%</div>
+</div>
+</div>
+</section>
+<!-- Active Products -->
+<section>
+<div class="flex items-center justify-between mb-8">
+<h2 class="font-headline-md text-2xl">Active Products (24)</h2>
+<a class="text-xs font-bold text-custom-primary hover:underline underline-offset-4 tracking-widest uppercase" href="#">View All</a>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Product 1 -->
+<div class="group">
+<div class="aspect-[4/5] rounded-xl overflow-hidden bg-surface-container mb-4 relative shadow-sm">
+<img alt="Leather Corset Belt" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXFpa8EVPtx07GH6qcZvdG5tpGQvhYFyGE5brZ6ybfVF-F67kk5-P294I7NxYrDJkRS969cBUgoxu_iSJ4cZ1GobEIIgCumwGznMaetOoz3Ncqu2MZU34QGLcIVyR5N6EtLpjgax33ZR-wdAQgTgZbRw4wl9t-oIb3_n1V7ViOMobi9k3p9bXKkosW_RBLQMoVLSX92MRQqCoRVdfTISpw1QgWhi-nzJdcgacb2gfTGcA1uAazCAccunfiQ2r6r4_uu1BMwXJWS-Q"/>
+<button class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-1.5 rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-sm text-on-surface">edit</span>
+</button>
+</div>
+<h3 class="font-semibold mb-1 truncate">Leather Corset Belt</h3>
+<div class="flex justify-between items-center">
+<span class="text-custom-primary font-bold">₹4,500</span>
+<span class="text-[10px] font-bold text-on-primary bg-custom-primary px-2 py-0.5 rounded uppercase tracking-tighter">8 In Stock</span>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="group">
+<div class="aspect-[4/5] rounded-xl overflow-hidden bg-surface-container mb-4 relative shadow-sm">
+<img alt="Upcycled Earring Set" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpPg24LPb0_9c16w4eVXW-erQjt867A61ersf9FrSGJcdoe-tOr-3hZ9Rs-1ey2Ha6DH1dv52yX1Z5pr_9V_8RkJZ0gGW86Iaw6SuP44vQzkHuozoef7A_7Cpw7Y6XNeUPREDpS1c5HLHju3Za5wCr9PYNrVaspNjjur1NPFnpTdVXVOr52BWEL0bdGnfdCGqmF03YhBdj5TUwckLoFqnLxiIZx3lwPCgSeH99ZqEhfMyzI1I72Te6AYIoCzOTBn7lKkPG3dSiZvw"/>
+<button class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-1.5 rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-sm text-on-surface">edit</span>
+</button>
+</div>
+<h3 class="font-semibold mb-1 truncate">Upcycled Earring Set</h3>
+<div class="flex justify-between items-center">
+<span class="text-custom-primary font-bold">₹1,200</span>
+<span class="text-[10px] font-bold text-on-primary bg-custom-primary px-2 py-0.5 rounded uppercase tracking-tighter">2 In Stock</span>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="group">
+<div class="aspect-[4/5] rounded-xl overflow-hidden bg-surface-container mb-4 relative shadow-sm">
+<img alt="Botanical Vase" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIsp6wd3drN7cRJ8m3X5aF760bcZHIwqQpufBvKQ-EblZ46drFcYbm59Q8eYtIRSJ59mrW4_cQVjnsgP0NGQupkNdPqMA1-pUsvsxDURFNo9pX90FgmpFQxwMQLa7_aH313yGxcIuH0jxZBTnweLN2NOBjwbgtFrkJTvf_QI2iFxs4-XDwtZYuOzIxSjRbRDyz04B2KfFsifBQJhlI45dTiTjk_DFGy1qeDmUoVmrvPwEVG9_k4vzwjgkRFPZzFLShyD9E2Wp8xxg"/>
+<button class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-1.5 rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-sm text-on-surface">edit</span>
+</button>
+</div>
+<h3 class="font-semibold mb-1 truncate">Botanical Vase</h3>
+<div class="flex justify-between items-center">
+<span class="text-custom-primary font-bold">₹2,800</span>
+<span class="text-[10px] font-bold text-error bg-error-container px-2 py-0.5 rounded uppercase tracking-tighter">Sold Out</span>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="group">
+<div class="aspect-[4/5] rounded-xl overflow-hidden bg-surface-container mb-4 relative shadow-sm">
+<img alt="Hand-bound Journal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7wxKkCl_PpYT8uGbsZZRkVydLG9IISxfXNYQ82U26Rf_7n3zupL36IlpjSez0S9pvrtUFEOeuTDw9irnSsS-bneq2iUcow9m95dACuzteHbiQ_89UJ_oTzftuLXjm6Rneh9bd5TCWn6Ixd2kSNK6lEOLvNTHKu0w323rM9jIWzEWlVWvG_PvjuvL7jB_QeoWq0NNHXrLQenYA0mQBlE1moFle9DV8rYDu-QmnRHGRqa3ExEn-rxyfQx7dC9NwE18CU_LP8NXSdDg"/>
+<button class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-1.5 rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-sm text-on-surface">edit</span>
+</button>
+</div>
+<h3 class="font-semibold mb-1 truncate">Hand-bound Journal</h3>
+<div class="flex justify-between items-center">
+<span class="text-custom-primary font-bold">₹1,550</span>
+<span class="text-[10px] font-bold text-on-primary bg-custom-primary px-2 py-0.5 rounded uppercase tracking-tighter">15 In Stock</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+
+</main>
+<!-- Simple Footer -->
+<footer class="border-t border-outline-variant/30 py-10 bg-surface-container-low text-center">
+<p class="text-xs text-on-surface-variant font-medium tracking-widest uppercase">© 2024 CraftNest Artisan Studio</p>
+</footer>
+
+<script>
+        const API_BASE_URL = 'https://localhost:8443';
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            const accessToken = sessionStorage.getItem('access_token');
+            if (!accessToken) {
+                // Not logged in: instantly redirect
+                window.location.href = '/login.html';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/v1/auth/me`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`
+                    }
+                });
+
+                if (response.status !== 200) {
+                    throw new Error("Unauthorized");
+                }
+
+                const user = await response.json();
+                
+                // If user is a buyer, redirect them to the buyer profile!
+                if (user.role !== 'seller') {
+                    window.location.href = '/profile.html';
+                    return;
+                }
+
+                // Populate Seller fields dynamically
+                const fullnameElem = document.getElementById('user-fullname');
+                const emailElem = document.getElementById('user-email');
+
+                if (fullnameElem) fullnameElem.textContent = user.full_name || 'Anonymous Studio';
+                if (emailElem) emailElem.textContent = user.email;
+
+                // Unhide the page contents gracefully
+                const bodyContent = document.getElementById('body-content');
+                if (bodyContent) {
+                    bodyContent.classList.remove('opacity-0');
+                }
+
+            } catch (err) {
+                console.error("Session verification failed:", err);
+                sessionStorage.clear();
+                window.location.href = '/login.html';
+            }
+        });
+
+        // Logout listener
+        const logoutBtn = document.getElementById('logout-btn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', async function() {
+                const accessToken = sessionStorage.getItem('access_token');
+                const refreshToken = sessionStorage.getItem('refresh_token');
+
+                if (!accessToken || !refreshToken) {
+                    sessionStorage.clear();
+                    window.location.href = '/login.html';
+                    return;
+                }
+
+                try {
+                    await fetch(`${API_BASE_URL}/api/v1/auth/logout`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${accessToken}`
+                        },
+                        body: JSON.stringify({ refresh_token: refreshToken })
+                    });
+                } catch (err) {
+                    console.error("Logout request failed:", err);
+                } finally {
+                    sessionStorage.clear();
+                    window.location.href = '/login.html';
+                }
+            });
+        }
+
+        // Micro-interaction for active scaling
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.style.transform = 'scale(0.97)';
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.style.transform = 'scale(1)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

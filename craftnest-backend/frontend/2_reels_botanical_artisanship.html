@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Flora &amp; Craft - Reels Discovery</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "primary-container": "#8fa382",
+                    "inverse-surface": "#343029",
+                    "secondary-fixed-dim": "#cac6bd",
+                    "inverse-primary": "#b8cdaa",
+                    "on-surface": "#1f1b15",
+                    "on-tertiary-fixed-variant": "#593d5d",
+                    "on-secondary-fixed-variant": "#484740",
+                    "on-tertiary": "#ffffff",
+                    "primary": "#516447",
+                    "surface-tint": "#516447",
+                    "tertiary-fixed": "#fcd6ff",
+                    "tertiary-container": "#b492b7",
+                    "on-primary-fixed-variant": "#3a4c31",
+                    "on-tertiary-container": "#452b4a",
+                    "inverse-on-surface": "#f8efe5",
+                    "on-secondary": "#ffffff",
+                    "surface-variant": "#eae1d7",
+                    "tertiary": "#725476",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#fbf2e8",
+                    "on-error": "#ffffff",
+                    "on-surface-variant": "#444840",
+                    "outline": "#74786f",
+                    "tertiary-fixed-dim": "#dfbbe2",
+                    "on-error-container": "#93000a",
+                    "secondary-container": "#e6e2d8",
+                    "secondary-fixed": "#e6e2d8",
+                    "primary-fixed-dim": "#b8cdaa",
+                    "secondary": "#605e57",
+                    "on-secondary-fixed": "#1c1c16",
+                    "background": "#fff8f3",
+                    "surface-dim": "#e1d9cf",
+                    "primary-fixed": "#d4e9c4",
+                    "outline-variant": "#c4c8bd",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#f0e7dd",
+                    "surface-bright": "#fff8f3",
+                    "on-primary-fixed": "#101f09",
+                    "on-background": "#1f1b15",
+                    "on-secondary-container": "#66645d",
+                    "surface-container": "#f6ece3",
+                    "on-primary-container": "#283920",
+                    "surface": "#fff8f3",
+                    "surface-container-highest": "#eae1d7",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#2a122f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "unit": "8px",
+                    "margin-mobile": "20px",
+                    "container-max": "1280px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["EB Garamond"],
+                    "body-lg": ["Work Sans"],
+                    "body-sm": ["Work Sans"],
+                    "headline-lg": ["EB Garamond"],
+                    "title-md": ["Work Sans"],
+                    "label-caps": ["Work Sans"],
+                    "display-lg": ["EB Garamond"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "500"}],
+                    "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .video-overlay-gradient {
+            background: linear-gradient(to top, rgba(31, 27, 21, 0.8) 0%, rgba(31, 27, 21, 0) 30%, rgba(31, 27, 21, 0) 70%, rgba(31, 27, 21, 0.4) 100%);
+        }
+        .botanical-watermark {
+            mask-image: radial-gradient(circle, black, transparent 80%);
+            opacity: 0.1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-lg overflow-hidden h-screen flex flex-col">
+<!-- Top Navigation Shell (Hidden on Mobile, Visible on Desktop per protocol) -->
+<nav class="hidden md:flex flex-row justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20 bg-background/80 backdrop-blur-md z-50 fixed top-0">
+<div class="font-headline-lg text-headline-lg text-primary">Flora &amp; Craft</div>
+<div class="flex items-center gap-8">
+<a class="text-secondary hover:text-primary transition-colors font-body-lg" href="#">Shop</a>
+<a class="text-secondary hover:text-primary transition-colors font-body-lg" href="#">About</a>
+<a class="text-secondary hover:text-primary transition-colors font-body-lg" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-primary cursor-pointer">favorite</span>
+<span class="material-symbols-outlined text-primary cursor-pointer">shopping_bag</span>
+</div>
+</nav>
+<!-- Main Reels Content Canvas -->
+<main class="relative flex-1 w-full bg-inverse-surface overflow-hidden">
+<!-- Background Video Placeholder -->
+<div class="absolute inset-0 z-0">
+<img alt="Crafting video" class="w-full h-full object-cover" data-alt="A highly detailed cinematic shot of artisan hands meticulously crocheting a small, vibrant yellow and black bumblebee. The setting is a sun-drenched, rustic workshop with soft morning light streaming through a window, highlighting the fine textures of the wool. The background is a soft-focus blur of botanical sketches and spools of natural thread, creating a warm, artisanal atmosphere. The overall mood is peaceful and focuses on the high-end craft process." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcZS_YsG76n0DdA2V4RJ5bhdkaivWJ4nCbWSqLhe5PhnguddomNJZUkZt33uy4dkeahrMK9blYX2BfflEn23ZE5jD6enFK7gwLldlwKnr80z1v-kUxx10OwsQrTP0hEDtxLPiqGf37gRE2r7z_1nHgaOveuP9llIxyIWu4yKgnEA0K3d3mX7JttNy6HlRfeyZXt73inBJ7d3tJ_3Lyf821dv4M-_PGpIU4lKFnxlI5nC65IUfs8CpmYKtYQFTymKDhIys16MaGl3I"/>
+<div class="absolute inset-0 video-overlay-gradient"></div>
+</div>
+<!-- Butterfly & Botanical Decorative Flourishes -->
+<div class="absolute top-10 right-10 z-10 opacity-20 pointer-events-none">
+<span class="material-symbols-outlined text-[120px] text-primary-fixed">flutter_dash</span>
+</div>
+<!-- Reel Content Overlay -->
+<div class="absolute inset-0 z-20 flex flex-col justify-end px-margin-mobile pb-[100px] md:px-margin-desktop md:pb-24">
+<!-- Side Interaction Menu -->
+<div class="absolute right-6 bottom-40 flex flex-col items-center gap-6 z-30">
+<div class="flex flex-col items-center gap-1 group cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-surface-container-low/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-primary/40 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+<span class="text-white text-xs font-label-caps">2.4k</span>
+</div>
+<div class="flex flex-col items-center gap-1 group cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-surface-container-low/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-primary/40 transition-all">
+<span class="material-symbols-outlined">chat_bubble</span>
+</div>
+<span class="text-white text-xs font-label-caps">128</span>
+</div>
+<div class="flex flex-col items-center gap-1 group cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-surface-container-low/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-primary/40 transition-all">
+<span class="material-symbols-outlined">share</span>
+</div>
+<span class="text-white text-xs font-label-caps">Share</span>
+</div>
+<div class="flex flex-col items-center gap-1 group cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-surface-container-low/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-primary/40 transition-all">
+<span class="material-symbols-outlined">bookmark</span>
+</div>
+</div>
+</div>
+<!-- Header Text for Reel -->
+<div class="mb-6 max-w-lg">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-white drop-shadow-md">
+                    Making tiny bees for tiny people 🐝... more
+                </h1>
+</div>
+<!-- Product Detail Box (Floating Card) -->
+<div class="bg-surface-container-low/95 dark:bg-inverse-surface backdrop-blur-md p-4 rounded-xl border border-outline-variant/20 shadow-[0_4px_16px_rgba(74,69,62,0.12)] max-w-sm flex items-center gap-4 group hover:bg-surface-bright transition-colors cursor-pointer">
+<div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Handmade Crochet Bee" class="w-full h-full object-cover" data-alt="A macro studio photograph of a finished handmade crochet bee resting on a light wooden surface. The bee features a soft, textured body with bright yellow and deep black stripes, tiny white wings, and a cute embroidered face. The lighting is soft and directional, casting a gentle shadow. The background is a creamy, warm tone that matches the artisan design system's aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgiId_AmMNrnNwewYD-d8RKvIr3O3hnoZDdgkDggXBa-I27ljtyqgqAJPbez8ACbZ1zgI6sYwiLc2H8ywSXycjrhCtbw7L26hW62STKHDS7U5m05koyM9lkBVLiQdCrmoQ1SdVI3MLRu9_fPuUI4ycKKA1tVMlHcTsxB2TTHVrOPMGZPpAK58YAQGOnYedGhDFzWpPG4ku4gGHdOF2MVlUzW0YvPBkCPiSnSCF8k6axROdMsnCyI3iV_FA_8DUhevEW-hZiNr1TjI"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-title-md text-title-md text-on-surface leading-tight">Handmade Crochet Bee</h3>
+<span class="material-symbols-outlined text-primary">add_shopping_cart</span>
+</div>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-bold text-primary">₹379</span>
+<span class="text-sm text-secondary line-through opacity-60">₹417</span>
+</div>
+<div class="flex items-center gap-3 mt-2">
+<div class="flex items-center gap-1 bg-primary-container/20 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-caps text-label-caps text-primary">4.1</span>
+</div>
+<span class="font-label-caps text-label-caps text-secondary">47 bought this</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Mobile Only as per protocol) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface-container-low/95 backdrop-blur-md border-t border-outline-variant/10 shadow-[0_-4px_16px_rgba(74,69,62,0.08)]">
+<div class="flex flex-col items-center justify-center text-secondary px-4 py-1.5 hover:bg-secondary-container/30 transition-colors">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary px-4 py-1.5 hover:bg-secondary-container/30 transition-colors">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-caps text-label-caps">Discover</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container/20 text-primary rounded-xl px-4 py-1.5 transition-transform duration-200 active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+<span class="font-label-caps text-label-caps">Reels</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary px-4 py-1.5 hover:bg-secondary-container/30 transition-colors">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-caps text-label-caps">Profile</span>
+</div>
+</nav>
+<!-- Floating Action Button (Suppressed on this discovery screen as per protocol) -->
+</body></html>

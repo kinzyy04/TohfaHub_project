@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CraftNest - Buyer Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Be+Vietnam+Pro:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+        }
+        /* Custom scrollbar hiding for the tabs */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "inverse-on-surface": "#f7f0e6",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#745a78",
+                        "on-background": "#1e1b15",
+                        "surface-container-high": "#efe7dd",
+                        "surface-variant": "#e9e1d8",
+                        "on-primary-container": "#3c4628",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#1d1c16",
+                        "outline": "#76786e",
+                        "surface-dim": "#e0d9cf",
+                        "on-surface-variant": "#45483f",
+                        "tertiary-fixed-dim": "#cac6be",
+                        "outline-variant": "#c6c7bb",
+                        "primary": "#576242",
+                        "on-tertiary-fixed-variant": "#494740",
+                        "surface-tint": "#576242",
+                        "inverse-primary": "#bfcba4",
+                        "secondary": "#705673",
+                        "secondary-container": "#f7d5f8",
+                        "background": "#fff8f1",
+                        "surface": "#fff8f1",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#fad8fb",
+                        "tertiary-fixed": "#e7e2d9",
+                        "tertiary-container": "#b3afa7",
+                        "on-secondary-fixed-variant": "#573e5b",
+                        "tertiary": "#615e57",
+                        "surface-bright": "#fff8f1",
+                        "primary-container": "#a8b48e",
+                        "on-primary-fixed-variant": "#404a2c",
+                        "primary-fixed-dim": "#bfcba4",
+                        "surface-container-highest": "#e9e1d8",
+                        "secondary-fixed-dim": "#ddbcdf",
+                        "on-surface": "#1e1b15",
+                        "on-secondary-fixed": "#28132d",
+                        "primary-fixed": "#dbe8bf",
+                        "inverse-surface": "#33302a",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#f4ede3",
+                        "on-primary-fixed": "#151e05",
+                        "surface-container-low": "#faf2e9",
+                        "on-tertiary-container": "#44423c",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "80px",
+                        "container-max": "1200px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["EB Garamond"],
+                        "headline-lg-mobile": ["EB Garamond"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "headline-lg": ["EB Garamond"],
+                        "display-lg": ["EB Garamond"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "label-sm": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "300"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "300"}],
+                        "label-sm": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.1em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface min-h-screen pb-24 font-body-md">
+<!-- TopAppBar -->
+<header class="bg-surface docked full-width top-0 z-50 shadow-sm border-b border-outline-variant/30 flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 sticky">
+<div class="font-headline-lg text-on-background">CraftNest</div>
+<div class="flex gap-4 items-center">
+<button class="material-symbols-outlined text-on-background hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200" data-icon="search">search</button>
+<button class="material-symbols-outlined text-on-background hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200" data-icon="menu">menu</button>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-12">
+<!-- Profile Header Section -->
+<section class="flex flex-col items-center mb-16 text-center">
+<div class="relative mb-6">
+<img alt="Aria Sharma" class="w-24 h-24 rounded-full object-cover border border-outline-variant p-1 bg-surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTP6Rel66sXz7ZBaz-2_ALPJW51wVu7fCARL142d55lGTZcnetPk5UGQQ_fcFkFAy2xrlvtuslrPes-SkAV-GmJiNXKztcAYkyVAA_-nFFnYmFJ-oqhbfw-rZTLugIoO_8-NCveLk3qggig2qkepNeeVxh1_Ss30S-6gApy1jbKR4ROxaPMRzKZJ_y9XqDIori3QcK8qzvaaDebNUiUMEkPxEtVlKKlMxZYCoHLmGT-14HQ-iSZZNxoRuc6leyj1UxIogdEm50Ccs"/>
+<div class="absolute -bottom-1 -right-1 bg-primary text-on-primary p-1 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<h1 class="font-display-lg text-on-background mb-2">Aria Sharma</h1>
+<div class="inline-flex items-center px-4 py-1.5 bg-surface-container rounded-full border border-outline-variant/30 mb-8">
+<span class="font-label-sm text-on-surface-variant uppercase">Avid Collector ✨</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-2xl mb-10">
+<div class="py-4 border-b border-outline-variant/20 md:border-b-0 md:border-r">
+<div class="font-headline-md text-primary">12</div>
+<div class="font-label-sm text-on-surface-variant uppercase">Creators</div>
+</div>
+<div class="py-4 border-b border-outline-variant/20 md:border-b-0 md:border-r">
+<div class="font-headline-md text-primary">45</div>
+<div class="font-label-sm text-on-surface-variant uppercase">Saved</div>
+</div>
+<div class="py-4 border-b border-outline-variant/20 md:border-b-0 md:border-r">
+<div class="font-headline-md text-primary">8</div>
+<div class="font-label-sm text-on-surface-variant uppercase">Reviews</div>
+</div>
+<div class="py-4">
+<div class="font-headline-md text-primary">2.4k</div>
+<div class="font-label-sm text-on-surface-variant uppercase">Followers</div>
+</div>
+</div>
+<button class="w-full max-w-md bg-primary-container hover:bg-primary text-on-primary-container hover:text-on-primary font-label-sm uppercase py-4 rounded-full transition-all active:scale-[0.98]">
+                Edit Preferences &amp; Style Profile
+            </button>
+</section>
+<!-- Main Content Tabs -->
+<nav class="flex justify-between md:justify-center md:gap-12 border-b border-outline-variant/20 mb-12 px-2 overflow-x-auto no-scrollbar">
+<button class="flex items-center gap-2 pb-4 px-2 border-b-2 border-primary-container text-on-background active:scale-95 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">package_2</span>
+<span class="font-label-sm uppercase whitespace-nowrap">Order History</span>
+</button>
+<button class="flex items-center gap-2 pb-4 px-2 border-b-2 border-transparent text-on-surface-variant hover:text-on-background transition-all">
+<span class="material-symbols-outlined">favorite</span>
+<span class="font-label-sm uppercase whitespace-nowrap">Wishlist</span>
+</button>
+<button class="flex items-center gap-2 pb-4 px-2 border-b-2 border-transparent text-on-surface-variant hover:text-on-background transition-all">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-sm uppercase whitespace-nowrap">Cart (3)</span>
+</button>
+<button class="flex items-center gap-2 pb-4 px-2 border-b-2 border-transparent text-on-surface-variant hover:text-on-background transition-all">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-sm uppercase whitespace-nowrap">Discover</span>
+</button>
+</nav>
+<!-- Active Tab Content: Order History -->
+<section class="max-w-4xl mx-auto" id="order-history">
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/30 overflow-hidden shadow-sm transition-all hover:shadow-md">
+<div class="p-6 md:p-10 flex flex-col md:flex-row gap-8">
+<div class="w-full md:w-40 h-40 flex-shrink-0 bg-surface-container-high rounded-lg overflow-hidden">
+<img alt="Crochet Sage Cardigan" class="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRhPNHyzMKQMqTLXEB05joc3d0EKWqnVRO4n_AxOFumJJGSF5H2uf-BOjm9GUsncYoEAf50h9gGqbTUSuRvHxry048BAAww-sM9g1isumzJroBGn5uO6dbhaLJslE08wmcbRwev7i596x6p4IGvOxK7iRrbNX2EVQlg-Ng8ZqzmgCWKHqqMGUHdsxyMSNLqgNLmUC_CueRT5cnVd-JJMjWQ4kzqSs6Gm4-zL1VA_8X_0Y4lqDXnrSQ7LNt83ka0sER7cKCEY8FxJg"/>
+</div>
+<div class="flex-grow">
+<div class="flex flex-wrap justify-between items-start gap-4 mb-6">
+<div>
+<h3 class="font-headline-md text-on-background mb-2">Crochet Sage Cardigan</h3>
+<p class="font-body-md text-on-surface-variant flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                                    In Transit 🚚 <span class="text-primary font-medium">Arriving Thursday</span>
+</p>
+</div>
+<div class="text-right">
+<p class="font-label-sm text-on-surface-variant uppercase mb-1">Order #MN-4921</p>
+<p class="font-headline-md text-on-background">$128.00</p>
+</div>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden mb-8">
+<div class="bg-primary-container h-full w-3/4"></div>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="flex-1 bg-primary text-on-primary font-label-sm uppercase py-4 rounded-full hover:bg-on-primary-fixed-variant transition-colors">Track Order</button>
+<button class="flex-1 border border-outline text-on-surface font-label-sm uppercase py-4 rounded-full hover:bg-surface-container transition-colors">Order Details</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-surface border-t border-outline-variant/30 shadow-[0_-4px_12px_rgba(0,0,0,0.03)] z-50 md:hidden">
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-sm text-[10px] uppercase">Discover</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1">
+<span class="material-symbols-outlined">favorite</span>
+<span class="font-label-sm text-[10px] uppercase">Wishlist</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-sm text-[10px] uppercase">Cart</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary px-4 py-1">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">package_2</span>
+<span class="font-label-sm text-[10px] uppercase">Orders</span>
+</div>
+</nav>
+<script>
+        // Micro-interaction for active scaling
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.style.transform = 'scale(0.97)';
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.style.transform = 'scale(1)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

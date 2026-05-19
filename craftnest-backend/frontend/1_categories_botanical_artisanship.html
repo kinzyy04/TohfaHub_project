@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Browse by Craft | Flora &amp; Craft</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#6B705C",
+                        "on-primary": "#FFFFFF",
+                        "primary-container": "#B7B7A4",
+                        "on-primary-container": "#3F4334",
+                        secondary: "#A5A58D",
+                        "secondary-container": "#FFE8D6",
+                        "on-secondary-container": "#6B705C",
+                        tertiary: "#D4A373",
+                        surface: "#FFFDF9",
+                        "surface-container-low": "#F1EFE7",
+                        background: "#FFFDF9",
+                        outline: "#CB997E",
+                        "outline-variant": "#DDBEA9",
+                        "inverse-surface": "#3F4334",
+                        "inverse-primary": "#DDBEA9"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        headline: ["Public Sans", "sans-serif"],
+                        display: ["Public Sans", "sans-serif"],
+                        body: ["Public Sans", "sans-serif"],
+                        label: ["Public Sans", "sans-serif"]
+                    },
+                    spacing: {
+                        'margin-desktop': '5rem',
+                        'container-max': '1440px'
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .botanical-pattern {
+            background-color: #FFFDF9;
+            background-image: radial-gradient(#DDBEA9 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+        .glass-card {
+            background: rgba(255, 253, 249, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(203, 153, 126, 0.2);
+        }
+    </style>
+</head>
+<body class="font-body bg-background text-on-primary-container botanical-pattern min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-background/80 backdrop-blur-md sticky top-0 z-50 docked full-width border-b border-outline-variant/10">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20">
+<div class="flex items-center gap-8">
+<h1 class="font-headline-lg text-headline-lg text-primary dark:text-inverse-primary font-extrabold tracking-tighter text-2xl uppercase">Flora &amp; Craft</h1>
+<nav class="hidden md:flex items-center gap-6 font-body-lg text-body-lg">
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors" href="#">Shop</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors" href="#">About</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors" href="#">Contact</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/20">
+<span class="material-symbols-outlined text-secondary text-sm mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48" placeholder="Search crafts..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-primary hover:text-primary-container transition-colors relative">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<button class="text-primary hover:text-primary-container transition-colors relative">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="absolute -top-1 -right-1 bg-tertiary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">2</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-4 md:px-margin-desktop py-12">
+<!-- Hero Title -->
+<section class="mb-16 text-center relative">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 opacity-10 pointer-events-none select-none">
+<span class="material-symbols-outlined text-[200px]" style="font-variation-settings: 'FILL' 1;">local_florist</span>
+</div>
+<h2 class="font-headline text-5xl md:text-7xl font-extrabold text-primary mb-4 tracking-tight">Browse by Craft</h2>
+<p class="text-secondary max-w-2xl mx-auto text-lg">Discover the artistry behind every piece. Explore our curated collections of handmade treasures, each telling a unique story of craftsmanship and botanical inspiration.</p>
+</section>
+<!-- Category Grid (Bento Style Layout) -->
+<section class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-3 gap-6 h-auto md:h-[900px] mb-24">
+<!-- Crochet - Feature Large -->
+<div class="md:col-span-2 md:row-span-2 group relative overflow-hidden rounded-xl shadow-sm hover:shadow-xl transition-all duration-500">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A highly detailed close-up of a tiny, expertly handcrafted crochet bumblebee with delicate white wings and a cheerful expression. The toy sits on a rustic wooden table with soft morning light filtering through leaves in the background, creating a warm, artisanal atmosphere. The aesthetic is gentle and botanical, using a soft cream and golden yellow palette to emphasize the intricate yarn textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCObPUeWdtf941R11tkq5y_ZFB4OcF-w6C_XgD9woyFYwfzIQkHfvVRirx-Kdqu5bZ2M5PGu3oafACFLMrtqaif_H4peiWwv50buCtNdXW6eR0Vse00piA9wXeKALg_dtLlLwRnGJ-5013BMEaN-uUbys0VBMH6JQ7N5jrgTWuhj_xHzeNq5Sl5DFmyk8-BS-QFn5bfRuzjrrsoRAKVfF3RzfDlVI8W3rGnXyrgug2jIpiyUu9hSV8w3sxTwVxM5d0KFvdwWBkZ3PM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent flex flex-col justify-end p-8">
+<span class="text-on-primary/70 text-sm font-bold uppercase tracking-widest mb-1">Textile Arts</span>
+<h3 class="text-white text-3xl font-bold mb-4">Crochet</h3>
+<button class="bg-white/20 backdrop-blur-md text-white border border-white/30 px-6 py-2 rounded-full w-fit hover:bg-white hover:text-primary transition-all">Explore Collection</button>
+</div>
+</div>
+<!-- Jewelry -->
+<div class="group relative overflow-hidden rounded-xl shadow-sm hover:shadow-xl transition-all duration-500">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Exquisite handmade jewelry pieces featuring pressed flowers encased in clear resin gold-plated pendants. The necklaces are displayed on a piece of raw sandstone under warm, direct sunlight that highlights the organic details of the petals. The overall mood is sophisticated and bohemian, with a focus on high-quality botanical artisanship and natural elegance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeJNG4g7zflqMyn7WkuQSO9QQfGcVEFgeG-_Q0vueOcwACo9wB_3n47LGCGJVjJyD5sfvTVuMxlSNq3ugTNodbWaf8Rgn8A7cyCh0QaXHy8sfqpicQEvtRzXgzJIJOONq4Su4fxZb7lnoTQHb_u6bb5vManpfJP_NRwCt10DBpdAVLjND6X5aH2zsasex4krU07RHdXNpLrcY1FHuhwPOp0OnqIUuCIM1socL7oGiZsOBNfwaKnQRVUDO4lv_gQ3tIv8Gakdbld2g"/>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+<h3 class="text-white text-xl font-bold tracking-tight">Jewelry</h3>
+</div>
+</div>
+<!-- Ceramics -->
+<div class="group relative overflow-hidden rounded-xl shadow-sm hover:shadow-xl transition-all duration-500">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A collection of hand-thrown ceramic mugs with a matte sage green glaze and subtle botanical imprints on the surface. They are arranged neatly on a weathered oak shelf in a bright, sunlit pottery studio filled with greenery. The style is minimalist and organic, emphasizing the tactile quality of the clay and the soft, earthy tones of the botanical theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYhjlpVVO-eSNQ3YGmsjZmdeDamckzLFtmNl9KV9wUxhHlEwCWHQ7xDRR2_92d2CpxSRtKBLdTbrbFgx8zaZdUrvSomQK5Dp8AtJQO7FycjVs7w96kYI_cKy7dhu8BAyp9LLP69hsx8lyycHGELDFdlFcl9uvgE4S1dcF7Ikvegf1PnkoHIMwdLsWHLeeZUd5u3NVg9KdZPn10apJPTjMa6qBah1Um6ynCsWZcgTEt_ILERIAlmYHL5DJGXgfQvL0BhIbJo6sc8gQ"/>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+<h3 class="text-white text-xl font-bold tracking-tight">Ceramics</h3>
+</div>
+</div>
+<!-- Stationery -->
+<div class="md:col-span-2 group relative overflow-hidden rounded-xl shadow-sm hover:shadow-xl transition-all duration-500">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A beautiful flat lay of handcrafted stationery featuring thick deckle-edged paper, wax seals with leaf patterns, and vintage-style botanical illustrations. The desk is cluttered with artisanal tools like a brass pen and dried lavender sprigs, set against a warm cream linen background. The lighting is soft and diffused, creating a serene and thoughtful mood that celebrates the slow art of letter writing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuuYPSTSnwuj49ojGB3jUWP8o3aCtui_OzxC7KspxVpHZcoxAD-C8UJ0VpQB6-eFitKYYOrdCQbsEM99UiMDcG-i8c9D6QoHkCXX7VgrHyGDOklhImJYUkUKC3J9gTveZKlebOt1YoFS9OslaDMyNmb3Wk2yOxw-SFSuYXJhtPLB0liNytfa2V_QVgwCekO_poXPWyFZag5zAlMkwymWBqetUnVrbUwcGJkDYvFnvfqtiKcWd5FfADUlsy1yWsEvOEs6Tm2HSzqK8"/>
+<div class="absolute inset-0 bg-gradient-to-r from-secondary/80 to-transparent flex flex-col justify-center p-8">
+<h3 class="text-white text-2xl font-bold">Stationery</h3>
+<p class="text-white/80 text-sm max-w-xs mt-2">Notebook covers, journals, and hand-pressed cards.</p>
+</div>
+</div>
+<!-- Paintings -->
+<div class="group relative overflow-hidden rounded-xl shadow-sm hover:shadow-xl transition-all duration-500">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="An original watercolor painting showcasing vibrant wildflower bouquets with soft, bleeding edges on high-quality textured paper. The painting is leaning against an easel in a light-filled artist's studio with jars of brushes and tubes of paint nearby. The style is ethereal and expressive, using a palette of soft pastels and deep greens to convey a sense of natural wonder." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcdcclf3UkDxobY1FyffIYZkIuPBIOwqM68_c6boQadkb7F3jGJO1dajAVHxHdbK8VEHQacdvmWo-z2bItqs3dPNHzvJ-DYMnoTg8RV0u8KAjxLEIZxtMTz5ZkmZYjpLZr7S-2t3peS6V5wRHCQwd79lri2M9XseyAdopf5zWKXDh3bZjj0UqDEccR4BUiQcQBpf75TLJeOcLXEbtPZWpzhH9ZQ9VqO5KWGnMg1YugB4gKF1D8TR3mWzex8pg5wGYaPKs7a0VdPKw"/>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+<h3 class="text-white text-xl font-bold tracking-tight">Paintings</h3>
+</div>
+</div>
+<!-- Photo Frames -->
+<div class="group relative overflow-hidden rounded-xl shadow-sm hover:shadow-xl transition-all duration-500">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Rustic, handcrafted wooden photo frames with unique grain patterns and small metal accents, holding monochrome nature photographs. The frames are mounted on a minimalist plaster wall with gentle shadows falling across them. The aesthetic is clean and timeless, focusing on the organic beauty of the wood and the artisan's attention to detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7iTSdGuzZigGuF_giQ44sJ2TRwkcDKVoIixbQNlSJ4TakpnfzQ1VoRHjn1_ATaeYlE1lk7WW2f0gyrMPsI6AewqdmNxQXwVI3alpR8EsQLdn5L3kA1iEVO6D2mscunhiErRw8OBa-otyifX-YA9cBKqJM0i25aA4zhfwXCLTrAZ5ilUpY_zh-2w_BEPMXOJSt-3H9QakVgLcZizt3fJn_VhrUMNu4avgS4QKjh5sJggmDAhHoLk3AqivMY97YpeRllJS7hKx1cTc"/>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+<h3 class="text-white text-xl font-bold tracking-tight">Photo Frames</h3>
+</div>
+</div>
+<!-- Keychains -->
+<div class="group relative overflow-hidden rounded-xl shadow-sm hover:shadow-xl transition-all duration-500">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Hand-carved wooden keychains shaped like various forest animals and leaves, attached to high-quality brass rings. They are scattered over a bed of dry moss and river stones, photographed from a high angle with sharp focus on the wood grain. The lighting is natural and crisp, highlighting the artisanal quality and the playful botanical theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsZ9fmteUvkxB7X4pnviv0wh7vWZFZssqKASBn720geG3Tby6dei76wxICNjySDGD9KO5sCf-bQmxn3dHYKRN1GCkGoQ3TyA2aexIp4wfZ-J9wG8r22miCnW1xI90sQaV4fDed1jMyfJsCixmdR_eM50_hp627WKttdoPFcCMvJL9qkTLg8EaVwlMu3ubYUkS7Mu-DwURAyTx34WmI1BuKLRz-YRYtHaN9oDMYAcGl-wnUvjsxFxRXbDOSaIimntvnBPe2WhmuVpY"/>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+<h3 class="text-white text-xl font-bold tracking-tight">Keychains</h3>
+</div>
+</div>
+<!-- Textiles -->
+<div class="group relative overflow-hidden rounded-xl shadow-sm hover:shadow-xl transition-all duration-500">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Beautifully embroidered linen cushions with intricate floral patterns in earthy tones, arranged on a cozy neutral-colored sofa. The room is decorated with potted plants and warm light, creating a serene domestic scene. The focus is on the rich texture of the fabric and the precision of the hand-stitched botanical designs, embodying high-end artisanal textile work." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLho-RnXqI5Tg2ffVG1uOPsQTavqPBz_N1kvNlkFkUUdUfqXeF4bQmTcvIss-slOULqnatqsxAG5ZNrJ4u21EtEr4Jsdf5m4oc_fkSopRm_MoMneDJwcAjJrXf0fTRMzRhQFtXD90Sf41OdIsoDsA_gJ5QaW_zo09wi7mkswMW9Fvy4nxE9FkA2gpBBbb_geIWJ4dfjkyyYOAzn7RGlAgkm7loiGCgTs2Kqj7udGV3zTA-69z_NxJON2TnXXmzSIiSkhyCVXOudiY"/>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+<h3 class="text-white text-xl font-bold tracking-tight">Textiles</h3>
+</div>
+</div>
+</section>
+<!-- Featured Studio Highlight Section -->
+<section class="mb-24">
+<div class="flex flex-col md:flex-row items-center gap-12 bg-secondary-container rounded-xl p-8 md:p-16 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8 opacity-10">
+<span class="material-symbols-outlined text-[120px]">nature_people</span>
+</div>
+<div class="w-full md:w-1/2">
+<div class="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-6">Featured Studio</div>
+<h2 class="font-headline text-4xl font-bold text-on-primary-container mb-6">Discover Unique Styles</h2>
+<p class="text-on-secondary-container text-lg mb-8 leading-relaxed">Our 'Wildwood Artisans' collective brings together creators who find inspiration in the untamed beauty of nature. From hand-carved wood to botanical resin casting, explore studios that redefine craftsmanship.</p>
+<div class="flex gap-4">
+<button class="bg-primary text-white px-8 py-3 rounded-full font-bold hover:bg-primary/90 transition-all flex items-center">
+                            Meet the Makers
+                            <span class="material-symbols-outlined ml-2 text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="w-full md:w-1/2 grid grid-cols-2 gap-4">
+<div class="aspect-square rounded-xl overflow-hidden shadow-lg transform rotate-2">
+<img class="w-full h-full object-cover" data-alt="A close-up of an artist's hands carefully painting fine details on a ceramic bowl in a sun-drenched studio. The hands are covered in light clay dust, and the surrounding workspace is filled with small paint pots and natural sponges. The scene captures the intimate and focused nature of artisanal creation in a warm, inviting environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCofP4wZpLE_9iazSL3N7UUzb8Jh3M3NArn_sFOkO-SE5nP_qtXtJzmNMuI8qyZO4C5n6erAipu5OTwSPxKQx0CFJKmI3uapKbGKy_fyCeUTgOfJcyfMIGOIlO4YymY7z2hzfrND_GyfEh_7-5_hCgfIHMvyN6CXnBLrGoPKMSmw5u6pI4ZU_0apG3-PqbKAfMoI3xwXks70zjIy7buLutAiPtbN8aMILI_C_DZXAYMyeHnRFlD9ucO68i8kPosc2bm9vNLLjCIlMk"/>
+</div>
+<div class="aspect-square rounded-xl overflow-hidden shadow-lg transform -rotate-2 translate-y-8">
+<img class="w-full h-full object-cover" data-alt="A vibrant and organized artist studio wall featuring shelves of colorful yarn, rolls of linen fabric, and pinned-up sketches of botanical patterns. The lighting is bright and cheerful, highlighting the diverse textures and colors of the materials. The overall mood is one of creative energy and organized chaos, typical of a bustling craft studio." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcBGxdvp3auKVNbmfZpEMAmRbwBDgIhMyIx3xIDhRvFsvO2vKJqIBmTAmVGcYOxSWPODsuD8puBw2I365CCjDMzo1tT_vZBFXdfmV4qVmX2qn9cyufwSHcOWAmixI_oXJCBO7l5u9CXB2n7S_quEryBjRHfgkHRii5ZMPWzsEat805k951WUX6RVdJG0VygUT0DwgyEQ4Ly3rBeHDUxY19ZgyKlFtjHyvH2YvLt4Ew5zz8whlUmPXpK5HTEH88kcCl7MNUXkkjRkQ"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Artisanal Values (Bento Minor) -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+<div class="glass-card p-8 rounded-xl">
+<span class="material-symbols-outlined text-primary text-4xl mb-4" style="font-variation-settings: 'FILL' 1;">eco</span>
+<h4 class="font-headline text-xl font-bold mb-2">Organic Sourcing</h4>
+<p class="text-secondary text-sm">We prioritize materials that are kind to the earth, from recycled yarns to sustainably harvested wood.</p>
+</div>
+<div class="glass-card p-8 rounded-xl">
+<span class="material-symbols-outlined text-primary text-4xl mb-4" style="font-variation-settings: 'FILL' 1;">handshake</span>
+<h4 class="font-headline text-xl font-bold mb-2">Fair Craft</h4>
+<p class="text-secondary text-sm">Every artist receives a fair share for their work, ensuring the continuation of traditional skills.</p>
+</div>
+<div class="glass-card p-8 rounded-xl">
+<span class="material-symbols-outlined text-primary text-4xl mb-4" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<h4 class="font-headline text-xl font-bold mb-2">Lifetime Quality</h4>
+<p class="text-secondary text-sm">Handmade means heart-made. Our pieces are built to be cherished for generations to come.</p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low pt-20 pb-10 border-t border-outline-variant/10">
+<div class="max-w-container-max mx-auto px-4 md:px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+<div class="md:col-span-1">
+<h1 class="font-headline text-2xl font-extrabold text-primary mb-6">Flora &amp; Craft</h1>
+<p class="text-secondary text-sm mb-6">Nurturing the bridge between nature and hand-made artistry since 2012.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary shadow-sm hover:shadow-md transition-all" href="#">
+<span class="material-symbols-outlined text-lg">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary shadow-sm hover:shadow-md transition-all" href="#">
+<span class="material-symbols-outlined text-lg">camera</span>
+</a>
+</div>
+</div>
+<div>
+<h5 class="font-bold text-primary mb-6 uppercase text-xs tracking-widest">Collections</h5>
+<ul class="space-y-4 text-sm text-secondary">
+<li><a class="hover:text-primary transition-colors" href="#">Best Sellers</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">New Arrivals</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Limited Editions</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Gift Sets</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-primary mb-6 uppercase text-xs tracking-widest">Company</h5>
+<ul class="space-y-4 text-sm text-secondary">
+<li><a class="hover:text-primary transition-colors" href="#">Our Story</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">The Studio</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Ethical Standards</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-primary mb-6 uppercase text-xs tracking-widest">Join our Circle</h5>
+<p class="text-secondary text-sm mb-4">Be the first to see new botanical drops.</p>
+<div class="flex">
+<input class="bg-white border-outline-variant/20 rounded-l-full px-4 py-2 text-sm w-full focus:ring-primary focus:border-primary" placeholder="Email address" type="email"/>
+<button class="bg-primary text-white px-4 py-2 rounded-r-full hover:bg-primary/90 transition-all">
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="border-t border-outline-variant/10 pt-10 flex flex-col md:row justify-between items-center text-xs text-secondary/60">
+<p>© 2024 Flora &amp; Craft Artisanal Collective. All rights reserved.</p>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a class="hover:text-primary" href="#">Privacy Policy</a>
+<a class="hover:text-primary" href="#">Terms of Service</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface-container-low/95 backdrop-blur-md shadow-[0_-4px_16px_rgba(74,69,62,0.08)] border-t border-outline-variant/10 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-secondary px-4 py-1.5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-caps text-[10px] mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container/20 text-primary rounded-xl px-4 py-1.5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-caps text-[10px] mt-1">Discover</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary px-4 py-1.5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="play_circle">play_circle</span>
+<span class="font-label-caps text-[10px] mt-1">Reels</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary px-4 py-1.5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-caps text-[10px] mt-1">Profile</span>
+</a>
+</nav>
+</body></html>
