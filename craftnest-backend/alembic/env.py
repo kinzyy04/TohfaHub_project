@@ -13,9 +13,7 @@ if sys.platform == "win32":
 from app.core.config import settings
 from app.core.database import Base
 # Import all models to ensure they are registered on Base.metadata
-from app.models.user import User  # noqa
-from app.models.item import Item  # noqa
-from app.models.refresh_token import RefreshToken  # noqa
+import app.models  # noqa
 
 # This is the Alembic Config object
 config = context.config

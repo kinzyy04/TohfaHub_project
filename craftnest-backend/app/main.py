@@ -67,6 +67,14 @@ async def lifespan(app: FastAPI):
 from app.routers.auth import router as auth_router
 from app.routers.items import router as items_router
 from app.routers.profiles import router as profiles_router
+from app.routers.products import router as products_router
+from app.routers.browse import router as browse_router
+from app.routers.uploads import router as uploads_router
+from app.routers.wishlist import router as wishlist_router
+
+
+
+
 
 app = FastAPI(
     title="CraftNest API",
@@ -91,6 +99,14 @@ async def custom_rate_limit_handler(request: Request, exc: RateLimitExceeded):
 app.include_router(auth_router)
 app.include_router(items_router)
 app.include_router(profiles_router)
+app.include_router(products_router)
+app.include_router(browse_router)
+app.include_router(uploads_router)
+app.include_router(wishlist_router)
+
+
+
+
 
 
 @app.middleware("http")
@@ -191,5 +207,10 @@ async def health_db_check(db: AsyncSession = Depends(get_db)):
         )
 
 
-app.mount("/", StaticFiles(directory="frontend", html=True), name="static")
+import os
+os.makedirs("media/products", exist_ok=True)
+app.mount("/media", StaticFiles(directory="media"), name="media")
+app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
+
+
 

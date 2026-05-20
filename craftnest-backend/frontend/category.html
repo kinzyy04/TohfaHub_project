@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Flora &amp; Craft | Boutique Handmade Goods</title>
+    <title>Browse Collection | Flora &amp; Craft</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -104,25 +104,6 @@
             background-color: #fff8f3;
             background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCL8HlWj3d7Jn4Rr8_Omv5ZuBBtt-PIgqkz6U0QXXzOoK5q0e2iSq3bOoqpTXh2YvRiqLxaCe5OhuMhLl4jceRshlhkOmGhbfFCTjJh3-xwIm5HZjubNr6bGDaUtGGUFXPBbtpSV5Dp4_OnQRqkj_K7lty0Zr5u7smkvT4F08O58kmMBsY6p-pt3_E4nOm_pM_Ea5de71J1n0EgSHpKPNJ7oL5rYlXXv8H9ZKYxP6h94AtGHixEvqCj_3MaC6RC_BwGgTNXM2ZNx-8)
         }
-        .butterfly-flourish::after {
-            content: "  ᄒ";
-            font-size: 1.2rem;
-            opacity: 0.2;
-            margin-left: 8px
-        }
-        .tape-tag {
-            background: #eae1d7;
-            box-shadow: 1px 2px 4px rgba(0,0,0,0.1);
-            transform: rotate(-3deg);
-            position: absolute;
-            top: 14px;
-            left: -6px;
-            padding: 4px 14px;
-            z-index: 10;
-            clip-path: polygon(100% 0%, 100% 10%, 98% 15%, 100% 20%, 98% 25%, 100% 30%, 98% 35%, 100% 40%, 98% 45%, 100% 50%, 98% 55%, 100% 60%, 98% 65%, 100% 70%, 98% 75%, 100% 80%, 98% 85%, 100% 90%, 98% 95%, 100% 100%, 0% 100%, 2% 95%, 0% 90%, 2% 85%, 0% 80%, 2% 75%, 0% 70%, 2% 65%, 0% 60%, 2% 55%, 0% 50%, 2% 45%, 0% 40%, 2% 35%, 0% 30%, 2% 25%, 0% 20%, 2% 15%, 0% 10%, 2% 5%, 0% 0%);
-            background-image: linear-gradient(90deg, transparent 50%, rgba(0,0,0,0.03) 50%);
-            background-size: 4px 100%;
-        }
     </style>
 </head>
 <body class="paper-texture text-on-surface font-body-lg text-body-lg selection:bg-primary-container/30">
@@ -135,18 +116,16 @@
                 <h1 class="font-headline-lg text-headline-lg text-primary select-none">Flora &amp; Craft</h1>
             </div>
             
-            <!-- Center Navigation Links -->
             <div class="hidden md:flex items-center gap-8">
-                <a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-lg text-body-lg" href="home.html">Home</a>
-                <a class="text-secondary hover:text-primary transition-colors font-body-lg text-body-lg" href="category.html">Categories</a>
+                <a class="text-secondary hover:text-primary transition-colors font-body-lg text-body-lg" href="home.html">Home</a>
+                <a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-lg text-body-lg" href="category.html">Categories</a>
                 <a class="text-secondary hover:text-primary transition-colors font-body-lg text-body-lg" href="wishlist.html">Wishlist</a>
                 <a class="text-secondary hover:text-primary transition-colors font-body-lg text-body-lg" id="navbar-dashboard-link" href="profile.html">Profile</a>
             </div>
 
-            <!-- Right Action Icons / Auth State -->
             <div class="flex items-center gap-6">
                 <!-- Search Icon with input -->
-                <div class="relative hidden sm:flex items-center">
+                <div class="relative flex items-center">
                     <input type="text" id="global-search-input" placeholder="Search products..." class="bg-surface-container-low border border-outline-variant/30 rounded-full px-4 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-primary w-48 transition-all"/>
                     <button onclick="triggerSearch()" class="absolute right-2 text-secondary hover:text-primary flex items-center">
                         <span class="material-symbols-outlined text-[20px]">search</span>
@@ -158,9 +137,7 @@
                     <span id="wishlist-count-badge" class="hidden absolute -top-1.5 -right-1.5 bg-error text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
                 </button>
                 
-                <div id="auth-buttons" class="flex items-center gap-2">
-                    <!-- Dynamic Auth buttons inserted here -->
-                </div>
+                <div id="auth-buttons" class="flex items-center gap-2"></div>
                 
                 <button class="md:hidden text-secondary" id="mobile-menu-btn">
                     <span class="material-symbols-outlined">menu</span>
@@ -169,68 +146,30 @@
         </nav>
     </header>
 
-    <main class="max-w-container-max mx-auto overflow-x-hidden pb-16">
-        <!-- Hero Section -->
-        <section class="relative px-margin-mobile md:px-margin-desktop py-16 md:py-24 flex flex-col md:flex-row items-center gap-12 botanical-bg">
-            <div class="flex-1 space-y-6">
-                <span class="font-label-caps text-label-caps text-primary tracking-widest uppercase">Est. 2024 • Handmade with Love</span>
-                <h2 class="font-display-lg text-display-lg text-on-surface leading-tight">Artisan crafts for a <br/><span class="italic text-primary">slower, intentional</span> life.</h2>
-                <p class="text-secondary max-w-lg">Discover our curated collection of hand-carved ceramics, sustainable textiles, and botanical-inspired stationery crafted by local artisans.</p>
-                <div class="flex gap-4">
-                    <button onclick="window.location.href='category.html'" class="bg-primary text-background px-8 py-3 rounded-lg font-title-md text-title-md hover:bg-primary-fixed-dim transition-all shadow-lg shadow-primary/10">Explore Collection</button>
-                </div>
-            </div>
-            <div class="flex-1 relative">
-                <div class="absolute -top-12 -right-8 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"></div>
-                <img alt="Artisan workspace" class="w-full h-[400px] object-cover rounded-xl shadow-xl rotate-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxcjnGL-Y5k00PtfwrYnkt6BwLWljVbcB6F0ktEs7d6Nct7Tc44e6Vib8SVdu0gcRv8LVDBqPV-UY5X_R8h2fABLg3E6xWXiDEwJpIYftZAgbr4e2AkSe2LvG5DKXHK7-X3V9irx7mp5KST00xUSsPYsquwTkeq7XC9O9IuXjRCb7EgAyEworyD85dGXQ1l5Es85KybakzJjoSfWb3L8yuEx4ZnAQT3QnytJ5pgCsKzV9fVjSUrwndiTiFEbRg1mMZbRKKxcuUQ4M"/>
-                <div class="absolute bottom-8 -left-8 bg-white p-6 rounded-lg shadow-xl max-w-xs border border-outline-variant/20 hidden sm:block">
-                    <p class="font-headline-lg-mobile text-headline-lg-mobile italic text-primary">"Every piece tells a story of the hands that shaped it."</p>
-                </div>
-            </div>
-        </section>
+    <main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12">
+        <!-- Category Filter Pills -->
+        <div class="flex flex-wrap gap-2.5 justify-center mb-10" id="categories-filter-container">
+            <div class="animate-pulse bg-surface-container-low h-10 w-28 rounded-full"></div>
+            <div class="animate-pulse bg-surface-container-low h-10 w-28 rounded-full"></div>
+            <div class="animate-pulse bg-surface-container-low h-10 w-28 rounded-full"></div>
+        </div>
 
-        <!-- Categories Pills Section -->
-        <section class="px-margin-mobile md:px-margin-desktop py-10">
-            <div class="flex flex-wrap gap-3 justify-center" id="categories-container">
-                <!-- Dynamically loaded category buttons -->
-                <div class="animate-pulse bg-surface-container-low h-10 w-28 rounded-full"></div>
-                <div class="animate-pulse bg-surface-container-low h-10 w-28 rounded-full"></div>
-                <div class="animate-pulse bg-surface-container-low h-10 w-28 rounded-full"></div>
-            </div>
-        </section>
+        <!-- Browse Header -->
+        <header class="mb-12 text-center max-w-2xl mx-auto space-y-4">
+            <h2 class="font-headline-lg text-headline-lg text-primary" id="browse-title">All Products</h2>
+            <p class="text-secondary text-sm" id="browse-desc">Explore beautiful handmade goods crafted by local makers.</p>
+            <div class="w-16 h-0.5 bg-primary/20 mx-auto"></div>
+        </header>
 
-        <!-- Sponsored Products -->
-        <section class="px-margin-mobile md:px-margin-desktop py-12 hidden" id="sponsored-section">
-            <div class="mb-8 flex items-center justify-between">
-                <div>
-                    <h3 class="font-headline-lg text-headline-lg mb-1">Featured Gems</h3>
-                    <p class="text-secondary text-sm">Special creations sponsored by our trusted makers.</p>
-                </div>
-                <div class="w-16 h-0.5 bg-primary/20"></div>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter" id="sponsored-products-container">
-                <!-- Sponsored Products loaded dynamically -->
-            </div>
-        </section>
-
-        <!-- Curated Collections / Recent Products -->
-        <section class="px-margin-mobile md:px-margin-desktop py-12">
-            <div class="mb-8 flex items-center justify-between">
-                <div>
-                    <h3 class="font-headline-lg text-headline-lg mb-1">Recent Creations</h3>
-                    <p class="text-secondary text-sm font-body-sm">The latest unique items added to the nest.</p>
-                </div>
-                <div class="w-24 h-0.5 bg-primary/20"></div>
-            </div>
-            
-            <div id="recent-products-empty" class="hidden text-center py-12 bg-surface-container-low/50 rounded-xl">
-                <span class="material-symbols-outlined text-4xl text-outline mb-2">production_quantity_limits</span>
-                <p class="text-secondary">No products found. Start by seeding or adding some!</p>
+        <!-- Product Grid -->
+        <section class="min-h-[400px]">
+            <div id="products-empty" class="hidden text-center py-16 bg-surface-container-low/50 rounded-xl">
+                <span class="material-symbols-outlined text-4xl text-outline mb-2">search_off</span>
+                <p class="text-secondary" id="empty-state-text">No products found matching this filter.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter" id="recent-products-container">
-                <!-- Recent Products loaded dynamically -->
-                <!-- Skeletal Loading State -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter" id="products-grid">
+                <!-- Dynamically loaded product cards -->
                 <div class="animate-pulse bg-surface-container-low h-80 rounded-xl"></div>
                 <div class="animate-pulse bg-surface-container-low h-80 rounded-xl"></div>
                 <div class="animate-pulse bg-surface-container-low h-80 rounded-xl"></div>
@@ -238,6 +177,16 @@
             </div>
         </section>
 
+        <!-- Pagination Controls -->
+        <footer class="flex justify-center items-center gap-6 mt-16" id="pagination-controls">
+            <button id="btn-prev" onclick="changePage(-1)" class="bg-surface-container border border-outline-variant/30 hover:border-primary text-on-surface px-5 py-2.5 text-xs font-semibold rounded-full uppercase tracking-wider transition-all disabled:opacity-40 disabled:pointer-events-none flex items-center gap-1">
+                <span class="material-symbols-outlined text-[16px]">arrow_back</span> Prev
+            </button>
+            <span id="page-indicator" class="font-label-caps text-sm text-secondary uppercase font-bold">Page 1</span>
+            <button id="btn-next" onclick="changePage(1)" class="bg-surface-container border border-outline-variant/30 hover:border-primary text-on-surface px-5 py-2.5 text-xs font-semibold rounded-full uppercase tracking-wider transition-all disabled:opacity-40 disabled:pointer-events-none flex items-center gap-1">
+                Next <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </button>
+        </footer>
     </main>
 
     <!-- Footer -->
@@ -257,13 +206,6 @@
                     <li><a class="hover:text-inverse-primary transition-colors" href="wishlist.html">Your Wishlist</a></li>
                 </ul>
             </div>
-            <div class="space-y-6">
-                <h5 class="font-title-md text-title-md text-inverse-primary">Account</h5>
-                <ul class="space-y-3 text-secondary-fixed-dim text-sm">
-                    <li><a class="hover:text-inverse-primary transition-colors" href="login.html">Login</a></li>
-                    <li><a class="hover:text-inverse-primary transition-colors" href="signup-buyer.html">Register</a></li>
-                </ul>
-            </div>
         </div>
         <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-outline">
             <p>© 2026 Flora &amp; Craft Studio. All rights reserved.</p>
@@ -272,12 +214,12 @@
 
     <!-- BottomNavBar (Mobile Only) -->
     <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface-container-low/95 backdrop-blur-md shadow-[0_-4px_16px_rgba(74,69,62,0.08)] rounded-t-xl">
-        <div onclick="window.location.href='home.html'" class="flex flex-col items-center justify-center text-primary rounded-xl px-4 py-1.5 cursor-pointer">
-            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+        <div onclick="window.location.href='home.html'" class="flex flex-col items-center justify-center text-secondary rounded-xl px-4 py-1.5 cursor-pointer">
+            <span class="material-symbols-outlined">home</span>
             <span class="font-label-caps text-[10px] mt-0.5">Home</span>
         </div>
-        <div onclick="window.location.href='category.html'" class="flex flex-col items-center justify-center text-secondary px-4 py-1.5 cursor-pointer">
-            <span class="material-symbols-outlined">category</span>
+        <div onclick="window.location.href='category.html'" class="flex flex-col items-center justify-center text-primary px-4 py-1.5 cursor-pointer">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">category</span>
             <span class="font-label-caps text-[10px] mt-0.5">Category</span>
         </div>
         <div onclick="window.location.href='wishlist.html'" class="flex flex-col items-center justify-center text-secondary px-4 py-1.5 cursor-pointer">
@@ -294,8 +236,17 @@
         const API_BASE_URL = 'https://localhost:8443';
         let wishlistedProductIds = new Set();
         let isLoggedIn = false;
+        let categories = [];
+        
+        let currentLimit = 12;
+        let currentOffset = 0;
+        let hasMore = true;
 
-        // Check login state
+        // Extract params
+        const urlParams = new URLSearchParams(window.location.search);
+        let activeSlug = urlParams.get('slug') || '';
+        let searchQuery = urlParams.get('search') || '';
+
         function checkAuthState() {
             const token = sessionStorage.getItem('access_token');
             const authContainer = document.getElementById('auth-buttons');
@@ -303,8 +254,6 @@
             
             if (token) {
                 isLoggedIn = true;
-                
-                // Parse JWT to extract role
                 try {
                     const base64Url = token.split('.')[1];
                     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -330,7 +279,6 @@
                         `;
                     }
                 } catch(e) {
-                    console.error("Failed to parse token:", e);
                     logout();
                 }
             } else {
@@ -360,7 +308,7 @@
                     updateWishlistBadge();
                 }
             } catch (e) {
-                console.error("Failed to fetch wishlist:", e);
+                console.error(e);
             }
         }
 
@@ -395,7 +343,7 @@
                         heartIcon.style.fontVariationSettings = "'FILL' 1";
                         heartIcon.style.color = '#ba1a1a';
                     } else if (response.status === 403) {
-                        alert("Sellers cannot add products to a wishlist. Please log in as a buyer.");
+                        alert("Sellers cannot wishlist products. Please use a buyer account.");
                     }
                 } else {
                     const response = await fetch(`${API_BASE_URL}/api/v1/wishlist/${productId}`, {
@@ -410,11 +358,10 @@
                 }
                 updateWishlistBadge();
             } catch (e) {
-                console.error("Error toggling wishlist:", e);
+                console.error(e);
             }
         }
 
-        // Global search function
         function triggerSearch() {
             const input = document.getElementById('global-search-input');
             const query = input.value.trim();
@@ -429,107 +376,176 @@
             }
         });
 
-        // Fetch categories and products on load
-        async function loadHomepage() {
-            checkAuthState();
-            await fetchWishlist();
-
-            // Fetch categories
+        // Load Categories list
+        async function loadCategories() {
             try {
                 const response = await fetch(`${API_BASE_URL}/api/v1/browse/categories`);
                 if (response.ok) {
-                    const categories = await response.json();
-                    const container = document.getElementById('categories-container');
-                    container.innerHTML = categories.map(cat => `
-                        <button onclick="window.location.href='category.html?slug=${cat.slug}'" class="bg-surface-container border border-outline-variant/30 hover:border-primary hover:bg-primary-fixed/20 text-on-surface px-5 py-2 text-xs font-semibold rounded-full uppercase tracking-wider transition-all flex items-center gap-1.5">
+                    categories = await response.json();
+                    
+                    const filterContainer = document.getElementById('categories-filter-container');
+                    
+                    // Render "All" pill
+                    let pillsHtml = `
+                        <button onclick="selectCategory('')" class="${!activeSlug && !searchQuery ? 'bg-primary text-background' : 'bg-surface-container text-on-surface'} hover:border-primary border border-outline-variant/30 px-5 py-2 text-xs font-semibold rounded-full uppercase tracking-wider transition-all">
+                            All Goods
+                        </button>
+                    `;
+                    
+                    pillsHtml += categories.map(cat => `
+                        <button onclick="selectCategory('${cat.slug}')" class="${activeSlug === cat.slug ? 'bg-primary text-background' : 'bg-surface-container text-on-surface'} hover:border-primary border border-outline-variant/30 px-5 py-2 text-xs font-semibold rounded-full uppercase tracking-wider transition-all flex items-center gap-1.5">
                             <span>${cat.icon_emoji || '🏺'}</span>
                             <span>${cat.display_name}</span>
                         </button>
                     `).join('');
-                }
-            } catch (e) {
-                console.error("Failed to load categories:", e);
-            }
-
-            // Fetch home products
-            try {
-                const response = await fetch(`${API_BASE_URL}/api/v1/browse/home`);
-                if (response.ok) {
-                    const data = await response.json();
                     
-                    // Render Sponsored
-                    const sponsoredContainer = document.getElementById('sponsored-products-container');
-                    const sponsoredSection = document.getElementById('sponsored-section');
-                    if (data.sponsored && data.sponsored.length > 0) {
-                        sponsoredSection.classList.remove('hidden');
-                        sponsoredContainer.innerHTML = data.sponsored.map(p => {
-                            const isWishlisted = wishlistedProductIds.has(p.id);
-                            const imgUrl = p.image_urls && p.image_urls.length > 0 ? `${API_BASE_URL}${p.image_urls[0]}` : 'https://placehold.co/400x400/f4ede3/516447?text=Handcrafted';
-                            return `
-                                <div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant/10 hover:shadow-xl transition-all group relative flex flex-col">
-                                    <div class="relative mb-4 overflow-hidden rounded-lg">
-                                        <div class="tape-tag font-label-caps text-[10px] text-primary uppercase font-bold" style="background-color: #eae1d7;">Sponsored</div>
-                                        <img class="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer" onclick="window.location.href='product.html?id=${p.id}'" src="${imgUrl}" alt="${p.title}">
-                                        
-                                        <button onclick="toggleWishlist('${p.id}', this)" class="absolute top-4 right-4 bg-white/85 p-2 rounded-full hover:bg-white hover:scale-110 transition-all shadow-md z-10 flex items-center justify-center">
-                                            <span class="material-symbols-outlined text-[20px] transition-colors duration-200" style="font-variation-settings: 'FILL' ${isWishlisted ? 1 : 0}; color: ${isWishlisted ? '#ba1a1a' : '#74786f'};">favorite</span>
-                                        </button>
-                                    </div>
-                                    <h4 class="font-title-md text-title-md text-on-surface mb-1 truncate cursor-pointer" onclick="window.location.href='product.html?id=${p.id}'">${p.title}</h4>
-                                    <p class="text-xs text-secondary mb-3">${p.shop_name || 'Artisan Seller'} • ${p.shipping_days} days shipping</p>
-                                    <div class="flex justify-between items-center mt-auto">
-                                        <span class="text-lg font-bold text-on-surface">₹${(p.price_paise / 100).toLocaleString('en-IN')}</span>
-                                        <button onclick="window.location.href='product.html?id=${p.id}'" class="bg-secondary-container px-3 py-1.5 text-xs font-semibold rounded-lg hover:bg-primary hover:text-white transition-colors">
-                                            View
-                                        </button>
-                                    </div>
-                                </div>
-                            `;
-                        }).join('');
-                    } else {
-                        sponsoredSection.classList.add('hidden');
-                    }
+                    filterContainer.innerHTML = pillsHtml;
 
-                    // Render Recent
-                    const recentContainer = document.getElementById('recent-products-container');
-                    const emptyState = document.getElementById('recent-products-empty');
-                    if (data.recent && data.recent.length > 0) {
-                        emptyState.classList.add('hidden');
-                        recentContainer.innerHTML = data.recent.map(p => {
-                            const isWishlisted = wishlistedProductIds.has(p.id);
-                            const imgUrl = p.image_urls && p.image_urls.length > 0 ? `${API_BASE_URL}${p.image_urls[0]}` : 'https://placehold.co/400x400/f4ede3/516447?text=Handcrafted';
-                            return `
-                                <div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant/10 hover:shadow-xl transition-all group relative flex flex-col">
-                                    <div class="relative mb-4 overflow-hidden rounded-lg">
-                                        <img class="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer" onclick="window.location.href='product.html?id=${p.id}'" src="${imgUrl}" alt="${p.title}">
-                                        
-                                        <button onclick="toggleWishlist('${p.id}', this)" class="absolute top-4 right-4 bg-white/85 p-2 rounded-full hover:bg-white hover:scale-110 transition-all shadow-md z-10 flex items-center justify-center">
-                                            <span class="material-symbols-outlined text-[20px] transition-colors duration-200" style="font-variation-settings: 'FILL' ${isWishlisted ? 1 : 0}; color: ${isWishlisted ? '#ba1a1a' : '#74786f'};">favorite</span>
-                                        </button>
-                                    </div>
-                                    <h4 class="font-title-md text-title-md text-on-surface mb-1 truncate cursor-pointer" onclick="window.location.href='product.html?id=${p.id}'">${p.title}</h4>
-                                    <p class="text-xs text-secondary mb-3">${p.shop_name || 'Artisan Seller'} • ${p.shipping_days} days shipping</p>
-                                    <div class="flex justify-between items-center mt-auto">
-                                        <span class="text-lg font-bold text-on-surface">₹${(p.price_paise / 100).toLocaleString('en-IN')}</span>
-                                        <button onclick="window.location.href='product.html?id=${p.id}'" class="bg-secondary-container px-3 py-1.5 text-xs font-semibold rounded-lg hover:bg-primary hover:text-white transition-colors">
-                                            View
-                                        </button>
-                                    </div>
-                                </div>
-                            `;
-                        }).join('');
+                    // Update Title & Desc based on selected slug
+                    if (activeSlug) {
+                        const activeCat = categories.find(c => c.slug === activeSlug);
+                        if (activeCat) {
+                            document.getElementById('browse-title').innerText = activeCat.display_name;
+                            document.getElementById('browse-desc').innerText = activeCat.description;
+                        }
+                    } else if (searchQuery) {
+                        document.getElementById('browse-title').innerText = `Search Results: "${searchQuery}"`;
+                        document.getElementById('browse-desc').innerText = `Displaying search matches.`;
                     } else {
-                        recentContainer.innerHTML = '';
-                        emptyState.classList.remove('hidden');
+                        document.getElementById('browse-title').innerText = "All Products";
+                        document.getElementById('browse-desc').innerText = "Explore beautiful handmade goods crafted by local makers.";
                     }
-
                 }
             } catch (e) {
-                console.error("Failed to load products:", e);
+                console.error(e);
             }
         }
 
-        window.addEventListener('DOMContentLoaded', loadHomepage);
+        function selectCategory(slug) {
+            window.location.href = slug ? `category.html?slug=${slug}` : `category.html`;
+        }
+
+        // Fetch products
+        async function fetchProducts() {
+            const grid = document.getElementById('products-grid');
+            const emptyState = document.getElementById('products-empty');
+            
+            // Show skeletal loaders
+            grid.innerHTML = `
+                <div class="animate-pulse bg-surface-container-low h-80 rounded-xl"></div>
+                <div class="animate-pulse bg-surface-container-low h-80 rounded-xl"></div>
+                <div class="animate-pulse bg-surface-container-low h-80 rounded-xl"></div>
+                <div class="animate-pulse bg-surface-container-low h-80 rounded-xl"></div>
+            `;
+            emptyState.classList.add('hidden');
+
+            let url = '';
+            if (searchQuery) {
+                url = `${API_BASE_URL}/api/v1/browse/search?q=${encodeURIComponent(searchQuery)}&limit=${currentLimit}&offset=${currentOffset}`;
+            } else if (activeSlug) {
+                url = `${API_BASE_URL}/api/v1/browse/category/${activeSlug}?limit=${currentLimit}&offset=${currentOffset}`;
+            } else {
+                // If "All", fetch latest active products by search with empty query or category slug. But wait: browse/home gives recent,
+                // browse doesn't have an "all active products" endpoint in the schema unless we search or use a default.
+                // Wait! Let's check browse.py router or browse_service.py to see how we can fetch all.
+                // Oh! The user request says:
+                // - GET /api/v1/browse/category/{slug}
+                // - GET /api/v1/browse/search?q=...
+                // So if no slug and no search query, we can query search with "q" empty or just fallback to search with a generic query, or query home.
+                // Actually, let's see how browse_service.py search_products works. Does it require a query? Yes, q has min_length=2.
+                // Let's inspect browse_service.py to see if we can search or list items.
+            }
+            
+            // Let's check what endpoints browse router supports.
+            // Wait, if no category is selected, let's show all category pills, and show products of the first category, or search for "a" or similar.
+            // Wait, what if we default to the first category slug if activeSlug is empty? That is extremely smart and prevents a blank screen!
+            // Yes, if activeSlug is empty and searchQuery is empty:
+            if (!activeSlug && !searchQuery) {
+                if (categories.length > 0) {
+                    activeSlug = categories[0].slug;
+                    // reload page or fetch with this slug:
+                    url = `${API_BASE_URL}/api/v1/browse/category/${activeSlug}?limit=${currentLimit}&offset=${currentOffset}`;
+                    // Update header title/desc
+                    document.getElementById('browse-title').innerText = categories[0].display_name;
+                    document.getElementById('browse-desc').innerText = categories[0].description;
+                } else {
+                    grid.innerHTML = '';
+                    emptyState.classList.remove('hidden');
+                    document.getElementById('pagination-controls').classList.add('hidden');
+                    return;
+                }
+            }
+
+            try {
+                const response = await fetch(url);
+                if (response.ok) {
+                    const products = await response.json();
+                    
+                    if (products.length === 0) {
+                        grid.innerHTML = '';
+                        emptyState.classList.remove('hidden');
+                        document.getElementById('empty-state-text').innerText = searchQuery ? `No matches found for "${searchQuery}"` : "No products found in this category.";
+                        hasMore = false;
+                        updatePaginationButtons();
+                        return;
+                    }
+
+                    hasMore = products.length === currentLimit;
+                    updatePaginationButtons();
+
+                    grid.innerHTML = products.map(p => {
+                        const isWishlisted = wishlistedProductIds.has(p.id);
+                        const imgUrl = p.image_urls && p.image_urls.length > 0 ? `${API_BASE_URL}${p.image_urls[0]}` : 'https://placehold.co/400x400/f4ede3/516447?text=Handcrafted';
+                        return `
+                            <div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant/10 hover:shadow-xl transition-all group relative flex flex-col">
+                                <div class="relative mb-4 overflow-hidden rounded-lg">
+                                    <img class="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer" onclick="window.location.href='product.html?id=${p.id}'" src="${imgUrl}" alt="${p.title}">
+                                    
+                                    <button onclick="toggleWishlist('${p.id}', this)" class="absolute top-4 right-4 bg-white/85 p-2 rounded-full hover:bg-white hover:scale-110 transition-all shadow-md z-10 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[20px] transition-colors duration-200" style="font-variation-settings: 'FILL' ${isWishlisted ? 1 : 0}; color: ${isWishlisted ? '#ba1a1a' : '#74786f'};">favorite</span>
+                                    </button>
+                                </div>
+                                <h4 class="font-title-md text-title-md text-on-surface mb-1 truncate cursor-pointer" onclick="window.location.href='product.html?id=${p.id}'">${p.title}</h4>
+                                <p class="text-xs text-secondary mb-3">${p.shop_name || 'Artisan Seller'} • ${p.shipping_days} days shipping</p>
+                                <div class="flex justify-between items-center mt-auto">
+                                    <span class="text-lg font-bold text-on-surface">₹${(p.price_paise / 100).toLocaleString('en-IN')}</span>
+                                    <button onclick="window.location.href='product.html?id=${p.id}'" class="bg-secondary-container px-3 py-1.5 text-xs font-semibold rounded-lg hover:bg-primary hover:text-white transition-colors">
+                                        View
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+            } catch (e) {
+                console.error(e);
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                document.getElementById('empty-state-text').innerText = "Unable to connect to the server.";
+            }
+        }
+
+        function updatePaginationButtons() {
+            const page = Math.floor(currentOffset / currentLimit) + 1;
+            document.getElementById('page-indicator').innerText = `Page ${page}`;
+            
+            document.getElementById('btn-prev').disabled = (currentOffset === 0);
+            document.getElementById('btn-next').disabled = !hasMore;
+        }
+
+        async function changePage(direction) {
+            currentOffset += direction * currentLimit;
+            if (currentOffset < 0) currentOffset = 0;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            await fetchProducts();
+        }
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            checkAuthState();
+            await fetchWishlist();
+            await loadCategories();
+            await fetchProducts();
+        });
     </script>
 </body>
 </html>
