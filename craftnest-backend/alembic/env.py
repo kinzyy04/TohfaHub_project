@@ -18,8 +18,20 @@ import app.models  # noqa
 # This is the Alembic Config object
 config = context.config
 
-# Dynamically set the database URL from settings
-config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
+# Dynamically set the database URL from settings with SQLite fallback
+db_url = settings.DATABASE_URL
+if db_url.startswith("postgresql"):
+    if "localhost" in db_url or "127.0.0.1" in db_url:
+        import socket
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.settimeout(0.5)
+            s.connect(("127.0.0.1", 5432))
+            s.close()
+        except OSError:
+            db_url = "sqlite+aiosqlite:///./craftnest.db"
+
+config.set_main_option("sqlalchemy.url", db_url)
 
 # Interpret the config file for Python logging
 if config.config_file_name is not None:

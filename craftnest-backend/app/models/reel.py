@@ -178,4 +178,3 @@ class ReelView(Base):
     )
 
     reel = relationship("Reel")
-

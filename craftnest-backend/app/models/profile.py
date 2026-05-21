@@ -2,15 +2,15 @@ import uuid
 from datetime import datetime
 import sqlalchemy as sa
 from sqlalchemy import String, ForeignKey, DateTime, Integer
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import String, ForeignKey, DateTime, Integer
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from app.core.database import Base
+from app.core.database import Base, GUID
 
 class BuyerProfile(Base):
     __tablename__ = "buyer_profiles"
 
     user_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID,
         ForeignKey("users.id", ondelete="CASCADE"),
         primary_key=True
     )
@@ -36,7 +36,7 @@ class SellerProfile(Base):
     __tablename__ = "seller_profiles"
 
     user_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID,
         ForeignKey("users.id", ondelete="CASCADE"),
         primary_key=True
     )

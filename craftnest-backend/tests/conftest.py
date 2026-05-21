@@ -27,6 +27,17 @@ async def engine():
     if not test_db_url:
         raise ValueError("TEST_DATABASE_URL is not configured in environment/.env")
         
+    import socket
+    if test_db_url.startswith("postgresql"):
+        if "localhost" in test_db_url or "127.0.0.1" in test_db_url:
+            try:
+                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                s.settimeout(0.5)
+                s.connect(("127.0.0.1", 5432))
+                s.close()
+            except OSError:
+                test_db_url = "sqlite+aiosqlite:///./test_craftnest.db"
+                
     test_engine = create_async_engine(test_db_url, echo=False)
     
     # Drop and create all tables for the clean test database

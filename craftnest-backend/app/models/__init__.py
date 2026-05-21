@@ -10,5 +10,3 @@ from app.models.product import Product  # noqa
 from app.models.wishlist import Wishlist  # noqa
 from app.models.reel import Reel, ReelLike, ReelSave, ReelComment, ReelView  # noqa
 from app.models.follow import Follow  # noqa
-
-

@@ -12,7 +12,10 @@ async def test_startup_fails_with_postgres_user():
     mock_sessionmaker = MagicMock()
     mock_sessionmaker.return_value.__aenter__.return_value = mock_session
     
-    with patch("app.main.SessionLocal", mock_sessionmaker):
+    mock_engine = MagicMock()
+    mock_engine.url = "postgresql://localhost/craftnest"
+    mock_engine.dispose = AsyncMock()
+    with patch("app.main.SessionLocal", mock_sessionmaker), patch("app.main.engine", mock_engine):
         from app.main import app
         with pytest.raises(SystemExit) as exc_info:
             async with app.router.lifespan_context(app):
@@ -30,7 +33,10 @@ async def test_startup_fails_with_superuser_role():
     mock_sessionmaker = MagicMock()
     mock_sessionmaker.return_value.__aenter__.return_value = mock_session
     
-    with patch("app.main.SessionLocal", mock_sessionmaker):
+    mock_engine = MagicMock()
+    mock_engine.url = "postgresql://localhost/craftnest"
+    mock_engine.dispose = AsyncMock()
+    with patch("app.main.SessionLocal", mock_sessionmaker), patch("app.main.engine", mock_engine):
         from app.main import app
         with pytest.raises(SystemExit) as exc_info:
             async with app.router.lifespan_context(app):
@@ -48,7 +54,10 @@ async def test_startup_succeeds_with_normal_user():
     mock_sessionmaker = MagicMock()
     mock_sessionmaker.return_value.__aenter__.return_value = mock_session
     
-    with patch("app.main.SessionLocal", mock_sessionmaker):
+    mock_engine = MagicMock()
+    mock_engine.url = "postgresql://localhost/craftnest"
+    mock_engine.dispose = AsyncMock()
+    with patch("app.main.SessionLocal", mock_sessionmaker), patch("app.main.engine", mock_engine):
         from app.main import app
         # Should execute startup and shutdown of lifespan without raising SystemExit
         async with app.router.lifespan_context(app):
