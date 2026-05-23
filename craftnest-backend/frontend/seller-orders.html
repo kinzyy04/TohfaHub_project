@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Manage Orders | CraftNest Studio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Be+Vietnam+Pro:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#ddbcdf",
+                        "primary-container": "#a8b48e",
+                        "on-secondary-container": "#745a78",
+                        "on-tertiary-fixed-variant": "#494740",
+                        "on-surface-variant": "#45483f",
+                        "surface-bright": "#fff8f1",
+                        "secondary-container": "#f7d5f8",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#1d1c16",
+                        "tertiary-container": "#b3afa7",
+                        "surface-container-low": "#faf2e9",
+                        "surface-container": "#f4ede3",
+                        "on-primary-fixed-variant": "#404a2c",
+                        "primary": "#576242",
+                        "surface-variant": "#e9e1d8",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c6c7bb",
+                        "secondary-fixed": "#fad8fb",
+                        "outline": "#76786e",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#dbe8bf",
+                        "on-tertiary-container": "#44423c",
+                        "surface-container-high": "#efe7dd",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f7f0e6",
+                        "background": "#fff8f1",
+                        "on-secondary-fixed-variant": "#573e5b",
+                        "surface-tint": "#576242",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#615e57",
+                        "surface-container-highest": "#e9e1d8",
+                        "primary-fixed-dim": "#bfcba4",
+                        "on-primary-container": "#3c4628",
+                        "tertiary-fixed": "#e7e2d9",
+                        "inverse-surface": "#33302a",
+                        "inverse-primary": "#bfcba4",
+                        "surface-dim": "#e0d9cf",
+                        "on-surface": "#1e1b15",
+                        "surface": "#fff8f1",
+                        "tertiary-fixed-dim": "#cac6be",
+                        "secondary": "#705673",
+                        "on-secondary-fixed": "#28132d",
+                        "on-primary-fixed": "#151e05",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#1e1b15",
+                        "custom-primary": "#a8b48e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "container-max": "1200px",
+                        "margin-desktop": "80px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["EB Garamond", "serif"],
+                        "headline-lg": ["EB Garamond", "serif"],
+                        "body-md": ["Be Vietnam Pro", "sans-serif"],
+                        "body-lg": ["Be Vietnam Pro", "sans-serif"],
+                        "label-sm": ["Be Vietnam Pro", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #fff8f1; color: #1e1b15; }
+        h1, h2, h3, .font-headline { font-family: 'EB Garamond', serif; color: #1e1b15; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .active-tab { border-bottom: 2px solid #a8b48e; color: #a8b48e; font-weight: 600; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="min-h-screen opacity-0 transition-opacity duration-300 flex flex-col justify-between" id="body-content">
+    
+    <div>
+        <!-- Top Navigation -->
+        <nav class="sticky top-0 z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 px-margin-mobile md:px-margin-desktop py-4 flex justify-between items-center">
+            <div class="h-8 flex items-center gap-2 cursor-pointer" onclick="window.location.href='seller-dashboard.html'">
+                <span class="material-symbols-outlined text-custom-primary text-2xl" style="font-variation-settings: 'FILL' 1;">store</span>
+                <span class="font-headline-lg text-on-background text-2xl" style="font-family: 'EB Garamond', serif;">CraftNest Studio</span>
+            </div>
+            <div class="flex gap-4 items-center">
+                <a class="text-secondary hover:text-custom-primary transition-colors text-sm font-semibold uppercase tracking-wider hidden md:block" href="seller-dashboard.html">Dashboard</a>
+                <button id="logout-btn" class="p-2 hover:bg-surface-container rounded-full transition-colors flex items-center justify-center" title="Logout">
+                    <span class="material-symbols-outlined text-on-surface text-2xl hover:text-error transition-colors">logout</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-10 pb-20">
+            <header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <h1 class="font-headline-md text-3xl mb-2">Order Management</h1>
+                    <p class="font-body-md text-sm text-on-surface-variant">Fulfill orders, input tracking details, and manage customer shipments.</p>
+                </div>
+                <button onclick="window.location.href='seller-dashboard.html'" class="inline-flex items-center gap-2 border border-outline text-on-surface py-2 px-6 rounded-full font-semibold text-xs uppercase tracking-wider hover:bg-surface-container transition-all self-start md:self-auto">
+                    <span class="material-symbols-outlined text-[16px]">arrow_back</span> Back to Dashboard
+                </button>
+            </header>
+
+            <!-- Filter Tabs -->
+            <nav class="flex border-b border-outline-variant/50 mb-8 overflow-x-auto no-scrollbar" id="status-tabs">
+                <button onclick="filterByStatus('all')" class="flex-1 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant hover:text-custom-primary transition-colors whitespace-nowrap px-6 active-tab" id="tab-all">All</button>
+                <button onclick="filterByStatus('awaiting_payment')" class="flex-1 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant hover:text-custom-primary transition-colors whitespace-nowrap px-6" id="tab-awaiting_payment">Awaiting</button>
+                <button onclick="filterByStatus('processing')" class="flex-1 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant hover:text-custom-primary transition-colors whitespace-nowrap px-6" id="tab-processing">Processing</button>
+                <button onclick="filterByStatus('shipped')" class="flex-1 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant hover:text-custom-primary transition-colors whitespace-nowrap px-6" id="tab-shipped">Shipped</button>
+                <button onclick="filterByStatus('delivered')" class="flex-1 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant hover:text-custom-primary transition-colors whitespace-nowrap px-6" id="tab-delivered">Delivered</button>
+                <button onclick="filterByStatus('cancelled')" class="flex-1 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant hover:text-custom-primary transition-colors whitespace-nowrap px-6" id="tab-cancelled">Cancelled</button>
+            </nav>
+
+            <!-- Error Banner -->
+            <div id="error-banner" class="hidden bg-red-50 border border-red-200 text-red-700 p-4 rounded-xl mb-8 flex items-start gap-3">
+                <span class="material-symbols-outlined text-red-600 shrink-0">error</span>
+                <p id="error-message" class="text-sm"></p>
+            </div>
+
+            <!-- Orders List -->
+            <div id="seller-orders-list" class="space-y-6">
+                <!-- Skeleton Loader -->
+                <div class="animate-pulse bg-surface-container p-6 rounded-xl space-y-4">
+                    <div class="h-6 bg-surface-container-high rounded w-1/4"></div>
+                    <div class="h-10 bg-surface-container-high rounded w-1/2"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Shipped Modal (Requires Tracking Code) -->
+    <div id="shipped-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-surface p-6 md:p-8 rounded-xl border border-outline-variant/35 shadow-xl max-w-md w-full mx-4 transform scale-95 transition-all duration-300" id="shipped-modal-box">
+            <div>
+                <h3 class="font-headline-md text-2xl mb-2 flex items-center gap-2 text-custom-primary">
+                    <span class="material-symbols-outlined text-[28px]">local_shipping</span> Mark as Shipped
+                </h3>
+                <p class="text-on-surface-variant text-sm mb-6">Fulfill this order by entering the tracking number or logistics reference code below.</p>
+                
+                <form id="shipped-form" class="space-y-4">
+                    <div>
+                        <label for="tracking-code-input" class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2">Tracking Code *</label>
+                        <input type="text" id="tracking-code-input" placeholder="e.g. IN129849202" class="w-full bg-transparent border border-outline-variant px-4 py-3 text-sm focus:border-custom-primary focus:ring-0 rounded-lg transition-colors" required/>
+                    </div>
+                    <div>
+                        <label for="seller-note-input" class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2">Seller Note (Optional)</label>
+                        <textarea id="seller-note-input" placeholder="Add any details about shipping or carrier..." class="w-full bg-transparent border border-outline-variant px-4 py-3 text-sm focus:border-custom-primary focus:ring-0 rounded-lg transition-colors h-20 resize-none"></textarea>
+                    </div>
+                    
+                    <div class="flex gap-4 pt-2">
+                        <button type="button" onclick="closeShippedModal()" class="flex-grow border border-outline text-on-surface font-semibold py-3 rounded-full text-xs uppercase tracking-wider hover:bg-surface-container transition-all">
+                            Cancel
+                        </button>
+                        <button type="submit" class="flex-grow bg-custom-primary text-white font-semibold py-3 rounded-full text-xs uppercase tracking-wider hover:opacity-90 transition-all">
+                            Submit Shipment
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Simple Footer -->
+    <footer class="border-t border-outline-variant/30 py-10 bg-surface-container-low text-center mt-12">
+        <p class="text-xs text-on-surface-variant font-medium tracking-widest uppercase">© 2026 CraftNest Artisan Studio</p>
+    </footer>
+
+    <script>
+        const API_BASE_URL = "https://localhost:8443";
+        let activeFilter = 'all';
+        let currentShipOrderId = null;
+
+        function checkAuth() {
+            const token = sessionStorage.getItem('access_token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return null;
+            }
+            return token;
+        }
+
+        async function verifySellerRole() {
+            const token = checkAuth();
+            if (!token) return;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/v1/auth/me`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (response.status !== 200) throw new Error("Verification failed");
+
+                const user = await response.json();
+                if (user.role !== 'seller') {
+                    // Redirect non-sellers
+                    window.location.href = 'profile.html';
+                    return;
+                }
+
+                // Grant access
+                const bodyContent = document.getElementById('body-content');
+                if (bodyContent) bodyContent.classList.remove('opacity-0');
+                
+                loadSellerOrders();
+
+            } catch (err) {
+                console.error("Seller validation failed:", err);
+                sessionStorage.clear();
+                window.location.href = 'login.html';
+            }
+        }
+
+        function getStatusBadge(status) {
+            let bg, text, label;
+            switch(status) {
+                case 'awaiting_payment':
+                case 'pending':
+                    bg = 'bg-amber-50 border-amber-200';
+                    text = 'text-amber-700';
+                    label = 'Awaiting Payment';
+                    break;
+                case 'paid_offline':
+                    bg = 'bg-amber-50 border-amber-200';
+                    text = 'text-amber-700';
+                    label = 'Paid Offline';
+                    break;
+                case 'processing':
+                    bg = 'bg-blue-50 border-blue-200';
+                    text = 'text-blue-700';
+                    label = 'Processing';
+                    break;
+                case 'shipped':
+                    bg = 'bg-indigo-50 border-indigo-200';
+                    text = 'text-indigo-700';
+                    label = 'Shipped';
+                    break;
+                case 'delivered':
+                    bg = 'bg-green-50 border-green-200';
+                    text = 'text-green-700';
+                    label = 'Delivered';
+                    break;
+                case 'cancelled':
+                    bg = 'bg-gray-100 border-gray-200';
+                    text = 'text-gray-600';
+                    label = 'Cancelled';
+                    break;
+                case 'refunded':
+                    bg = 'bg-gray-100 border-gray-200';
+                    text = 'text-gray-600';
+                    label = 'Refunded';
+                    break;
+                default:
+                    bg = 'bg-gray-50 border-gray-200';
+                    text = 'text-gray-700';
+                    label = status;
+            }
+            return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border ${bg} ${text}">${label}</span>`;
+        }
+
+        function filterByStatus(status) {
+            activeFilter = status;
+            
+            // Toggle active tabs class
+            const tabs = document.querySelectorAll('#status-tabs button');
+            tabs.forEach(tab => {
+                if (tab.id === `tab-${status}`) {
+                    tab.classList.add('active-tab');
+                } else {
+                    tab.classList.remove('active-tab');
+                }
+            });
+
+            loadSellerOrders();
+        }
+
+        async function loadSellerOrders() {
+            const token = checkAuth();
+            if (!token) return;
+
+            const ordersList = document.getElementById('seller-orders-list');
+            const errorBanner = document.getElementById('error-banner');
+            const errorMsg = document.getElementById('error-message');
+
+            try {
+                let url = `${API_BASE_URL}/api/v1/seller/orders?page_size=50`;
+                if (activeFilter !== 'all') {
+                    url += `&status=${activeFilter}`;
+                }
+
+                const response = await fetch(url, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!response.ok) throw new Error(`Failed to load seller orders (${response.status})`);
+
+                const data = await response.json();
+                ordersList.innerHTML = '';
+
+                if (data.items.length === 0) {
+                    ordersList.innerHTML = `
+                        <div class="text-center py-16 bg-surface-container/20 rounded-xl border border-outline-variant/30">
+                            <span class="material-symbols-outlined text-4xl text-outline mb-2">inbox</span>
+                            <p class="text-secondary text-sm">No orders matching this filter.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                data.items.forEach(order => {
+                    const shortId = order.id.substring(order.id.length - 8);
+                    const formattedDate = new Date(order.created_at).toLocaleDateString('en-IN', {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric'
+                    });
+                    const totalVal = (order.total_paise / 100).toLocaleString('en-IN');
+
+                    // Compile items
+                    let itemsHtml = '';
+                    order.items.forEach(item => {
+                        const price = (item.price_snapshot_paise / 100).toLocaleString('en-IN');
+                        itemsHtml += `
+                            <div class="flex justify-between items-center text-sm py-1">
+                                <span class="font-medium truncate mr-4">${item.title_snapshot} <span class="text-xs text-on-surface-variant font-normal">× ${item.quantity}</span></span>
+                                <span class="font-bold shrink-0">₹${((item.price_snapshot_paise * item.quantity)/100).toLocaleString('en-IN')}</span>
+                            </div>
+                        `;
+                    });
+
+                    // Manage dropdown / next step transition options
+                    let dropdownHtml = '';
+                    const status = order.status;
+
+                    if (['awaiting_payment', 'paid_offline'].includes(status)) {
+                        dropdownHtml = `
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-semibold text-on-surface-variant">Update Status:</span>
+                                <select onchange="handleDropdownTransition('${order.id}', this)" class="bg-surface-container text-xs font-semibold rounded-lg border-outline-variant/40 focus:border-custom-primary focus:ring-0 py-1.5 px-3">
+                                    <option value="" selected>Mark as...</option>
+                                    <option value="processing">Processing</option>
+                                </select>
+                            </div>
+                        `;
+                    } else if (status === 'processing') {
+                        dropdownHtml = `
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-semibold text-on-surface-variant">Update Status:</span>
+                                <select onchange="handleDropdownTransition('${order.id}', this)" class="bg-surface-container text-xs font-semibold rounded-lg border-outline-variant/40 focus:border-custom-primary focus:ring-0 py-1.5 px-3">
+                                    <option value="" selected>Mark as...</option>
+                                    <option value="shipped">Shipped</option>
+                                </select>
+                            </div>
+                        `;
+                    } else if (status === 'shipped') {
+                        dropdownHtml = `
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-semibold text-on-surface-variant">Update Status:</span>
+                                <select onchange="handleDropdownTransition('${order.id}', this)" class="bg-surface-container text-xs font-semibold rounded-lg border-outline-variant/40 focus:border-custom-primary focus:ring-0 py-1.5 px-3">
+                                    <option value="" selected>Mark as...</option>
+                                    <option value="delivered">Delivered</option>
+                                </select>
+                            </div>
+                        `;
+                    } else {
+                        // delivered / cancelled
+                        dropdownHtml = `<span class="text-xs font-bold text-on-surface-variant tracking-wider uppercase">Fulfillment Completed</span>`;
+                    }
+
+                    // Card block
+                    const card = document.createElement('div');
+                    card.className = "bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-6 shadow-sm hover:shadow-md transition-all flex flex-col gap-5";
+                    
+                    card.innerHTML = `
+                        <div class="flex flex-wrap justify-between items-start border-b border-outline-variant/20 pb-4 gap-4">
+                            <div>
+                                <div class="flex items-center gap-3">
+                                    <h3 class="font-bold text-lg text-primary">Order #${shortId}</h3>
+                                    ${getStatusBadge(status)}
+                                </div>
+                                <p class="text-xs text-on-surface-variant mt-1">Placed on ${formattedDate} • Buyer: ${order.buyer_id.substring(0,8)}...</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs text-on-surface-variant block uppercase font-semibold">Total Revenue</span>
+                                <span class="font-bold text-lg text-on-surface">₹${totalVal}</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Items List -->
+                            <div class="space-y-2 border-r border-outline-variant/10 pr-0 md:pr-6">
+                                <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Your Items</span>
+                                <div class="divide-y divide-outline-variant/10">
+                                    ${itemsHtml}
+                                </div>
+                            </div>
+
+                            <!-- Ship to -->
+                            <div class="space-y-2">
+                                <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Shipping Details</span>
+                                <p class="text-sm leading-relaxed text-on-surface">${order.shipping_address}</p>
+                                ${order.tracking_code ? `
+                                    <div class="mt-3 inline-flex items-center gap-2 bg-indigo-50 border border-indigo-100 py-1 px-3 rounded-lg text-xs font-medium text-indigo-700">
+                                        <span class="material-symbols-outlined text-[14px]">local_shipping</span>
+                                        Tracking: <span class="font-mono font-semibold">${order.tracking_code}</span>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between items-center border-t border-outline-variant/20 pt-4 mt-1 flex-wrap gap-4">
+                            <div class="text-xs text-on-surface-variant italic">
+                                ${order.seller_note ? `Note: ${order.seller_note}` : ''}
+                            </div>
+                            <div>
+                                ${dropdownHtml}
+                            </div>
+                        </div>
+                    `;
+                    ordersList.appendChild(card);
+                });
+
+            } catch (err) {
+                console.error("Error loading seller orders:", err);
+                errorMsg.textContent = err.message || "Failed to load order history.";
+                errorBanner.classList.remove('hidden');
+            }
+        }
+
+        // Handle Status Transitions
+        async function handleDropdownTransition(orderId, selectElement) {
+            const nextStatus = selectElement.value;
+            if (!nextStatus) return;
+
+            if (nextStatus === 'shipped') {
+                // Requires tracking code modal
+                currentShipOrderId = orderId;
+                openShippedModal();
+                selectElement.value = ''; // Reset select
+                return;
+            }
+
+            // Execute transition directly
+            await executeTransition(orderId, nextStatus);
+            selectElement.value = ''; // Reset select
+        }
+
+        async function executeTransition(orderId, status, trackingCode = null, sellerNote = null) {
+            const token = checkAuth();
+            if (!token) return;
+
+            try {
+                const payload = { status: status };
+                if (trackingCode) payload.tracking_code = trackingCode;
+                if (sellerNote) payload.seller_note = sellerNote;
+
+                const response = await fetch(`${API_BASE_URL}/api/v1/seller/orders/${orderId}/status`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.detail || `Failed to update status (${response.status})`);
+                }
+
+                // Successful transition: reload list
+                loadSellerOrders();
+
+            } catch (err) {
+                console.error("Transition error:", err);
+                alert(err.message || "An error occurred while updating order status.");
+            }
+        }
+
+        // Shipped Modal Functions
+        const modal = document.getElementById('shipped-modal');
+        const modalBox = document.getElementById('shipped-modal-box');
+        const shippedForm = document.getElementById('shipped-form');
+
+        function openShippedModal() {
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalBox.classList.remove('scale-95');
+            modalBox.classList.add('scale-100');
+            document.getElementById('tracking-code-input').focus();
+        }
+
+        function closeShippedModal() {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalBox.classList.remove('scale-100');
+            modalBox.classList.add('scale-95');
+            shippedForm.reset();
+            currentShipOrderId = null;
+        }
+
+        shippedForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const tracking = document.getElementById('tracking-code-input').value.trim();
+            const note = document.getElementById('seller-note-input').value.trim();
+
+            if (!tracking) {
+                alert("Tracking code is required.");
+                return;
+            }
+
+            if (!currentShipOrderId) return;
+
+            const submitBtn = shippedForm.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Fulfilling...";
+
+            await executeTransition(currentShipOrderId, 'shipped', tracking, note || null);
+
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Submit Shipment";
+            closeShippedModal();
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            verifySellerRole();
+
+            // Logout
+            document.getElementById('logout-btn')?.addEventListener('click', () => {
+                sessionStorage.clear();
+                window.location.href = 'login.html';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -178,35 +178,10 @@
 </nav>
 <!-- Active Tab Content: Order History -->
 <section class="max-w-4xl mx-auto" id="order-history">
-<div class="bg-surface-container-low rounded-xl border border-outline-variant/30 overflow-hidden shadow-sm transition-all hover:shadow-md">
-<div class="p-6 md:p-10 flex flex-col md:flex-row gap-8">
-<div class="w-full md:w-40 h-40 flex-shrink-0 bg-surface-container-high rounded-lg overflow-hidden">
-<img alt="Crochet Sage Cardigan" class="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRhPNHyzMKQMqTLXEB05joc3d0EKWqnVRO4n_AxOFumJJGSF5H2uf-BOjm9GUsncYoEAf50h9gGqbTUSuRvHxry048BAAww-sM9g1isumzJroBGn5uO6dbhaLJslE08wmcbRwev7i596x6p4IGvOxK7iRrbNX2EVQlg-Ng8ZqzmgCWKHqqMGUHdsxyMSNLqgNLmUC_CueRT5cnVd-JJMjWQ4kzqSs6Gm4-zL1VA_8X_0Y4lqDXnrSQ7LNt83ka0sER7cKCEY8FxJg"/>
-</div>
-<div class="flex-grow">
-<div class="flex flex-wrap justify-between items-start gap-4 mb-6">
-<div>
-<h3 class="font-headline-md text-on-background mb-2">Crochet Sage Cardigan</h3>
-<p class="font-body-md text-on-surface-variant flex items-center gap-3">
-<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                                    In Transit 🚚 <span class="text-primary font-medium">Arriving Thursday</span>
-</p>
-</div>
-<div class="text-right">
-<p class="font-label-sm text-on-surface-variant uppercase mb-1">Order #MN-4921</p>
-<p class="font-headline-md text-on-background">$128.00</p>
-</div>
-</div>
-<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden mb-8">
-<div class="bg-primary-container h-full w-3/4"></div>
-</div>
-<div class="flex flex-col sm:flex-row gap-4">
-<button class="flex-1 bg-primary text-on-primary font-label-sm uppercase py-4 rounded-full hover:bg-on-primary-fixed-variant transition-colors">Track Order</button>
-<button class="flex-1 border border-outline text-on-surface font-label-sm uppercase py-4 rounded-full hover:bg-surface-container transition-colors">Order Details</button>
-</div>
-</div>
-</div>
-</div>
+    <div class="animate-pulse bg-surface-container/30 p-6 rounded-xl space-y-4">
+        <div class="h-6 bg-surface-container rounded w-1/4"></div>
+        <div class="h-20 bg-surface-container rounded"></div>
+    </div>
 </section>
 </main>
 <!-- BottomNavBar (Mobile Only) -->
@@ -231,6 +206,122 @@
 
 <script>
         const API_BASE_URL = window.location.origin;
+
+        function formatStatusBadge(status) {
+            let bg, text, label;
+            switch(status) {
+                case 'awaiting_payment':
+                case 'pending':
+                    bg = 'bg-amber-50 border-amber-200';
+                    text = 'text-amber-700';
+                    label = 'Awaiting Payment';
+                    break;
+                case 'paid_offline':
+                    bg = 'bg-amber-50 border-amber-200';
+                    text = 'text-amber-700';
+                    label = 'Paid Offline';
+                    break;
+                case 'processing':
+                    bg = 'bg-blue-50 border-blue-200';
+                    text = 'text-blue-700';
+                    label = 'Processing';
+                    break;
+                case 'shipped':
+                    bg = 'bg-indigo-50 border-indigo-200';
+                    text = 'text-indigo-700';
+                    label = 'Shipped';
+                    break;
+                case 'delivered':
+                    bg = 'bg-green-50 border-green-200';
+                    text = 'text-green-700';
+                    label = 'Delivered';
+                    break;
+                case 'cancelled':
+                    bg = 'bg-gray-100 border-gray-200';
+                    text = 'text-gray-600';
+                    label = 'Cancelled';
+                    break;
+                case 'refunded':
+                    bg = 'bg-gray-100 border-gray-200';
+                    text = 'text-gray-600';
+                    label = 'Refunded';
+                    break;
+                default:
+                    bg = 'bg-gray-50 border-gray-200';
+                    text = 'text-gray-700';
+                    label = status;
+            }
+            return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border ${bg} ${text}">${label}</span>`;
+        }
+
+        async function fetchLatestOrder(token) {
+            const container = document.getElementById('order-history');
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/v1/orders?page=1&page_size=1`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!response.ok) throw new Error("Failed to load order preview.");
+
+                const data = await response.json();
+                
+                if (data.items.length === 0) {
+                    container.innerHTML = `
+                        <div class="bg-surface-container-low rounded-xl border border-outline-variant/30 p-8 text-center">
+                            <span class="material-symbols-outlined text-4xl text-outline mb-2">shopping_bag</span>
+                            <h3 class="font-headline-md text-xl mb-1">No orders yet</h3>
+                            <p class="text-secondary text-sm mb-4">Your order history is empty.</p>
+                            <button onclick="window.location.href='category.html'" class="bg-primary text-white text-xs font-semibold uppercase tracking-wider py-2 px-6 rounded-full hover:opacity-90 transition-all">Explore Crafts</button>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const order = data.items[0];
+                const shortId = order.id.substring(order.id.length - 8);
+                const totalVal = (order.total_paise / 100).toLocaleString('en-IN');
+                const itemsCount = order.items.reduce((sum, item) => sum + item.quantity, 0);
+                const titleStr = order.items[0]?.title_snapshot || "Handcrafted Art";
+
+                container.innerHTML = `
+                    <div class="bg-surface-container-low rounded-xl border border-outline-variant/30 overflow-hidden shadow-sm transition-all hover:shadow-md">
+                        <div class="p-6 md:p-10 flex flex-col md:flex-row gap-8">
+                            <div class="w-full md:w-40 h-40 flex-shrink-0 bg-surface-container-high rounded-lg overflow-hidden flex items-center justify-center border border-outline-variant/20">
+                                <span class="material-symbols-outlined text-primary text-5xl">filter_vintage</span>
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex flex-wrap justify-between items-start gap-4 mb-6">
+                                    <div>
+                                        <h3 class="font-headline-md text-2xl text-on-background mb-2 truncate max-w-sm">${titleStr}</h3>
+                                        <p class="text-sm text-on-surface-variant flex items-center gap-2">
+                                            Status: ${formatStatusBadge(order.status)}
+                                        </p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-label-sm text-on-surface-variant uppercase mb-1">Latest Order #${shortId}</p>
+                                        <p class="font-headline-md text-xl text-on-background">₹${totalVal}</p>
+                                    </div>
+                                </div>
+                                <div class="text-xs text-on-surface-variant mb-6">
+                                    Contains ${itemsCount} ${itemsCount === 1 ? 'item' : 'items'}. Placed on ${new Date(order.created_at).toLocaleDateString('en-IN', {day: 'numeric', month: 'short', year: 'numeric'})}
+                                </div>
+                                <div class="flex flex-col sm:flex-row gap-4">
+                                    <button onclick="window.location.href='orders.html'" class="flex-grow border border-outline text-on-surface font-label-sm uppercase py-3.5 rounded-full hover:bg-surface-container transition-colors text-xs font-semibold">View All Orders</button>
+                                    <button onclick="window.location.href='orders-detail.html?id=${order.id}'" class="flex-grow bg-primary text-on-primary font-label-sm uppercase py-3.5 rounded-full hover:opacity-90 transition-colors text-xs font-semibold">Order Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } catch(e) {
+                console.error("Latest order fetch failed:", e);
+                container.innerHTML = `
+                    <div class="bg-surface-container-low rounded-xl border border-outline-variant/30 p-8 text-center text-secondary text-sm">
+                        Failed to load order preview. <button onclick="window.location.reload()" class="underline text-primary">Retry</button>
+                    </div>
+                `;
+            }
+        }
 
         document.addEventListener('DOMContentLoaded', async function() {
             const accessToken = sessionStorage.getItem('access_token');
@@ -262,6 +353,9 @@
                 if (fullnameElem) fullnameElem.textContent = user.full_name || 'Anonymous User';
                 if (emailElem) emailElem.textContent = user.email;
                 if (roleElem) roleElem.textContent = `${user.role.toUpperCase()} ✨`;
+
+                // Fetch latest order preview
+                await fetchLatestOrder(accessToken);
 
                 // Unhide the page contents gracefully
                 const bodyContent = document.getElementById('body-content');
