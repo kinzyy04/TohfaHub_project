@@ -64,6 +64,7 @@ async def lifespan(app: FastAPI):
     await engine.dispose()
     logger.info("DB engine disposed cleanly")
 
+import app.models  # Ensure all models are loaded before routers
 from app.routers.auth import router as auth_router
 from app.routers.items import router as items_router
 from app.routers.profiles import router as profiles_router
@@ -73,6 +74,11 @@ from app.routers.uploads import router as uploads_router
 from app.routers.wishlist import router as wishlist_router
 from app.routers.reels import router as reels_router
 from app.routers.users import router as users_router
+from app.routers.orders import router as orders_router
+from app.routers.reviews import router as reviews_router
+from app.routers.admin import router as admin_router
+
+
 
 
 
@@ -107,6 +113,10 @@ app.include_router(uploads_router)
 app.include_router(wishlist_router)
 app.include_router(reels_router)
 app.include_router(users_router)
+app.include_router(orders_router)
+app.include_router(reviews_router)
+app.include_router(admin_router)
+
 
 
 
@@ -202,7 +212,7 @@ async def api_health_check():
 async def health_db_check(db: AsyncSession = Depends(get_db)):
     try:
         result = await db.execute(text("SELECT 1"))
-        result.fetchone()
+        result.scalar()
         return {"db": "ok"}
     except Exception as e:
         logger.error("Database health check failed", error=str(e))

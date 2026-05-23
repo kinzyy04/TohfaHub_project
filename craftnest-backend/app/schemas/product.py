@@ -30,6 +30,8 @@ class ProductRead(BaseModel):
     image_urls: list[str]
     is_active: bool
     is_sponsored: bool
+    avg_rating: float | None = None
+    review_count: int = 0
     created_at: datetime
     updated_at: datetime
     shop_name: str | None = None

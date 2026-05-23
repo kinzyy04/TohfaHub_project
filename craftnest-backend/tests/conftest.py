@@ -7,6 +7,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from app.core.config import settings
 from app.core.database import Base, get_db
 from app.main import app
+import app.models as _models_module  # noqa
 
 # Set the selector event loop policy on Windows for psycopg async compatibility
 if sys.platform == "win32":
@@ -72,6 +73,11 @@ async def db(engine):
             yield session
             # Rollback the transaction to revert all database operations in the test
             await transaction.rollback()
+
+@pytest.fixture
+def db_session(db):
+    """Alias for db fixture to satisfy older tests."""
+    return db
 
 @pytest.fixture
 async def client(db):

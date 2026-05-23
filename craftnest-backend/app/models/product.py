@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime
-from sqlalchemy import String, Integer, Boolean, DateTime, ForeignKey, text
+from sqlalchemy import String, Integer, Numeric, Boolean, DateTime, ForeignKey, text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
 from app.core.database import Base, GUID, DialectArray, engine
@@ -61,6 +61,17 @@ class Product(Base):
         default=False,
         server_default=text("false"),
         nullable=False,
+    )
+    avg_rating: Mapped[float | None] = mapped_column(
+        Numeric(3, 2),
+        nullable=True,
+        default=None,
+    )
+    review_count: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False,
+        default=0,
+        server_default=text("0"),
     )
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),

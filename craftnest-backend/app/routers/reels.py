@@ -599,7 +599,7 @@ async def view_reel(
     )
     view = view_res.scalar_one_or_none()
     
-    now = datetime.now(timezone.utc)
+    now = datetime.utcnow()
     increment = False
     
     if view:

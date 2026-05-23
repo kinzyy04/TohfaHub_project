@@ -21,7 +21,29 @@ depends_on: Union[str, Sequence[str], None] = None
 def upgrade() -> None:
     """Upgrade schema."""
     connection = op.get_bind()
-    
+    if connection.dialect.name == "postgresql":
+        # Drop existing tables with cascade
+        op.execute("DROP TABLE IF EXISTS refresh_tokens CASCADE;")
+        op.execute("DROP TABLE IF EXISTS users CASCADE;")
+        # Truncate items table
+        op.execute("TRUNCATE TABLE items CASCADE;")
+        # Alter owner_id to UUID and add foreign key
+        op.execute("ALTER TABLE items ALTER COLUMN owner_id TYPE UUID USING owner_id::text::uuid;")
+        op.create_foreign_key(
+            'items_owner_id_fkey',
+            'items',
+            'users',
+            ['owner_id'],
+            ['id'],
+            ondelete='CASCADE'
+        )
+    else:
+        # SQLite fallback: drop tables without cascade and clear items
+        op.execute("DROP TABLE IF EXISTS refresh_tokens;")
+        op.execute("DROP TABLE IF EXISTS users;")
+        op.execute("DROP TABLE IF EXISTS items;")
+        # Note: owner_id datatype conversion not needed for SQLite tests
+
     # Safely query if the citext extension is already installed to avoid transaction aborts
     has_citext = False
     try:
@@ -29,10 +51,6 @@ def upgrade() -> None:
         has_citext = bool(res)
     except Exception:
         has_citext = False
-
-    # 2. Drop existing foreign key and users table (cascade) to ensure a clean slate for UUID transition
-    op.execute("DROP TABLE IF EXISTS refresh_tokens CASCADE;")
-    op.execute("DROP TABLE IF EXISTS users CASCADE;")
 
     # 3. Create the users table with UUID primary key and citext (or String fallback) email
     email_type = postgresql.CITEXT() if has_citext else sa.String()
@@ -50,20 +68,6 @@ def upgrade() -> None:
     )
     op.create_index(op.f('ix_users_email'), 'users', ['email'], unique=True)
 
-    # Truncate items to allow clean migration of integer owner_id to UUID
-    op.execute("TRUNCATE TABLE items CASCADE;")
-
-    # 4. Alter the items table's owner_id to use UUID and reference users.id
-    op.execute("ALTER TABLE items ALTER COLUMN owner_id TYPE UUID USING owner_id::text::uuid;")
-    op.create_foreign_key(
-        'items_owner_id_fkey',
-        'items',
-        'users',
-        ['owner_id'],
-        ['id'],
-        ondelete='CASCADE'
-    )
-
     # 5. Create the refresh_tokens table
     op.create_table('refresh_tokens',
         sa.Column('id', sa.UUID(), server_default=sa.text('gen_random_uuid()'), nullable=False),
@@ -73,7 +77,7 @@ def upgrade() -> None:
         sa.Column('revoked', sa.Boolean(), server_default=sa.text('false'), nullable=False),
         sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
         sa.Column('user_agent', sa.String(), nullable=True),
-        sa.Column('ip_address', postgresql.INET(), nullable=True),
+        sa.Column('ip_address', sa.String().with_variant(postgresql.INET(), 'postgresql'), nullable=True),
         sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
         sa.PrimaryKeyConstraint('id')
     )

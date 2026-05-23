@@ -25,9 +25,9 @@ def upgrade() -> None:
     sa.Column('id', sa.UUID(), server_default=sa.text('gen_random_uuid()'), nullable=False),
     sa.Column('user_id', sa.UUID(), nullable=True),
     sa.Column('event_type', sa.String(), nullable=False),
-    sa.Column('ip_address', postgresql.INET(), nullable=True),
+    sa.Column('ip_address', sa.String().with_variant(postgresql.INET(), 'postgresql'), nullable=True),
     sa.Column('user_agent', sa.String(), nullable=True),
-    sa.Column('details', postgresql.JSONB(astext_type=sa.Text()), nullable=True),
+    sa.Column('details', sa.JSON().with_variant(postgresql.JSONB(astext_type=sa.Text()), 'postgresql'), nullable=True),
     sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='SET NULL'),
     sa.PrimaryKeyConstraint('id')
