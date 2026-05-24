@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html class="light" lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link href="/frontend/styles.css" rel="stylesheet">
+    
+    
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>My Orders | CraftNest</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Be+Vietnam+Pro:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+    
     <!-- Material Symbols -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -23,16 +28,16 @@
                         "surface-bright": "#fff8f1",
                         "surface-container-low": "#faf2e9",
                         "surface-container": "#f4ede3",
-                        "primary": "#576242",
+                        "primary": "#B8456A",
                         "surface-variant": "#e9e1d8",
                         "outline-variant": "#c6c7bb",
                         "outline": "#76786e",
-                        "background": "#fff8f1",
+                        "background": "#FAF7F2",
                         "surface-tint": "#576242",
-                        "tertiary": "#615e57",
-                        "on-surface": "#1e1b15",
-                        "surface": "#fff8f1",
-                        "secondary": "#705673",
+                        "tertiary": "#C9974A",
+                        "on-surface": "#2D2420",
+                        "surface": "#FAF7F2",
+                        "secondary": "#7A8C6E",
                         "surface-container-lowest": "#ffffff"
                     },
                     "borderRadius": {
@@ -49,11 +54,11 @@
                         "margin-desktop": "80px"
                     },
                     "fontFamily": {
-                        "headline-md": ["EB Garamond", "serif"],
-                        "headline-lg": ["EB Garamond", "serif"],
-                        "body-md": ["Be Vietnam Pro", "sans-serif"],
-                        "body-lg": ["Be Vietnam Pro", "sans-serif"],
-                        "label-sm": ["Be Vietnam Pro", "sans-serif"]
+                        "headline-md": ["Fraunces", "serif"],
+                        "headline-lg": ["Fraunces", "serif"],
+                        "body-md": ["Lora", "sans-serif"],
+                        "body-lg": ["Lora", "sans-serif"],
+                        "label-sm": ["Lora", "sans-serif"]
                     }
                 }
             }
@@ -66,6 +71,28 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
+
+    
+
+
+    <style>
+        :root {
+            --color-cream: #FAF7F2;
+            --color-ink: #2D2420;
+            --color-rose: #B8456A;
+            --color-gold: #C9974A;
+            --color-sage: #7A8C6E;
+        }
+        body {
+            font-family: 'Lora', Georgia, serif;
+            background-color: var(--color-cream);
+            color: var(--color-ink);
+        }
+        h1, h2, h3, h4, h5, h6, .font-headline {
+            font-family: 'Fraunces', 'Times New Roman', serif;
+        }
+    </style>
+
 </head>
 <body class="min-h-screen opacity-0 transition-opacity duration-300 flex flex-col justify-between" id="body-content">
     

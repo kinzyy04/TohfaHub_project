@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 
 <html class="light" lang="en"><head>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link href="/frontend/styles.css" rel="stylesheet">
+    
+    
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Browse by Craft | Flora &amp; Craft</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+
+
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -37,10 +42,10 @@
                         "full": "9999px"
                     },
                     fontFamily: {
-                        headline: ["Public Sans", "sans-serif"],
-                        display: ["Public Sans", "sans-serif"],
-                        body: ["Public Sans", "sans-serif"],
-                        label: ["Public Sans", "sans-serif"]
+                        headline: ["Lora", "sans-serif"],
+                        display: ["Lora", "sans-serif"],
+                        body: ["Lora", "sans-serif"],
+                        label: ["Lora", "sans-serif"]
                     },
                     spacing: {
                         'margin-desktop': '5rem',
@@ -65,6 +70,28 @@
             border: 1px solid rgba(203, 153, 126, 0.2);
         }
     </style>
+
+    
+
+
+    <style>
+        :root {
+            --color-cream: #FAF7F2;
+            --color-ink: #2D2420;
+            --color-rose: #B8456A;
+            --color-gold: #C9974A;
+            --color-sage: #7A8C6E;
+        }
+        body {
+            font-family: 'Lora', Georgia, serif;
+            background-color: var(--color-cream);
+            color: var(--color-ink);
+        }
+        h1, h2, h3, h4, h5, h6, .font-headline {
+            font-family: 'Fraunces', 'Times New Roman', serif;
+        }
+    </style>
+
 </head>
 <body class="font-body bg-background text-on-primary-container botanical-pattern min-h-screen">
 <!-- TopNavBar -->

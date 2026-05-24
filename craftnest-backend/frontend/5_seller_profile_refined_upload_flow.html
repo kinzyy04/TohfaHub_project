@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 
 <html class="light" lang="en"><head>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link href="/frontend/styles.css" rel="stylesheet">
+    
+    
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>CraftNest - Upload Product</title>
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
+
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&amp;family=Be+Vietnam+Pro:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+
 <!-- Material Symbols -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
       tailwind.config = {
@@ -20,7 +25,7 @@
                 "surface-container-low": "#faf2e9",
                 "surface-container-high": "#efe7dd",
                 "on-tertiary": "#ffffff",
-                "background": "#fff8f1",
+                "background": "#FAF7F2",
                 "surface-variant": "#e9e1d8",
                 "surface-container": "#f4ede3",
                 "secondary-container": "#f7d5f8",
@@ -32,7 +37,7 @@
                 "surface-container-lowest": "#ffffff",
                 "on-error": "#ffffff",
                 "error": "#ba1a1a",
-                "on-surface": "#1e1b15",
+                "on-surface": "#2D2420",
                 "on-secondary": "#ffffff",
                 "tertiary-container": "#b3afa7",
                 "on-secondary-fixed-variant": "#573e5b",
@@ -40,7 +45,7 @@
                 "primary-container": "#a8b48e",
                 "on-primary-fixed": "#151e05",
                 "on-primary": "#ffffff",
-                "primary": "#576242",
+                "primary": "#B8456A",
                 "on-tertiary-fixed": "#1d1c16",
                 "on-secondary-container": "#745a78",
                 "inverse-primary": "#bfcba4",
@@ -49,18 +54,18 @@
                 "secondary-fixed": "#fad8fb",
                 "on-error-container": "#93000a",
                 "surface-dim": "#e0d9cf",
-                "secondary": "#705673",
+                "secondary": "#7A8C6E",
                 "error-container": "#ffdad6",
                 "on-secondary-fixed": "#28132d",
-                "on-background": "#1e1b15",
+                "on-background": "#2D2420",
                 "on-surface-variant": "#45483f",
                 "primary-fixed-dim": "#bfcba4",
                 "surface-tint": "#576242",
-                "surface": "#fff8f1",
+                "surface": "#FAF7F2",
                 "outline-variant": "#c6c7bb",
                 "on-tertiary-container": "#44423c",
                 "tertiary-fixed": "#e7e2d9",
-                "tertiary": "#615e57",
+                "tertiary": "#C9974A",
                 "surface-container-highest": "#e9e1d8",
                 "on-primary-fixed-variant": "#404a2c",
                 "on-primary-container": "#3c4628"
@@ -79,13 +84,13 @@
                 "margin-desktop": "80px"
             },
             "fontFamily": {
-                "headline-lg": ["EB Garamond"],
-                "headline-md": ["EB Garamond"],
-                "display-lg": ["EB Garamond"],
-                "body-md": ["Be Vietnam Pro"],
-                "body-lg": ["Be Vietnam Pro"],
-                "headline-lg-mobile": ["EB Garamond"],
-                "label-sm": ["Be Vietnam Pro"]
+                "headline-lg": ["Fraunces"],
+                "headline-md": ["Fraunces"],
+                "display-lg": ["Fraunces"],
+                "body-md": ["Lora"],
+                "body-lg": ["Lora"],
+                "headline-lg-mobile": ["Fraunces"],
+                "label-sm": ["Lora"]
             },
             "fontSize": {
                 "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "400"}],
@@ -118,6 +123,28 @@
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
+
+    
+
+
+    <style>
+        :root {
+            --color-cream: #FAF7F2;
+            --color-ink: #2D2420;
+            --color-rose: #B8456A;
+            --color-gold: #C9974A;
+            --color-sage: #7A8C6E;
+        }
+        body {
+            font-family: 'Lora', Georgia, serif;
+            background-color: var(--color-cream);
+            color: var(--color-ink);
+        }
+        h1, h2, h3, h4, h5, h6, .font-headline {
+            font-family: 'Fraunces', 'Times New Roman', serif;
+        }
+    </style>
+
 </head>
 <body class="bg-background text-on-surface font-body-md selection:bg-primary-container/30 overflow-x-hidden botanical-bg">
 <!-- Top Profile Header -->

@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 
 <html class="light" lang="en"><head>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link href="/frontend/styles.css" rel="stylesheet">
+    
+    
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>CraftNest - Buyer Profile</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Be+Vietnam+Pro:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+
 <style>
         .material-symbols-outlined {
             font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
@@ -32,7 +37,7 @@
                         "inverse-on-surface": "#f7f0e6",
                         "error": "#ba1a1a",
                         "on-secondary-container": "#745a78",
-                        "on-background": "#1e1b15",
+                        "on-background": "#2D2420",
                         "surface-container-high": "#efe7dd",
                         "surface-variant": "#e9e1d8",
                         "on-primary-container": "#3c4628",
@@ -43,27 +48,27 @@
                         "on-surface-variant": "#45483f",
                         "tertiary-fixed-dim": "#cac6be",
                         "outline-variant": "#c6c7bb",
-                        "primary": "#576242",
+                        "primary": "#B8456A",
                         "on-tertiary-fixed-variant": "#494740",
                         "surface-tint": "#576242",
                         "inverse-primary": "#bfcba4",
-                        "secondary": "#705673",
+                        "secondary": "#7A8C6E",
                         "secondary-container": "#f7d5f8",
-                        "background": "#fff8f1",
-                        "surface": "#fff8f1",
+                        "background": "#FAF7F2",
+                        "surface": "#FAF7F2",
                         "on-error": "#ffffff",
                         "secondary-fixed": "#fad8fb",
                         "tertiary-fixed": "#e7e2d9",
                         "tertiary-container": "#b3afa7",
                         "on-secondary-fixed-variant": "#573e5b",
-                        "tertiary": "#615e57",
+                        "tertiary": "#C9974A",
                         "surface-bright": "#fff8f1",
                         "primary-container": "#a8b48e",
                         "on-primary-fixed-variant": "#404a2c",
                         "primary-fixed-dim": "#bfcba4",
                         "surface-container-highest": "#e9e1d8",
                         "secondary-fixed-dim": "#ddbcdf",
-                        "on-surface": "#1e1b15",
+                        "on-surface": "#2D2420",
                         "on-secondary-fixed": "#28132d",
                         "primary-fixed": "#dbe8bf",
                         "inverse-surface": "#33302a",
@@ -88,13 +93,13 @@
                         "unit": "8px"
                     },
                     "fontFamily": {
-                        "headline-md": ["EB Garamond"],
-                        "headline-lg-mobile": ["EB Garamond"],
-                        "body-lg": ["Be Vietnam Pro"],
-                        "headline-lg": ["EB Garamond"],
-                        "display-lg": ["EB Garamond"],
-                        "body-md": ["Be Vietnam Pro"],
-                        "label-sm": ["Be Vietnam Pro"]
+                        "headline-md": ["Fraunces"],
+                        "headline-lg-mobile": ["Fraunces"],
+                        "body-lg": ["Lora"],
+                        "headline-lg": ["Fraunces"],
+                        "display-lg": ["Fraunces"],
+                        "body-md": ["Lora"],
+                        "label-sm": ["Lora"]
                     },
                     "fontSize": {
                         "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "400"}],
@@ -109,6 +114,28 @@
             },
         }
     </script>
+
+    
+
+
+    <style>
+        :root {
+            --color-cream: #FAF7F2;
+            --color-ink: #2D2420;
+            --color-rose: #B8456A;
+            --color-gold: #C9974A;
+            --color-sage: #7A8C6E;
+        }
+        body {
+            font-family: 'Lora', Georgia, serif;
+            background-color: var(--color-cream);
+            color: var(--color-ink);
+        }
+        h1, h2, h3, h4, h5, h6, .font-headline {
+            font-family: 'Fraunces', 'Times New Roman', serif;
+        }
+    </style>
+
 </head>
 <body class="bg-surface text-on-surface min-h-screen pb-24 font-body-md opacity-0 transition-opacity duration-300" id="body-content">
 <!-- TopAppBar -->

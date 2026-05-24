@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 
 <html class="light" lang="en"><head>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link href="/frontend/styles.css" rel="stylesheet">
+    
+    
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Flora &amp; Craft - Reels Discovery</title>
 <!-- Material Symbols -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
@@ -22,11 +27,11 @@
                     "inverse-surface": "#343029",
                     "secondary-fixed-dim": "#cac6bd",
                     "inverse-primary": "#b8cdaa",
-                    "on-surface": "#1f1b15",
+                    "on-surface": "#2D2420",
                     "on-tertiary-fixed-variant": "#593d5d",
                     "on-secondary-fixed-variant": "#484740",
                     "on-tertiary": "#ffffff",
-                    "primary": "#516447",
+                    "primary": "#B8456A",
                     "surface-tint": "#516447",
                     "tertiary-fixed": "#fcd6ff",
                     "tertiary-container": "#b492b7",
@@ -35,7 +40,7 @@
                     "inverse-on-surface": "#f8efe5",
                     "on-secondary": "#ffffff",
                     "surface-variant": "#eae1d7",
-                    "tertiary": "#725476",
+                    "tertiary": "#C9974A",
                     "surface-container-lowest": "#ffffff",
                     "surface-container-low": "#fbf2e8",
                     "on-error": "#ffffff",
@@ -46,9 +51,9 @@
                     "secondary-container": "#e6e2d8",
                     "secondary-fixed": "#e6e2d8",
                     "primary-fixed-dim": "#b8cdaa",
-                    "secondary": "#605e57",
+                    "secondary": "#7A8C6E",
                     "on-secondary-fixed": "#1c1c16",
-                    "background": "#fff8f3",
+                    "background": "#FAF7F2",
                     "surface-dim": "#e1d9cf",
                     "primary-fixed": "#d4e9c4",
                     "outline-variant": "#c4c8bd",
@@ -56,11 +61,11 @@
                     "surface-container-high": "#f0e7dd",
                     "surface-bright": "#fff8f3",
                     "on-primary-fixed": "#101f09",
-                    "on-background": "#1f1b15",
+                    "on-background": "#2D2420",
                     "on-secondary-container": "#66645d",
                     "surface-container": "#f6ece3",
                     "on-primary-container": "#283920",
-                    "surface": "#fff8f3",
+                    "surface": "#FAF7F2",
                     "surface-container-highest": "#eae1d7",
                     "error-container": "#ffdad6",
                     "on-tertiary-fixed": "#2a122f"
@@ -79,13 +84,13 @@
                     "gutter": "24px"
             },
             "fontFamily": {
-                    "headline-lg-mobile": ["EB Garamond"],
-                    "body-lg": ["Work Sans"],
-                    "body-sm": ["Work Sans"],
-                    "headline-lg": ["EB Garamond"],
-                    "title-md": ["Work Sans"],
-                    "label-caps": ["Work Sans"],
-                    "display-lg": ["EB Garamond"]
+                    "headline-lg-mobile": ["Fraunces"],
+                    "body-lg": ["Lora"],
+                    "body-sm": ["Lora"],
+                    "headline-lg": ["Fraunces"],
+                    "title-md": ["Lora"],
+                    "label-caps": ["Lora"],
+                    "display-lg": ["Fraunces"]
             },
             "fontSize": {
                     "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "500"}],
@@ -113,6 +118,28 @@
             pointer-events: none;
         }
     </style>
+
+    
+
+
+    <style>
+        :root {
+            --color-cream: #FAF7F2;
+            --color-ink: #2D2420;
+            --color-rose: #B8456A;
+            --color-gold: #C9974A;
+            --color-sage: #7A8C6E;
+        }
+        body {
+            font-family: 'Lora', Georgia, serif;
+            background-color: var(--color-cream);
+            color: var(--color-ink);
+        }
+        h1, h2, h3, h4, h5, h6, .font-headline {
+            font-family: 'Fraunces', 'Times New Roman', serif;
+        }
+    </style>
+
 </head>
 <body class="bg-background text-on-surface font-body-lg overflow-hidden h-screen flex flex-col">
     <!-- TopNavBar -->
