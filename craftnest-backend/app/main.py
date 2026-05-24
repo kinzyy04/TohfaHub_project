@@ -8,7 +8,7 @@ if sys.platform == "win32":
 import uuid
 import time
 from fastapi import FastAPI, Depends, status, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
@@ -304,6 +304,10 @@ app.add_middleware(
     allow_headers=["Authorization", "Content-Type"],
     max_age=600,
 )
+
+@app.get("/")
+async def root():
+    return RedirectResponse(url="/home.html")
 
 @app.get("/health", tags=["Health Check"])
 async def health_check():

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Order Details | CraftNest</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Be+Vietnam+Pro:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#a8b48e",
+                        "on-surface-variant": "#45483f",
+                        "surface-bright": "#fff8f1",
+                        "surface-container-low": "#faf2e9",
+                        "surface-container": "#f4ede3",
+                        "primary": "#576242",
+                        "surface-variant": "#e9e1d8",
+                        "outline-variant": "#c6c7bb",
+                        "outline": "#76786e",
+                        "background": "#fff8f1",
+                        "surface-tint": "#576242",
+                        "tertiary": "#615e57",
+                        "on-surface": "#1e1b15",
+                        "surface": "#fff8f1",
+                        "secondary": "#705673",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "container-max": "1200px",
+                        "margin-desktop": "80px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["EB Garamond", "serif"],
+                        "headline-lg": ["EB Garamond", "serif"],
+                        "body-md": ["Be Vietnam Pro", "sans-serif"],
+                        "body-lg": ["Be Vietnam Pro", "sans-serif"],
+                        "label-sm": ["Be Vietnam Pro", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #fff8f1; color: #1e1b15; }
+        h1, h2, h3, .font-headline { font-family: 'EB Garamond', serif; color: #1e1b15; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="min-h-screen opacity-0 transition-opacity duration-300 flex flex-col justify-between" id="body-content">
+    
+    <div>
+        <!-- Top Navigation -->
+        <nav class="sticky top-0 z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 px-margin-mobile md:px-margin-desktop py-4 flex justify-between items-center">
+            <div class="h-8 flex items-center gap-2 cursor-pointer" onclick="window.location.href='home.html'">
+                <span class="material-symbols-outlined text-primary text-2xl">filter_vintage</span>
+                <span class="font-headline-lg text-on-background text-2xl" style="font-family: 'EB Garamond', serif;">CraftNest</span>
+            </div>
+            <div class="flex gap-4 items-center">
+                <a class="text-secondary hover:text-primary transition-colors text-sm font-semibold uppercase tracking-wider hidden md:block" href="home.html">Home</a>
+                <a class="text-secondary hover:text-primary transition-colors text-sm font-semibold uppercase tracking-wider hidden md:block" href="category.html">Categories</a>
+                <a class="text-secondary hover:text-primary transition-colors text-sm font-semibold uppercase tracking-wider hidden md:block" href="orders.html">My Orders</a>
+                <button id="logout-btn" class="p-2 hover:bg-surface-container rounded-full transition-colors flex items-center justify-center" title="Logout">
+                    <span class="material-symbols-outlined text-on-surface text-2xl hover:text-error transition-colors">logout</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="max-w-4xl mx-auto px-margin-mobile md:px-margin-desktop py-12">
+            <header class="mb-8">
+                <button onclick="window.location.href='orders.html'" class="inline-flex items-center gap-2 text-secondary hover:text-primary text-sm font-semibold uppercase tracking-wider mb-4 transition-colors">
+                    <span class="material-symbols-outlined text-[18px]">arrow_back</span> Back to Orders
+                </button>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2 flex-wrap">
+                            <h1 class="font-headline-lg text-3xl">Order Detail</h1>
+                            <span id="order-id-badge" class="font-mono text-sm bg-surface-container px-3 py-1 rounded border border-outline-variant/30 text-on-surface-variant">Loading...</span>
+                        </div>
+                        <p id="order-date" class="text-on-surface-variant text-xs"></p>
+                    </div>
+                    <div id="order-status-container"></div>
+                </div>
+            </header>
+
+            <!-- Error Banner -->
+            <div id="error-banner" class="hidden bg-red-50 border border-red-200 text-red-700 p-4 rounded-xl mb-8 flex items-start gap-3">
+                <span class="material-symbols-outlined text-red-600 shrink-0">error</span>
+                <p id="error-message" class="text-sm"></p>
+            </div>
+
+            <!-- Main Order Card -->
+            <div id="order-card" class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 p-6 md:p-8 shadow-sm space-y-8">
+                <!-- Skeleton Loader -->
+                <div class="animate-pulse space-y-6">
+                    <div class="h-6 bg-surface-container rounded w-1/3"></div>
+                    <div class="h-20 bg-surface-container rounded"></div>
+                    <div class="h-10 bg-surface-container rounded w-1/2"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirm-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-surface p-6 md:p-8 rounded-xl border border-outline-variant/35 shadow-xl max-w-sm w-full mx-4 transform scale-95 transition-all duration-300" id="confirm-modal-box">
+            <div class="text-center">
+                <span class="material-symbols-outlined text-error text-5xl mb-4">warning</span>
+                <h3 class="font-headline-md text-2xl mb-2">Cancel Order?</h3>
+                <p class="text-on-surface-variant text-sm mb-6">Are you sure you want to cancel this order? This action will restore product stock and cannot be undone.</p>
+                <div class="flex gap-4">
+                    <button id="cancel-no-btn" class="flex-1 border border-outline text-on-surface font-semibold py-3 rounded-full text-xs uppercase tracking-wider hover:bg-surface-container transition-all">
+                        No, Keep Order
+                    </button>
+                    <button id="cancel-yes-btn" class="flex-1 bg-error text-white font-semibold py-3 rounded-full text-xs uppercase tracking-wider hover:opacity-90 transition-all">
+                        Yes, Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Simple Footer -->
+    <footer class="border-t border-outline-variant/30 py-10 bg-surface-container-low text-center mt-12">
+        <p class="text-xs text-on-surface-variant font-medium tracking-widest uppercase">© 2026 CraftNest Artisan Studio</p>
+    </footer>
+
+    <script>
+        const API_BASE_URL = "https://localhost:8443";
+        let orderId = null;
+        let currentOrder = null;
+
+        function checkAuth() {
+            const token = sessionStorage.getItem('access_token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return null;
+            }
+            return token;
+        }
+
+        function getOrderIdFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('id');
+        }
+
+        function formatStatusBadge(status) {
+            let bg, text, label;
+            switch(status) {
+                case 'awaiting_payment':
+                case 'pending':
+                    bg = 'bg-amber-50 border-amber-200';
+                    text = 'text-amber-700';
+                    label = 'Awaiting Payment';
+                    break;
+                case 'paid_offline':
+                    bg = 'bg-amber-50 border-amber-200';
+                    text = 'text-amber-700';
+                    label = 'Paid Offline';
+                    break;
+                case 'processing':
+                    bg = 'bg-blue-50 border-blue-200';
+                    text = 'text-blue-700';
+                    label = 'Processing';
+                    break;
+                case 'shipped':
+                    bg = 'bg-indigo-50 border-indigo-200';
+                    text = 'text-indigo-700';
+                    label = 'Shipped';
+                    break;
+                case 'delivered':
+                    bg = 'bg-green-50 border-green-200';
+                    text = 'text-green-700';
+                    label = 'Delivered';
+                    break;
+                case 'cancelled':
+                    bg = 'bg-gray-100 border-gray-200';
+                    text = 'text-gray-600';
+                    label = 'Cancelled';
+                    break;
+                case 'refunded':
+                    bg = 'bg-gray-100 border-gray-200';
+                    text = 'text-gray-600';
+                    label = 'Refunded';
+                    break;
+                default:
+                    bg = 'bg-gray-50 border-gray-200';
+                    text = 'text-gray-700';
+                    label = status;
+            }
+            return `<span class="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold border ${bg} ${text}">${label}</span>`;
+        }
+
+        async function fetchOrderDetail() {
+            const token = checkAuth();
+            if (!token) return;
+
+            orderId = getOrderIdFromUrl();
+            if (!orderId) {
+                showError("No order ID provided in URL parameters.");
+                return;
+            }
+
+            const errorBanner = document.getElementById('error-banner');
+            const errorMsg = document.getElementById('error-message');
+            const orderCard = document.getElementById('order-card');
+            const orderIdBadge = document.getElementById('order-id-badge');
+            const orderDate = document.getElementById('order-date');
+            const statusContainer = document.getElementById('order-status-container');
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/v1/orders/${orderId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.status === 401) {
+                    sessionStorage.clear();
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                if (response.status === 403) {
+                    throw new Error("Access Denied: You do not own this order.");
+                }
+
+                if (response.status === 404) {
+                    throw new Error("Order not found.");
+                }
+
+                if (!response.ok) {
+                    throw new Error(`Failed to load order details (${response.status})`);
+                }
+
+                const order = await response.json();
+                currentOrder = order;
+
+                // Update Header
+                orderIdBadge.textContent = `#${order.id.substring(order.id.length - 8)}`;
+                orderDate.textContent = `Placed on ${new Date(order.created_at).toLocaleString('en-IN', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                })}`;
+                statusContainer.innerHTML = formatStatusBadge(order.status);
+
+                // Render Content
+                let itemsHtml = '';
+                order.items.forEach(item => {
+                    const priceVal = (item.price_snapshot_paise / 100).toLocaleString('en-IN');
+                    const subtotalVal = ((item.price_snapshot_paise * item.quantity) / 100).toLocaleString('en-IN');
+                    itemsHtml += `
+                        <div class="flex items-center gap-4 py-4 border-b border-outline-variant/20 last:border-b-0">
+                            <div class="w-16 h-16 bg-surface-container rounded-lg flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary text-3xl">filter_vintage</span>
+                            </div>
+                            <div class="flex-grow min-w-0">
+                                <h4 class="font-semibold text-on-surface truncate text-base mb-1">${item.title_snapshot}</h4>
+                                <p class="text-xs text-on-surface-variant">₹${priceVal} × ${item.quantity}</p>
+                            </div>
+                            <div class="text-right font-bold text-on-surface text-sm shrink-0">
+                                ₹${subtotalVal}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                // Tracking code block (visible only if shipped / present)
+                let trackingHtml = '';
+                if (order.tracking_code) {
+                    trackingHtml = `
+                        <div class="bg-indigo-50/50 border border-indigo-100 p-4 rounded-xl flex items-center gap-3">
+                            <span class="material-symbols-outlined text-indigo-600 text-2xl">local_shipping</span>
+                            <div>
+                                <span class="text-xs font-bold text-indigo-800 uppercase tracking-wide block mb-0.5">Tracking Number</span>
+                                <span class="font-mono text-sm text-indigo-950 font-semibold select-all">${order.tracking_code}</span>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // Seller note block
+                let sellerNoteHtml = '';
+                if (order.seller_note) {
+                    sellerNoteHtml = `
+                        <div class="bg-surface-container/50 border border-outline-variant/30 p-4 rounded-xl">
+                            <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wide block mb-1">Seller Note</span>
+                            <p class="text-sm text-on-surface italic">${order.seller_note}</p>
+                        </div>
+                    `;
+                }
+
+                // Action buttons (Cancel order)
+                const showCancelBtn = ['awaiting_payment', 'paid_offline', 'pending'].includes(order.status);
+                let actionsHtml = '';
+                if (showCancelBtn) {
+                    actionsHtml = `
+                        <div class="pt-6 border-t border-outline-variant/30 flex justify-end">
+                            <button onclick="triggerCancelModal()" class="w-full md:w-auto bg-red-50 text-error hover:bg-error hover:text-white border border-red-200 py-3.5 px-8 rounded-full font-bold text-xs uppercase tracking-wider transition-all active:scale-[0.98]">
+                                Cancel Order
+                            </button>
+                        </div>
+                    `;
+                }
+
+                const totalVal = (order.total_paise / 100).toLocaleString('en-IN');
+
+                orderCard.innerHTML = `
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Left Column: Items List -->
+                        <div class="md:col-span-2 space-y-6">
+                            <div>
+                                <h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-3">Order Items</h3>
+                                <div class="border border-outline-variant/20 rounded-xl px-6 bg-surface-container/10">
+                                    ${itemsHtml}
+                                </div>
+                            </div>
+                            ${trackingHtml}
+                            ${sellerNoteHtml}
+                        </div>
+
+                        <!-- Right Column: Info & Summary -->
+                        <div class="space-y-6">
+                            <!-- Shipping Address -->
+                            <div>
+                                <h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Delivery Address</h3>
+                                <div class="bg-surface-container/20 border border-outline-variant/20 p-5 rounded-xl">
+                                    <span class="material-symbols-outlined text-[20px] text-primary mb-2">location_on</span>
+                                    <p class="text-sm text-on-surface font-medium leading-relaxed whitespace-pre-line">${order.shipping_address}</p>
+                                </div>
+                            </div>
+
+                            <!-- Cost Summary -->
+                            <div>
+                                <h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Summary</h3>
+                                <div class="bg-surface-container/30 border border-outline-variant/20 p-5 rounded-xl space-y-3">
+                                    <div class="flex justify-between text-sm text-on-surface-variant">
+                                        <span>Subtotal</span>
+                                        <span>₹${totalVal}</span>
+                                    </div>
+                                    <div class="flex justify-between text-sm text-on-surface-variant">
+                                        <span>Shipping</span>
+                                        <span class="text-green-700 font-medium">Free</span>
+                                    </div>
+                                    <div class="flex justify-between text-base font-bold text-on-surface border-t border-outline-variant/20 pt-3">
+                                        <span>Total</span>
+                                        <span>₹${totalVal}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${actionsHtml}
+                `;
+
+            } catch (err) {
+                console.error("Error loading order detail:", err);
+                showError(err.message || "Failed to load order details.");
+            }
+        }
+
+        function showError(msg) {
+            const errorBanner = document.getElementById('error-banner');
+            const errorMsg = document.getElementById('error-message');
+            const orderCard = document.getElementById('order-card');
+
+            errorMsg.textContent = msg;
+            errorBanner.classList.remove('hidden');
+            orderCard.innerHTML = `<div class="text-center py-8 text-secondary text-sm">Failed to load content.</div>`;
+        }
+
+        // Confirmation Modal Logic
+        const modal = document.getElementById('confirm-modal');
+        const modalBox = document.getElementById('confirm-modal-box');
+
+        function triggerCancelModal() {
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalBox.classList.remove('scale-95');
+            modalBox.classList.add('scale-100');
+        }
+
+        function closeCancelModal() {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalBox.classList.remove('scale-100');
+            modalBox.classList.add('scale-95');
+        }
+
+        async function executeCancellation() {
+            const token = checkAuth();
+            if (!token || !orderId) return;
+
+            closeCancelModal();
+
+            const cancelBtn = document.querySelector('button[onclick="triggerCancelModal()"]');
+            if (cancelBtn) {
+                cancelBtn.disabled = true;
+                cancelBtn.textContent = "Cancelling...";
+                cancelBtn.style.opacity = '0.7';
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/v1/orders/${orderId}/cancel`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.status === 401) {
+                    sessionStorage.clear();
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.detail || `Failed to cancel order (${response.status})`);
+                }
+
+                // Successful cancellation
+                fetchOrderDetail(); // Reload view
+
+            } catch(err) {
+                console.error("Cancellation error:", err);
+                alert(err.message || "An error occurred during order cancellation.");
+                if (cancelBtn) {
+                    cancelBtn.disabled = false;
+                    cancelBtn.textContent = "Cancel Order";
+                    cancelBtn.style.opacity = '1';
+                }
+            }
+        }
+
+        // Initialize page listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = checkAuth();
+            if (token) {
+                const bodyContent = document.getElementById('body-content');
+                if (bodyContent) bodyContent.classList.remove('opacity-0');
+                fetchOrderDetail();
+            }
+
+            // Modal Button Listeners
+            document.getElementById('cancel-no-btn').addEventListener('click', closeCancelModal);
+            document.getElementById('cancel-yes-btn').addEventListener('click', executeCancellation);
+            
+            // Logout
+            document.getElementById('logout-btn')?.addEventListener('click', () => {
+                sessionStorage.clear();
+                window.location.href = 'login.html';
+            });
+        });
+    </script>
+</body>
+</html>
