@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Orders Management | CraftNest Admin</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=EB+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <style>
+        :root {
+            --font-headline: 'EB Garamond', serif;
+            --font-body: 'Be Vietnam Pro', sans-serif;
+            
+            --bg-cream: #fff8f1;
+            --bg-cream-dark: #f4ede3;
+            --bg-cream-light: #faf2e9;
+            --bg-white: #ffffff;
+            
+            --color-sage: #576242;
+            --color-sage-light: #bfcba4;
+            --color-sage-dark: #404a2c;
+            
+            --color-rose: #705673;
+            --color-rose-light: #fad8fb;
+            --color-rose-dark: #573e5b;
+            
+            --color-gold: #c39b62;
+            --color-gold-light: #f7e7ce;
+            --color-gold-dark: #966f33;
+            
+            --text-dark: #1e1b15;
+            --text-muted: #615e57;
+            --border-color: #e9e1d8;
+            --border-color-dark: #c6c7bb;
+            
+            --error: #ba1a1a;
+            --error-bg: #ffdad6;
+            --error-text: #93000a;
+            
+            --success: #2e6c40;
+            --success-bg: #d1ebd5;
+            --success-text: #0f3d1b;
+            
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.04);
+            
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+        }
+
+        body {
+            display: none;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-body);
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            min-height: 100vh;
+            flex-direction: row;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: var(--font-headline);
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        /* Sidebar Layout */
+        .sidebar {
+            width: 260px;
+            background-color: var(--bg-cream-dark);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 24px 16px;
+            height: 100vh;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .sidebar-brand {
+            font-family: var(--font-headline);
+            font-size: 28px;
+            color: var(--color-sage);
+            margin-bottom: 32px;
+            padding-left: 12px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-item a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-item a:hover {
+            background-color: var(--bg-cream-light);
+            color: var(--color-sage);
+        }
+
+        .sidebar-item.active a {
+            background-color: var(--color-sage-light);
+            color: var(--color-sage-dark);
+            font-weight: 600;
+        }
+
+        .sidebar-item.logout {
+            margin-top: auto;
+        }
+
+        .sidebar-item.logout a:hover {
+            background-color: var(--error-bg);
+            color: var(--error-text);
+        }
+
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            padding: 40px;
+            box-sizing: border-box;
+            max-width: calc(100vw - 260px);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+        }
+
+        .header-title h1 {
+            font-size: 32px;
+            font-weight: 500;
+        }
+
+        .header-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .admin-badge {
+            background-color: var(--color-gold-light);
+            color: var(--color-gold-dark);
+            padding: 4px 8px;
+            border-radius: var(--radius-sm);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Status Tabs row */
+        .status-tabs-container {
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .status-tabs {
+            display: inline-flex;
+            gap: 24px;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .status-tab {
+            padding: 12px 4px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .status-tab:hover {
+            color: var(--text-dark);
+        }
+
+        .status-tab.active {
+            color: var(--color-sage);
+            border-bottom-color: var(--color-sage);
+        }
+
+        /* Toolbar / Filters Box */
+        .filters-panel {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-bottom: 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) auto;
+            gap: 20px;
+            align-items: flex-end;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .filter-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        .filter-input {
+            background-color: var(--bg-cream-light);
+            border: 1px solid var(--border-color-dark);
+            border-radius: var(--radius-sm);
+            padding: 10px 12px;
+            font-family: var(--font-body);
+            font-size: 13px;
+            color: var(--text-dark);
+            box-sizing: border-box;
+            height: 38px;
+            transition: border-color 0.2s ease;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: var(--color-sage);
+        }
+
+        .btn-clear {
+            background-color: var(--bg-cream-dark);
+            color: var(--text-dark);
+            border: 1px solid var(--border-color-dark);
+            padding: 10px 16px;
+            height: 38px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-clear:hover {
+            background-color: var(--border-color-dark);
+        }
+
+        /* Table design */
+        .table-box {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .admin-table th {
+            padding: 14px 20px;
+            border-bottom: 2px solid var(--border-color);
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            background-color: var(--bg-cream-light);
+        }
+
+        .admin-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        .admin-table tbody tr:hover {
+            background-color: var(--bg-cream-light);
+        }
+
+        /* Order items embedded list styling */
+        .order-items-preview {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin: 4px 0 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .order-items-preview li {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 2px;
+        }
+
+        .item-qty {
+            font-weight: 600;
+            color: var(--color-sage-dark);
+        }
+
+        /* Dropdown status selector */
+        .status-select {
+            background-color: var(--bg-cream-light);
+            border: 1px solid var(--border-color-dark);
+            border-radius: var(--radius-sm);
+            padding: 6px 12px;
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .status-select:focus {
+            outline: none;
+            border-color: var(--color-sage);
+        }
+
+        /* Color-coded styles for selected statuses inside dropdown */
+        .status-select[data-status="pending"] { border-color: #ffa500; color: #cc8400; }
+        .status-select[data-status="processing"] { border-color: #0000ff; color: #0000b3; }
+        .status-select[data-status="shipped"] { border-color: #9370db; color: #6a4da6; }
+        .status-select[data-status="delivered"] { border-color: var(--success); color: var(--success); }
+        .status-select[data-status="cancelled"] { border-color: var(--error); color: var(--error); }
+        .status-select[data-status="refunded"] { border-color: #615e57; color: #44423c; }
+        .status-select[data-status="awaiting_payment"] { border-color: #ff00ff; color: #b300b3; }
+        .status-select[data-status="paid_offline"] { border-color: var(--color-gold); color: var(--color-gold-dark); }
+
+        /* Refund Flag Action Button */
+        .btn-refund {
+            background-color: var(--error-bg);
+            color: var(--error-text);
+            border: 1px solid var(--error);
+            border-radius: var(--radius-sm);
+            padding: 6px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-refund:hover {
+            background-color: var(--error);
+            color: var(--bg-cream);
+        }
+
+        /* Pagination container */
+        .pagination-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+        }
+
+        .pagination-info {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .pagination-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-pagination {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color-dark);
+            color: var(--text-dark);
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-pagination:hover:not(:disabled) {
+            background-color: var(--bg-cream-light);
+            border-color: var(--color-sage);
+        }
+
+        .btn-pagination:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Shared Modal Dialog styling */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(30, 27, 21, 0.4);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1100;
+            backdrop-filter: blur(2px);
+        }
+
+        .modal-card {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            width: 90%;
+            max-width: 480px;
+            box-shadow: var(--shadow-md);
+            padding: 24px;
+            box-sizing: border-box;
+            animation: modalPop 0.25s ease-out;
+        }
+
+        @keyframes modalPop {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-title {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .modal-body {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .modal-input-label {
+            display: block; 
+            font-size: 11px; 
+            text-transform: uppercase; 
+            font-weight: 600; 
+            color: var(--text-muted); 
+            margin-bottom: 6px;
+        }
+
+        .modal-input {
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid var(--border-color-dark);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            margin-bottom: 20px;
+            resize: vertical;
+        }
+
+        .modal-input:focus {
+            outline: none;
+            border-color: var(--color-sage);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .btn-modal-cancel {
+            background-color: var(--bg-cream-dark);
+            color: var(--text-dark);
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .btn-modal-cancel:hover {
+            background-color: var(--border-color-dark);
+        }
+
+        .btn-modal-confirm {
+            background-color: var(--color-sage);
+            color: var(--bg-cream);
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .btn-modal-confirm:hover {
+            opacity: 0.9;
+        }
+
+        .btn-modal-confirm.danger {
+            background-color: var(--error);
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: var(--text-dark);
+            color: var(--bg-cream);
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">CraftNest Admin</div>
+        <nav>
+            <ul class="sidebar-menu">
+                <li class="sidebar-item">
+                    <a href="index.html">
+                        <span class="material-symbols-outlined">dashboard</span>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="sellers.html">
+                        <span class="material-symbols-outlined">storefront</span>
+                        Sellers
+                    </a>
+                </li>
+                <li class="sidebar-item active">
+                    <a href="orders.html">
+                        <span class="material-symbols-outlined">receipt_long</span>
+                        Orders
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="categories.html" onclick="event.preventDefault(); showToast('Category management page coming soon!');">
+                        <span class="material-symbols-outlined">category</span>
+                        Categories
+                    </a>
+                </li>
+                <li class="sidebar-item logout">
+                    <a href="#" id="logout-link">
+                        <span class="material-symbols-outlined">logout</span>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <header class="header">
+            <div class="header-title">
+                <h1>Orders Management</h1>
+            </div>
+            <div class="header-meta">
+                <span class="admin-badge">Admin Panel</span>
+                <span id="admin-email">admin@craftnest.com</span>
+            </div>
+        </header>
+
+        <!-- Status Filter Tabs -->
+        <section class="status-tabs-container">
+            <ul class="status-tabs">
+                <li class="status-tab active" id="tab-all" onclick="setStatusFilter(null)">All Orders</li>
+                <li class="status-tab" id="tab-pending" onclick="setStatusFilter('pending')">Pending</li>
+                <li class="status-tab" id="tab-awaiting_payment" onclick="setStatusFilter('awaiting_payment')">Awaiting Payment</li>
+                <li class="status-tab" id="tab-paid_offline" onclick="setStatusFilter('paid_offline')">Paid Offline</li>
+                <li class="status-tab" id="tab-processing" onclick="setStatusFilter('processing')">Processing</li>
+                <li class="status-tab" id="tab-shipped" onclick="setStatusFilter('shipped')">Shipped</li>
+                <li class="status-tab" id="tab-delivered" onclick="setStatusFilter('delivered')">Delivered</li>
+                <li class="status-tab" id="tab-cancelled" onclick="setStatusFilter('cancelled')">Cancelled</li>
+                <li class="status-tab" id="tab-refunded" onclick="setStatusFilter('refunded')">Refunded</li>
+            </ul>
+        </section>
+
+        <!-- Search & Date Range Filters Panel -->
+        <section class="filters-panel">
+            <div class="filter-group">
+                <label class="filter-label">Buyer Email</label>
+                <input class="filter-input" id="filter-buyer" placeholder="Search by email..." type="text"/>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Date From</label>
+                <input class="filter-input" id="filter-date-from" type="date"/>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Date To</label>
+                <input class="filter-input" id="filter-date-to" type="date"/>
+            </div>
+
+            <div>
+                <button class="btn-clear" id="btn-clear-filters">
+                    <span class="material-symbols-outlined" style="font-size: 16px;">filter_alt_off</span>Clear Filters
+                </button>
+            </div>
+        </section>
+
+        <!-- Orders Table List Box -->
+        <section class="table-box">
+            <div style="overflow-x: auto;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Order Details</th>
+                            <th>Buyer Info</th>
+                            <th>Artisan Shop</th>
+                            <th style="text-align: right;">Total Price</th>
+                            <th>Current Status</th>
+                            <th>Override Status</th>
+                            <th style="text-align: right; padding-right: 24px;">Refund Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-tbody">
+                        <tr>
+                            <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 48px 0;">
+                                Loading orders records...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Pagination Controls -->
+        <section class="pagination-container">
+            <div class="pagination-info" id="pagination-info">
+                Showing Page 1
+            </div>
+            <div class="pagination-buttons">
+                <button class="btn-pagination" id="btn-prev" disabled>Previous</button>
+                <button class="btn-pagination" id="btn-next" disabled>Next</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Generic Modal Confirmation Prompt -->
+    <div class="modal" id="action-modal">
+        <div class="modal-card">
+            <h3 class="modal-title" id="modal-title">Action Title</h3>
+            <div class="modal-body" id="modal-body">
+                Are you sure you want to perform this action?
+            </div>
+            
+            <label class="modal-input-label" id="modal-input-label">Notes</label>
+            <textarea class="modal-input" id="modal-note" placeholder="Write context here..." rows="3"></textarea>
+            
+            <div class="modal-actions">
+                <button class="btn-modal-cancel" id="btn-modal-cancel">Cancel</button>
+                <button class="btn-modal-confirm" id="btn-modal-confirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification UI -->
+    <div id="toast-el" class="toast">
+        <span class="material-symbols-outlined">info</span>
+        <span id="toast-text">Notification message</span>
+    </div>
+
+    <!-- Script Block -->
+    <script>
+        const API_BASE_URL = 'https://localhost:8443';
+        
+        let currentPage = 1;
+        const itemsPerPage = 20;
+        let selectedStatus = null;
+        let buyerEmailKeyword = '';
+        let dateFromVal = '';
+        let dateToVal = '';
+
+        // Modal Action tracking state
+        let modalActionType = null; // 'override' or 'refund'
+        let modalTargetOrderId = null;
+        let modalPendingStatus = null;
+        let selectElementToRevert = null;
+
+        // Verify Session Token
+        async function verifyAuth() {
+            const token = sessionStorage.getItem('access_token');
+            if (!token) {
+                window.location.href = '../login.html';
+                return;
+            }
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/v1/auth/me`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (!response.ok) {
+                    window.location.href = '../login.html';
+                    return;
+                }
+                const user = await response.json();
+                if (user.role !== 'admin') {
+                    window.location.href = '../login.html';
+                    return;
+                }
+                document.getElementById('admin-email').textContent = user.email;
+                document.body.style.display = 'flex';
+            } catch (err) {
+                console.error("Auth check failed:", err);
+                window.location.href = '../login.html';
+            }
+        }
+
+        // Display Toast Notification
+        function showToast(msg) {
+            const toast = document.getElementById('toast-el');
+            document.getElementById('toast-text').textContent = msg;
+            toast.style.display = 'flex';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        // Format Paise to Rupee String
+        function formatCurrency(paise) {
+            return new Intl.NumberFormat('en-IN', {
+                style: 'currency',
+                currency: 'INR',
+                maximumFractionDigits: 2
+            }).format(paise / 100);
+        }
+
+        // Toggle Status Tab Filter
+        function setStatusFilter(status) {
+            selectedStatus = status;
+
+            // Remove active classes
+            const tabs = document.querySelectorAll('.status-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            const activeTabId = status ? `tab-${status}` : 'tab-all';
+            document.getElementById(activeTabId).classList.add('active');
+
+            currentPage = 1;
+            fetchOrders();
+        }
+
+        // Fetch Orders records
+        async function fetchOrders() {
+            const token = sessionStorage.getItem('access_token');
+            const tbody = document.getElementById('orders-tbody');
+            
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 48px 0;">
+                        Loading orders records...
+                    </td>
+                </tr>
+            `;
+
+            let url = `${API_BASE_URL}/api/v1/admin/orders?page=${currentPage}&limit=${itemsPerPage}`;
+            
+            if (selectedStatus) {
+                url += `&status=${selectedStatus}`;
+            }
+            if (buyerEmailKeyword) {
+                url += `&buyer_email=${encodeURIComponent(buyerEmailKeyword)}`;
+            }
+            // Append day-boundaries to capture full days
+            if (dateFromVal) {
+                url += `&date_from=${dateFromVal}T00:00:00`;
+            }
+            if (dateToVal) {
+                url += `&date_to=${dateToVal}T23:59:59`;
+            }
+
+            try {
+                const response = await fetch(url, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        window.location.href = '../login.html';
+                        return;
+                    }
+                    throw new Error(`Failed to load orders. status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                tbody.innerHTML = '';
+
+                if (!data.items || data.items.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 48px 0;">
+                                No orders found matching current filters.
+                            </td>
+                        </tr>
+                    `;
+                    document.getElementById('btn-prev').disabled = currentPage === 1;
+                    document.getElementById('btn-next').disabled = true;
+                    document.getElementById('pagination-info').textContent = `Showing 0 of 0 orders`;
+                    return;
+                }
+
+                data.items.forEach(order => {
+                    const tr = document.createElement('tr');
+                    
+                    const orderDate = new Date(order.created_at).toLocaleString('en-IN', {
+                        day: 'numeric', month: 'short', year: 'numeric',
+                        hour: '2-digit', minute: '2-digit'
+                    });
+
+                    // Build line items list details
+                    let itemsHtml = `<ul class="order-items-preview">`;
+                    order.items.forEach(item => {
+                        itemsHtml += `
+                            <li>
+                                <span class="item-qty">${item.quantity}x</span>
+                                <span>${item.title_snapshot}</span>
+                            </li>
+                        `;
+                    });
+                    itemsHtml += `</ul>`;
+
+                    // Format order status tag
+                    const statusText = order.status.replace('_', ' ');
+
+                    // Build dropdown override selector
+                    const statuses = ['pending', 'awaiting_payment', 'paid_offline', 'processing', 'shipped', 'delivered', 'cancelled', 'refunded'];
+                    let selectHtml = `<select class="status-select" data-status="${order.status}" onchange="handleStatusChange(this, '${order.id}')">`;
+                    statuses.forEach(st => {
+                        const selected = st === order.status ? 'selected' : '';
+                        selectHtml += `<option value="${st}" ${selected}>${st.replace('_', ' ')}</option>`;
+                    });
+                    selectHtml += `</select>`;
+
+                    // Show Refund Flag button ONLY if awaiting_payment
+                    const refundActionHtml = order.status === 'awaiting_payment'
+                        ? `<button class="btn-refund" onclick="openRefundModal('${order.id}')">
+                            <span class="material-symbols-outlined" style="font-size:14px;">assignment_return</span>Flag Refund
+                           </button>`
+                        : `<span style="color:var(--text-muted); font-size:12px;">N/A</span>`;
+
+                    tr.innerHTML = `
+                        <td>
+                            <div style="font-weight: 600; font-family: monospace; font-size: 13px;">#${order.id.slice(0,8)}...</div>
+                            <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">${orderDate}</div>
+                            ${itemsHtml}
+                        </td>
+                        <td>
+                            <div style="font-weight: 500;">${order.buyer_email}</div>
+                            <div style="font-size:11px; color:var(--text-muted); max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${order.shipping_address}">
+                                ${order.shipping_address}
+                            </div>
+                        </td>
+                        <td style="color: var(--color-rose); font-weight: 500;">${order.seller_shop_name || 'Artisan Shop'}</td>
+                        <td style="text-align: right; font-weight: 600; color: var(--color-sage-dark);">${formatCurrency(order.total_paise)}</td>
+                        <td>
+                            <span style="font-size: 12px; font-weight:600; text-transform:uppercase; color: var(--text-muted);">${statusText}</span>
+                        </td>
+                        <td>${selectHtml}</td>
+                        <td style="text-align: right; padding-right: 24px;">${refundActionHtml}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+                // Update pagination layout
+                const totalItems = data.total;
+                const startIdx = (currentPage - 1) * itemsPerPage + 1;
+                const endIdx = Math.min(currentPage * itemsPerPage, totalItems);
+                
+                document.getElementById('pagination-info').textContent = `Showing ${startIdx}-${endIdx} of ${totalItems} orders`;
+                document.getElementById('btn-prev').disabled = currentPage === 1;
+                document.getElementById('btn-next').disabled = endIdx >= totalItems;
+
+            } catch (err) {
+                console.error(err);
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" style="text-align: center; color: var(--error-text); padding: 48px 0; font-weight: 500;">
+                            Failed to load orders. Ensure backend connection is active.
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        // Trigger Status Change Dropdown
+        function handleStatusChange(selectEl, orderId) {
+            const oldStatus = selectEl.getAttribute('data-status');
+            const newStatus = selectEl.value;
+            if (oldStatus === newStatus) return;
+
+            // Open Modal
+            modalActionType = 'override';
+            modalTargetOrderId = orderId;
+            modalPendingStatus = newStatus;
+            selectElementToRevert = selectEl;
+
+            document.getElementById('modal-title').textContent = "Override Order Status";
+            document.getElementById('modal-body').innerHTML = `
+                Are you sure you want to change the status of Order <span style="font-family:monospace; font-weight:600;">#${orderId.slice(0,8)}</span> from 
+                <strong>${oldStatus.replace('_',' ')}</strong> to <strong>${newStatus.replace('_',' ')}</strong>? 
+                This override sends a notifications ping directly to the buyer if updated to Shipped or Delivered.
+            `;
+            document.getElementById('modal-input-label').textContent = "Admin Override Note (Optional)";
+            const textNote = document.getElementById('modal-note');
+            textNote.value = '';
+            textNote.placeholder = "Provide reason for overriding (e.g. buyer paid cash, offline pickup, manual override)...";
+            textNote.required = false;
+
+            const btnConfirm = document.getElementById('btn-modal-confirm');
+            btnConfirm.className = "btn-modal-confirm"; // standard
+            btnConfirm.textContent = "Confirm Status Change";
+
+            document.getElementById('action-modal').style.display = 'flex';
+        }
+
+        // Open Refund modal dialog
+        function openRefundModal(orderId) {
+            modalActionType = 'refund';
+            modalTargetOrderId = orderId;
+            modalPendingStatus = null;
+            selectElementToRevert = null;
+
+            document.getElementById('modal-title').textContent = "Flag Order for Refund";
+            document.getElementById('modal-body').innerHTML = `
+                Are you sure you want to flag Order <span style="font-family:monospace; font-weight:600;">#${orderId.slice(0,8)}</span> for refund?
+                This action is irreversible and changes the order status permanently to <strong>Refunded</strong>.
+            `;
+            document.getElementById('modal-input-label').textContent = "Refund Reason / Notes (Required)";
+            const textNote = document.getElementById('modal-note');
+            textNote.value = '';
+            textNote.placeholder = "Specify the refund terms (e.g. item out of stock, seller request)...";
+            textNote.required = true;
+
+            const btnConfirm = document.getElementById('btn-modal-confirm');
+            btnConfirm.className = "btn-modal-confirm danger"; // red style
+            btnConfirm.textContent = "Confirm Refund Flag";
+
+            document.getElementById('action-modal').style.display = 'flex';
+        }
+
+        // Close generic Action Modal
+        function closeModal() {
+            document.getElementById('action-modal').style.display = 'none';
+            // Revert select status back if we cancelled a status override
+            if (modalActionType === 'override' && selectElementToRevert) {
+                selectElementToRevert.value = selectElementToRevert.getAttribute('data-status');
+            }
+            // Clear tracking state
+            modalActionType = null;
+            modalTargetOrderId = null;
+            modalPendingStatus = null;
+            selectElementToRevert = null;
+        }
+
+        // Confirm action clicked inside modal
+        async function confirmModalAction() {
+            const token = sessionStorage.getItem('access_token');
+            const note = document.getElementById('modal-note').value.trim();
+
+            if (modalActionType === 'refund' && !note) {
+                alert("Please provide a note/reason for flagging this refund.");
+                return;
+            }
+
+            const btnConfirm = document.getElementById('btn-modal-confirm');
+            const originalText = btnConfirm.textContent;
+            btnConfirm.disabled = true;
+            btnConfirm.textContent = "Processing...";
+
+            try {
+                if (modalActionType === 'override') {
+                    // Call override status endpoint
+                    const response = await fetch(`${API_BASE_URL}/api/v1/admin/orders/${modalTargetOrderId}/status`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({
+                            status: modalPendingStatus,
+                            admin_note: note || null
+                        })
+                    });
+
+                    if (!response.ok) {
+                        const data = await response.json();
+                        throw new Error(data.detail || "Failed to update order status.");
+                    }
+
+                    showToast("Order status overridden successfully.");
+                } 
+                else if (modalActionType === 'refund') {
+                    // Call refund flag endpoint
+                    const response = await fetch(`${API_BASE_URL}/api/v1/admin/orders/${modalTargetOrderId}/refund_flag`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({
+                            note: note
+                        })
+                    });
+
+                    if (!response.ok) {
+                        const data = await response.json();
+                        throw new Error(data.detail || "Failed to flag order refund.");
+                    }
+
+                    showToast("Order flagged for refund successfully.");
+                }
+
+                // Close and refresh
+                document.getElementById('action-modal').style.display = 'none';
+                modalActionType = null;
+                modalTargetOrderId = null;
+                modalPendingStatus = null;
+                selectElementToRevert = null;
+                
+                fetchOrders();
+
+            } catch (err) {
+                console.error(err);
+                alert(err.message || "An unexpected error occurred.");
+                
+                // Revert dropdown if needed
+                if (modalActionType === 'override' && selectElementToRevert) {
+                    selectElementToRevert.value = selectElementToRevert.getAttribute('data-status');
+                }
+                
+                btnConfirm.disabled = false;
+                btnConfirm.textContent = originalText;
+            }
+        }
+
+        // Init Lifecycle
+        document.addEventListener('DOMContentLoaded', async () => {
+            await verifyAuth();
+            await fetchOrders();
+
+            // Clear Filters Listener
+            document.getElementById('btn-clear-filters').addEventListener('click', () => {
+                document.getElementById('filter-buyer').value = '';
+                document.getElementById('filter-date-from').value = '';
+                document.getElementById('filter-date-to').value = '';
+                buyerEmailKeyword = '';
+                dateFromVal = '';
+                dateToVal = '';
+                currentPage = 1;
+                fetchOrders();
+            });
+
+            // Input Debounce/Triggers
+            let debounceTimer;
+            document.getElementById('filter-buyer').addEventListener('input', (e) => {
+                buyerEmailKeyword = e.target.value.trim();
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    currentPage = 1;
+                    fetchOrders();
+                }, 300);
+            });
+
+            document.getElementById('filter-date-from').addEventListener('change', (e) => {
+                dateFromVal = e.target.value;
+                currentPage = 1;
+                fetchOrders();
+            });
+
+            document.getElementById('filter-date-to').addEventListener('change', (e) => {
+                dateToVal = e.target.value;
+                currentPage = 1;
+                fetchOrders();
+            });
+
+            // Pagination button listeners
+            document.getElementById('btn-prev').addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    fetchOrders();
+                }
+            });
+
+            document.getElementById('btn-next').addEventListener('click', () => {
+                currentPage++;
+                fetchOrders();
+            });
+
+            // Modal Action Confirm/Cancel Button listeners
+            document.getElementById('btn-modal-cancel').addEventListener('click', closeModal);
+            document.getElementById('btn-modal-confirm').addEventListener('click', confirmModalAction);
+
+            // Handle Logout
+            document.getElementById('logout-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                sessionStorage.removeItem('access_token');
+                sessionStorage.removeItem('refresh_token');
+                window.location.href = '../login.html';
+            });
+        });
+    </script>
+</body>
+</html>

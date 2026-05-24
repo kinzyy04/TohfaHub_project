@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Sellers Directory | CraftNest Admin</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=EB+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <style>
+        :root {
+            --font-headline: 'EB Garamond', serif;
+            --font-body: 'Be Vietnam Pro', sans-serif;
+            
+            --bg-cream: #fff8f1;
+            --bg-cream-dark: #f4ede3;
+            --bg-cream-light: #faf2e9;
+            --bg-white: #ffffff;
+            
+            --color-sage: #576242;
+            --color-sage-light: #bfcba4;
+            --color-sage-dark: #404a2c;
+            
+            --color-rose: #705673;
+            --color-rose-light: #fad8fb;
+            --color-rose-dark: #573e5b;
+            
+            --color-gold: #c39b62;
+            --color-gold-light: #f7e7ce;
+            --color-gold-dark: #966f33;
+            
+            --text-dark: #1e1b15;
+            --text-muted: #615e57;
+            --border-color: #e9e1d8;
+            --border-color-dark: #c6c7bb;
+            
+            --error: #ba1a1a;
+            --error-bg: #ffdad6;
+            --error-text: #93000a;
+            
+            --success: #2e6c40;
+            --success-bg: #d1ebd5;
+            --success-text: #0f3d1b;
+            
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.04);
+            
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+        }
+
+        body {
+            display: none;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-body);
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            min-height: 100vh;
+            flex-direction: row;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: var(--font-headline);
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        /* Sidebar Layout */
+        .sidebar {
+            width: 260px;
+            background-color: var(--bg-cream-dark);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 24px 16px;
+            height: 100vh;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .sidebar-brand {
+            font-family: var(--font-headline);
+            font-size: 28px;
+            color: var(--color-sage);
+            margin-bottom: 32px;
+            padding-left: 12px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-item a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-item a:hover {
+            background-color: var(--bg-cream-light);
+            color: var(--color-sage);
+        }
+
+        .sidebar-item.active a {
+            background-color: var(--color-sage-light);
+            color: var(--color-sage-dark);
+            font-weight: 600;
+        }
+
+        .sidebar-item.logout {
+            margin-top: auto;
+        }
+
+        .sidebar-item.logout a:hover {
+            background-color: var(--error-bg);
+            color: var(--error-text);
+        }
+
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            padding: 40px;
+            box-sizing: border-box;
+            max-width: calc(100vw - 260px);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+        }
+
+        .header-title h1 {
+            font-size: 32px;
+            font-weight: 500;
+        }
+
+        .header-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .admin-badge {
+            background-color: var(--color-gold-light);
+            color: var(--color-gold-dark);
+            padding: 4px 8px;
+            border-radius: var(--radius-sm);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Toolbar styles */
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .search-container {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+            min-width: 250px;
+        }
+
+        .search-input {
+            width: 100%;
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color-dark);
+            border-radius: var(--radius-md);
+            padding: 12px 16px 12px 40px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            box-sizing: border-box;
+            color: var(--text-dark);
+            transition: border-color 0.2s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--color-sage);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+            font-size: 20px;
+        }
+
+        /* Filter Tab Styles */
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            background-color: var(--bg-cream-dark);
+            padding: 4px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .filter-tab {
+            border: none;
+            background: none;
+            padding: 8px 16px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-tab:hover {
+            color: var(--text-dark);
+        }
+
+        .filter-tab.active {
+            background-color: var(--bg-white);
+            color: var(--color-sage-dark);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Table & Layout */
+        .table-box {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .admin-table th {
+            padding: 14px 20px;
+            border-bottom: 2px solid var(--border-color);
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            background-color: var(--bg-cream-light);
+        }
+
+        .admin-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        .admin-table tbody tr {
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+        }
+
+        .admin-table tbody tr:hover {
+            background-color: var(--bg-cream-light);
+        }
+
+        /* Badges */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge.active {
+            background-color: var(--success-bg);
+            color: var(--success-text);
+        }
+
+        .status-badge.banned {
+            background-color: var(--error-bg);
+            color: var(--error-text);
+        }
+
+        /* Action Buttons */
+        .btn {
+            border: 1px solid transparent;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-outline-error {
+            border-color: var(--error);
+            color: var(--error);
+            background-color: transparent;
+        }
+
+        .btn-outline-error:hover {
+            background-color: var(--error-bg);
+        }
+
+        .btn-outline-success {
+            border-color: var(--success);
+            color: var(--success);
+            background-color: transparent;
+        }
+
+        .btn-outline-success:hover {
+            background-color: var(--success-bg);
+        }
+
+        /* Pagination styles */
+        .pagination-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+        }
+
+        .pagination-info {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .pagination-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-pagination {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color-dark);
+            color: var(--text-dark);
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-pagination:hover:not(:disabled) {
+            background-color: var(--bg-cream-light);
+            border-color: var(--color-sage);
+        }
+
+        .btn-pagination:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Custom Modal Prompt styling */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(30, 27, 21, 0.4);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1100;
+            backdrop-filter: blur(2px);
+        }
+
+        .modal-card {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            width: 90%;
+            max-width: 480px;
+            box-shadow: var(--shadow-md);
+            padding: 24px;
+            box-sizing: border-box;
+            animation: modalPop 0.25s ease-out;
+        }
+
+        @keyframes modalPop {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-title {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .modal-body {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .modal-input {
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid var(--border-color-dark);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            margin-bottom: 20px;
+            resize: vertical;
+        }
+
+        .modal-input:focus {
+            outline: none;
+            border-color: var(--color-sage);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .btn-cancel {
+            background-color: var(--bg-cream-dark);
+            color: var(--text-dark);
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .btn-cancel:hover {
+            background-color: var(--border-color-dark);
+        }
+
+        .btn-confirm {
+            background-color: var(--error);
+            color: var(--bg-cream);
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .btn-confirm:hover {
+            opacity: 0.9;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: var(--text-dark);
+            color: var(--bg-cream);
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">CraftNest Admin</div>
+        <nav>
+            <ul class="sidebar-menu">
+                <li class="sidebar-item">
+                    <a href="index.html">
+                        <span class="material-symbols-outlined">dashboard</span>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="sidebar-item active">
+                    <a href="sellers.html">
+                        <span class="material-symbols-outlined">storefront</span>
+                        Sellers
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="orders.html">
+                        <span class="material-symbols-outlined">receipt_long</span>
+                        Orders
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="categories.html" onclick="event.preventDefault(); showToast('Category management page coming soon!');">
+                        <span class="material-symbols-outlined">category</span>
+                        Categories
+                    </a>
+                </li>
+                <li class="sidebar-item logout">
+                    <a href="#" id="logout-link">
+                        <span class="material-symbols-outlined">logout</span>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <header class="header">
+            <div class="header-title">
+                <h1>Sellers Management</h1>
+            </div>
+            <div class="header-meta">
+                <span class="admin-badge">Admin Panel</span>
+                <span id="admin-email">admin@craftnest.com</span>
+            </div>
+        </header>
+
+        <!-- Search & Filter Toolbar -->
+        <section class="toolbar">
+            <div class="search-container">
+                <span class="material-symbols-outlined search-icon">search</span>
+                <input class="search-input" id="search-input" placeholder="Search by shop name or email..." type="text"/>
+            </div>
+
+            <div class="filter-tabs">
+                <button class="filter-tab active" id="tab-all" onclick="setStatusFilter(null)">All</button>
+                <button class="filter-tab" id="tab-active" onclick="setStatusFilter(true)">Active</button>
+                <button class="filter-tab" id="tab-banned" onclick="setStatusFilter(false)">Banned</button>
+            </div>
+        </section>
+
+        <!-- Sellers List Table Box -->
+        <section class="table-box">
+            <div style="overflow-x: auto;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Shop Name</th>
+                            <th>Email Address</th>
+                            <th>Date Joined</th>
+                            <th style="text-align: center;">Products</th>
+                            <th style="text-align: center;">Orders</th>
+                            <th>Status</th>
+                            <th style="text-align: right; padding-right: 24px;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sellers-tbody">
+                        <tr>
+                            <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 48px 0;">
+                                Loading sellers directory...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Pagination Controls -->
+        <section class="pagination-container">
+            <div class="pagination-info" id="pagination-info">
+                Showing Page 1
+            </div>
+            <div class="pagination-buttons">
+                <button class="btn-pagination" id="btn-prev" disabled>Previous</button>
+                <button class="btn-pagination" id="btn-next" disabled>Next</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Ban Reason Confirmation Modal Dialog -->
+    <div class="modal" id="ban-modal">
+        <div class="modal-card">
+            <h3 class="modal-title">Ban Seller Account</h3>
+            <div class="modal-body">
+                Are you sure you want to suspend this seller account? Banning this account will automatically hide all their products and reels listings from the marketplace.
+            </div>
+            <label style="display: block; font-size: 11px; text-transform: uppercase; font-weight: 600; color: var(--text-muted); margin-bottom: 6px;">
+                Reason for Ban
+            </label>
+            <textarea class="modal-input" id="ban-reason" placeholder="Explain the violation of terms (e.g. copyright infringement, counterfeit item listings)..." rows="3" required></textarea>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeBanModal()">Cancel</button>
+                <button class="btn-confirm" id="btn-confirm-ban">Confirm Ban</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-el" class="toast">
+        <span class="material-symbols-outlined">info</span>
+        <span id="toast-text">Notification message</span>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'https://localhost:8443';
+        
+        let currentPage = 1;
+        const itemsPerPage = 20;
+        let searchKeyword = '';
+        let isActiveFilter = null; // null: all, true: active, false: banned
+        let currentActionSellerId = null;
+
+        // Verify Session Token
+        async function verifyAuth() {
+            const token = sessionStorage.getItem('access_token');
+            if (!token) {
+                window.location.href = '../login.html';
+                return;
+            }
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/v1/auth/me`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (!response.ok) {
+                    window.location.href = '../login.html';
+                    return;
+                }
+                const user = await response.json();
+                if (user.role !== 'admin') {
+                    window.location.href = '../login.html';
+                    return;
+                }
+                document.getElementById('admin-email').textContent = user.email;
+                document.body.style.display = 'flex';
+            } catch (err) {
+                console.error("Auth check failed:", err);
+                window.location.href = '../login.html';
+            }
+        }
+
+        // Display Alert Toast
+        function showToast(msg) {
+            const toast = document.getElementById('toast-el');
+            document.getElementById('toast-text').textContent = msg;
+            toast.style.display = 'flex';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        // Change Status Filter Tab
+        function setStatusFilter(status) {
+            isActiveFilter = status;
+            
+            // Toggle active classes on tabs
+            document.getElementById('tab-all').classList.remove('active');
+            document.getElementById('tab-active').classList.remove('active');
+            document.getElementById('tab-banned').classList.remove('active');
+
+            if (status === null) {
+                document.getElementById('tab-all').classList.add('active');
+            } else if (status === true) {
+                document.getElementById('tab-active').classList.add('active');
+            } else {
+                document.getElementById('tab-banned').classList.add('active');
+            }
+
+            currentPage = 1;
+            fetchSellers();
+        }
+
+        // Fetch Sellers list from API
+        async function fetchSellers() {
+            const token = sessionStorage.getItem('access_token');
+            const tbody = document.getElementById('sellers-tbody');
+            
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 48px 0;">
+                        Loading sellers directory...
+                    </td>
+                </tr>
+            `;
+
+            let url = `${API_BASE_URL}/api/v1/admin/sellers?page=${currentPage}&limit=${itemsPerPage}`;
+            if (searchKeyword) {
+                url += `&search=${encodeURIComponent(searchKeyword)}`;
+            }
+            if (isActiveFilter !== null) {
+                url += `&is_active=${isActiveFilter}`;
+            }
+
+            try {
+                const response = await fetch(url, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        window.location.href = '../login.html';
+                        return;
+                    }
+                    throw new Error(`Failed to load directory. status: ${response.status}`);
+                }
+
+                const sellers = await response.json();
+                tbody.innerHTML = '';
+
+                if (sellers.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 48px 0;">
+                                No sellers found matching current search/filters.
+                            </td>
+                        </tr>
+                    `;
+                    document.getElementById('btn-prev').disabled = currentPage === 1;
+                    document.getElementById('btn-next').disabled = true;
+                    document.getElementById('pagination-info').textContent = `Showing Page ${currentPage}`;
+                    return;
+                }
+
+                sellers.forEach(seller => {
+                    const tr = document.createElement('tr');
+                    
+                    // Row click goes to seller-detail.html
+                    tr.addEventListener('click', (e) => {
+                        if (e.target.closest('button')) return; // ignore button click bubbling
+                        window.location.href = `seller-detail.html?id=${seller.user_id}`;
+                    });
+
+                    const joinedDate = new Date(seller.joined_at).toLocaleDateString('en-IN', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    });
+
+                    const statusBadge = seller.is_active 
+                        ? `<span class="status-badge active"><span class="material-symbols-outlined" style="font-size: 14px;">check_circle</span>Active</span>`
+                        : `<span class="status-badge banned"><span class="material-symbols-outlined" style="font-size: 14px;">block</span>Banned</span>`;
+
+                    const actionBtn = seller.is_active
+                        ? `<button class="btn btn-outline-error" onclick="openBanModal('${seller.user_id}')">
+                            <span class="material-symbols-outlined" style="font-size:16px;">block</span>Ban Seller
+                           </button>`
+                        : `<button class="btn btn-outline-success" onclick="unbanSeller('${seller.user_id}')">
+                            <span class="material-symbols-outlined" style="font-size:16px;">check_circle</span>Unban Seller
+                           </button>`;
+
+                    tr.innerHTML = `
+                        <td style="font-weight:500; color: var(--color-rose);">${seller.shop_name || 'Artisan Shop'}</td>
+                        <td>${seller.email}</td>
+                        <td>${joinedDate}</td>
+                        <td style="text-align: center; font-weight:500;">${seller.product_count}</td>
+                        <td style="text-align: center; font-weight:500;">${seller.order_count}</td>
+                        <td>${statusBadge}</td>
+                        <td style="text-align: right; padding-right: 24px;">${actionBtn}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+                // Simple pagination handling
+                document.getElementById('btn-prev').disabled = currentPage === 1;
+                // If we get items exactly equal to limits, assume there's a next page
+                document.getElementById('btn-next').disabled = sellers.length < itemsPerPage;
+                document.getElementById('pagination-info').textContent = `Showing Page ${currentPage}`;
+
+            } catch (err) {
+                console.error(err);
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" style="text-align: center; color: var(--error-text); padding: 48px 0; font-weight: 500;">
+                            Failed to load sellers directory. Ensure backend connection is active.
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        // Open Ban Reason Dialog
+        function openBanModal(sellerId) {
+            currentActionSellerId = sellerId;
+            document.getElementById('ban-reason').value = '';
+            document.getElementById('ban-modal').style.display = 'flex';
+        }
+
+        // Close Ban Modal
+        function closeBanModal() {
+            document.getElementById('ban-modal').style.display = 'none';
+            currentActionSellerId = null;
+        }
+
+        // Ban seller trigger
+        async function confirmBanSeller() {
+            if (!currentActionSellerId) return;
+            const token = sessionStorage.getItem('access_token');
+            const reason = document.getElementById('ban-reason').value.trim();
+            if (!reason) {
+                alert("Please provide a reason for the ban.");
+                return;
+            }
+
+            const btnConfirm = document.getElementById('btn-confirm-ban');
+            const originalText = btnConfirm.textContent;
+            btnConfirm.disabled = true;
+            btnConfirm.textContent = "Banning...";
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/v1/admin/sellers/${currentActionSellerId}/ban`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ reason: reason })
+                });
+
+                if (!response.ok) {
+                    const data = await response.json();
+                    throw new Error(data.detail || "Failed to ban seller account.");
+                }
+
+                showToast("Seller account banned successfully.");
+                closeBanModal();
+                fetchSellers();
+            } catch (err) {
+                console.error(err);
+                alert(err.message || "An unexpected error occurred.");
+            } finally {
+                btnConfirm.disabled = false;
+                btnConfirm.textContent = originalText;
+            }
+        }
+
+        // Unban seller
+        async function unbanSeller(sellerId) {
+            if (!confirm("Are you sure you want to reinstate this seller? Their products and reels listings will be restored to active status.")) {
+                return;
+            }
+            const token = sessionStorage.getItem('access_token');
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/v1/admin/sellers/${sellerId}/unban`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    const data = await response.json();
+                    throw new Error(data.detail || "Failed to reinstate seller account.");
+                }
+
+                showToast("Seller account unbanned successfully.");
+                fetchSellers();
+            } catch (err) {
+                console.error(err);
+                alert(err.message || "An unexpected error occurred.");
+            }
+        }
+
+        // Init Lifecycle
+        document.addEventListener('DOMContentLoaded', async () => {
+            await verifyAuth();
+            
+            // Extract search query from URL (e.g. from top sellers click)
+            const params = new URLSearchParams(window.location.search);
+            const initialSearch = params.get('search');
+            if (initialSearch) {
+                searchKeyword = initialSearch;
+                document.getElementById('search-input').value = initialSearch;
+            }
+
+            await fetchSellers();
+
+            // Debounced Search Listener
+            let debounceTimer;
+            document.getElementById('search-input').addEventListener('input', (e) => {
+                searchKeyword = e.target.value.trim();
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    currentPage = 1;
+                    fetchSellers();
+                }, 300);
+            });
+
+            // Pagination Listeners
+            document.getElementById('btn-prev').addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    fetchSellers();
+                }
+            });
+
+            document.getElementById('btn-next').addEventListener('click', () => {
+                currentPage++;
+                fetchSellers();
+            });
+
+            // Ban Confirmation Modal Listener
+            document.getElementById('btn-confirm-ban').addEventListener('click', confirmBanSeller);
+
+            // Handle Logout
+            document.getElementById('logout-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                sessionStorage.removeItem('access_token');
+                sessionStorage.removeItem('refresh_token');
+                window.location.href = '../login.html';
+            });
+        });
+    </script>
+</body>
+</html>

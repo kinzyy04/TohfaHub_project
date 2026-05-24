@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Admin Dashboard | CraftNest</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=EB+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <style>
+        :root {
+            --font-headline: 'EB Garamond', serif;
+            --font-body: 'Be Vietnam Pro', sans-serif;
+            
+            --bg-cream: #fff8f1;
+            --bg-cream-dark: #f4ede3;
+            --bg-cream-light: #faf2e9;
+            --bg-white: #ffffff;
+            
+            --color-sage: #576242;
+            --color-sage-light: #bfcba4;
+            --color-sage-dark: #404a2c;
+            
+            --color-rose: #705673;
+            --color-rose-light: #fad8fb;
+            --color-rose-dark: #573e5b;
+            
+            --color-gold: #c39b62;
+            --color-gold-light: #f7e7ce;
+            --color-gold-dark: #966f33;
+            
+            --text-dark: #1e1b15;
+            --text-muted: #615e57;
+            --border-color: #e9e1d8;
+            --border-color-dark: #c6c7bb;
+            
+            --error: #ba1a1a;
+            --error-bg: #ffdad6;
+            --error-text: #93000a;
+            
+            --success: #2e6c40;
+            --success-bg: #d1ebd5;
+            --success-text: #0f3d1b;
+            
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.04);
+            
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+        }
+
+        /* Prevent flash of unauthenticated content */
+        body {
+            display: none;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-body);
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            min-height: 100vh;
+            flex-direction: row;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: var(--font-headline);
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        /* Layout */
+        .sidebar {
+            width: 260px;
+            background-color: var(--bg-cream-dark);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 24px 16px;
+            height: 100vh;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .sidebar-brand {
+            font-family: var(--font-headline);
+            font-size: 28px;
+            color: var(--color-sage);
+            margin-bottom: 32px;
+            padding-left: 12px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-item a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-item a:hover {
+            background-color: var(--bg-cream-light);
+            color: var(--color-sage);
+        }
+
+        .sidebar-item.active a {
+            background-color: var(--color-sage-light);
+            color: var(--color-sage-dark);
+            font-weight: 600;
+        }
+
+        .sidebar-item.logout {
+            margin-top: auto;
+        }
+
+        .sidebar-item.logout a:hover {
+            background-color: var(--error-bg);
+            color: var(--error-text);
+        }
+
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            padding: 40px;
+            box-sizing: border-box;
+            max-width: calc(100vw - 260px);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+        }
+
+        .header-title h1 {
+            font-size: 32px;
+            font-weight: 500;
+        }
+
+        .header-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .admin-badge {
+            background-color: var(--color-gold-light);
+            color: var(--color-gold-dark);
+            padding: 4px 8px;
+            border-radius: var(--radius-sm);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Dashboard Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .card-value {
+            font-family: var(--font-headline);
+            font-size: 36px;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .card-subtext {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Sparkline bar chart style */
+        .sparkline-container {
+            margin-top: 12px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 12px;
+        }
+
+        .sparkline-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .sparkline-svg {
+            width: 100%;
+            height: 90px;
+        }
+
+        .sparkline-bar {
+            fill: var(--color-sage);
+            rx: 3px;
+            transition: fill 0.2s ease;
+        }
+
+        .sparkline-bar:hover {
+            fill: var(--color-gold);
+        }
+
+        .sparkline-text {
+            font-size: 9px;
+            fill: var(--text-muted);
+            text-anchor: middle;
+            font-family: var(--font-body);
+        }
+
+        /* Badge design */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background-color: var(--success-bg);
+            color: var(--success-text);
+        }
+
+        .badge-accent {
+            background-color: var(--color-rose-light);
+            color: var(--color-rose-dark);
+        }
+
+        /* Detailed sections */
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        @media (max-width: 1024px) {
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section-box {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .section-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Custom premium table */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .admin-table th {
+            padding: 12px 16px;
+            border-bottom: 2px solid var(--border-color);
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+
+        .admin-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        .admin-table tbody tr:hover {
+            background-color: var(--bg-cream-light);
+        }
+
+        .shop-link {
+            color: var(--color-rose);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .shop-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: var(--text-dark);
+            color: var(--bg-cream);
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">CraftNest Admin</div>
+        <nav>
+            <ul class="sidebar-menu">
+                <li class="sidebar-item active">
+                    <a href="index.html">
+                        <span class="material-symbols-outlined">dashboard</span>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="sellers.html">
+                        <span class="material-symbols-outlined">storefront</span>
+                        Sellers
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="orders.html">
+                        <span class="material-symbols-outlined">receipt_long</span>
+                        Orders
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="categories.html" onclick="event.preventDefault(); showToast('Category management page coming soon!');">
+                        <span class="material-symbols-outlined">category</span>
+                        Categories
+                    </a>
+                </li>
+                <li class="sidebar-item logout">
+                    <a href="#" id="logout-link">
+                        <span class="material-symbols-outlined">logout</span>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <header class="header">
+            <div class="header-title">
+                <h1>Overview Dashboard</h1>
+            </div>
+            <div class="header-meta">
+                <span class="admin-badge">Admin Panel</span>
+                <span id="admin-email">admin@craftnest.com</span>
+            </div>
+        </header>
+
+        <!-- Stats Grid Widgets -->
+        <section class="stats-grid">
+            <!-- GMV Card -->
+            <div class="card">
+                <div class="card-label">Gross Merchandise Value</div>
+                <div class="card-value" id="stat-gmv">₹0.00</div>
+                <div class="card-subtext">Total values of delivered orders</div>
+            </div>
+
+            <!-- New Users Card -->
+            <div class="card">
+                <div class="card-label">New Users Today</div>
+                <div style="display: flex; align-items: baseline; gap: 8px;">
+                    <div class="card-value" id="stat-new-users">0</div>
+                    <span class="badge badge-accent" id="badge-new-users">+0 today</span>
+                </div>
+                <div class="card-subtext" id="stat-users-breakdown">Total: 0 (Buyers: 0, Sellers: 0)</div>
+            </div>
+
+            <!-- Products Card -->
+            <div class="card">
+                <div class="card-label">Products Directory</div>
+                <div class="card-value" id="stat-products">0</div>
+                <div class="card-subtext" id="stat-products-active">0 active listings</div>
+            </div>
+
+            <!-- Orders Card -->
+            <div class="card">
+                <div class="card-label">Orders Managed</div>
+                <div class="card-value" id="stat-orders">0</div>
+                <div class="card-subtext" id="stat-orders-breakdown">0 pending, 0 shipping</div>
+            </div>
+        </section>
+
+        <!-- Details Grid -->
+        <section class="details-grid">
+            <!-- Sparkline Chart Section -->
+            <div class="section-box">
+                <div class="section-title">
+                    <span>User Registration (Last 7 Days)</span>
+                    <span class="badge badge-success">Active Trend</span>
+                </div>
+                <div class="sparkline-container">
+                    <div class="sparkline-title">New Signups timeline</div>
+                    <svg class="sparkline-svg" id="sparkline-svg" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Bars will be injected dynamically -->
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Top Sellers List -->
+            <div class="section-box">
+                <div class="section-title">
+                    <span>Top Performing Sellers</span>
+                </div>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Shop Name</th>
+                                <th>Orders</th>
+                                <th>Total Sales</th>
+                            </tr>
+                        </thead>
+                        <tbody id="top-sellers-body">
+                            <tr>
+                                <td colspan="3" style="text-align: center; color: var(--text-muted); padding: 32px 0;">
+                                    Loading top sellers...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast UI -->
+    <div id="toast-el" class="toast">
+        <span class="material-symbols-outlined">info</span>
+        <span id="toast-text">Notification message</span>
+    </div>
+
+    <!-- Script Block -->
+    <script>
+        const API_BASE_URL = 'https://localhost:8443';
+
+        // Check Session Authentication
+        async function verifyAuth() {
+            const token = sessionStorage.getItem('access_token');
+            if (!token) {
+                window.location.href = '../login.html';
+                return;
+            }
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/v1/auth/me`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (!response.ok) {
+                    window.location.href = '../login.html';
+                    return;
+                }
+                const user = await response.json();
+                if (user.role !== 'admin') {
+                    window.location.href = '../login.html';
+                    return;
+                }
+                // Auth successful
+                document.getElementById('admin-email').textContent = user.email;
+                document.body.style.display = 'flex';
+            } catch (err) {
+                console.error("Auth check failed:", err);
+                window.location.href = '../login.html';
+            }
+        }
+
+        // Format Paise to Rupees Currency
+        function formatCurrency(paise) {
+            const rupees = paise / 100;
+            return new Intl.NumberFormat('en-IN', {
+                style: 'currency',
+                currency: 'INR',
+                maximumFractionDigits: 2
+            }).format(rupees);
+        }
+
+        // Show Toast Notification
+        function showToast(msg) {
+            const toast = document.getElementById('toast-el');
+            document.getElementById('toast-text').textContent = msg;
+            toast.style.display = 'flex';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        // Render Sparkline SVG (Daily New Users)
+        function renderSparkline(dailyData) {
+            const svg = document.getElementById('sparkline-svg');
+            svg.innerHTML = ''; // clear initial content
+            
+            if (!dailyData || dailyData.length === 0) {
+                svg.innerHTML = `<text x="50%" y="50%" class="sparkline-text">No timeline data available</text>`;
+                return;
+            }
+
+            const width = svg.clientWidth || 350;
+            const height = 90;
+            const paddingBottom = 20;
+            const paddingTop = 10;
+            const chartHeight = height - paddingBottom - paddingTop;
+            
+            const maxVal = Math.max(...dailyData.map(d => d.count), 1);
+            const totalBars = dailyData.length;
+            
+            const barWidth = Math.floor((width - (totalBars - 1) * 12) / totalBars);
+            
+            dailyData.forEach((day, index) => {
+                const barHeight = (day.count / maxVal) * chartHeight;
+                const x = index * (barWidth + 12);
+                const y = height - paddingBottom - barHeight;
+                
+                // SVG Rect Element
+                const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                rect.setAttribute('x', x);
+                rect.setAttribute('y', y);
+                rect.setAttribute('width', barWidth);
+                rect.setAttribute('height', Math.max(barHeight, 2)); // min 2px height so it's always visible
+                rect.setAttribute('class', 'sparkline-bar');
+                
+                // Tooltip on Hover
+                const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                title.textContent = `${day.date}: ${day.count} new users`;
+                rect.appendChild(title);
+                
+                // Day Label (e.g. "24 May" or just day number)
+                const dateObj = new Date(day.date);
+                const labelText = dateObj.toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
+                
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', x + barWidth / 2);
+                text.setAttribute('y', height - 4);
+                text.setAttribute('class', 'sparkline-text');
+                text.textContent = labelText;
+                
+                // Count above bar Label
+                const countText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                countText.setAttribute('x', x + barWidth / 2);
+                countText.setAttribute('y', y - 4);
+                countText.setAttribute('class', 'sparkline-text');
+                countText.style.fontWeight = 'bold';
+                countText.style.fill = 'var(--color-sage-dark)';
+                countText.textContent = day.count;
+
+                svg.appendChild(rect);
+                svg.appendChild(text);
+                if (day.count > 0) {
+                    svg.appendChild(countText);
+                }
+            });
+        }
+
+        // Fetch stats payload
+        async function fetchStats() {
+            const token = sessionStorage.getItem('access_token');
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/v1/admin/stats`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        window.location.href = '../login.html';
+                        return;
+                    }
+                    throw new Error(`Server returned status: ${response.status}`);
+                }
+                const data = await response.json();
+                
+                // Render stats values
+                document.getElementById('stat-gmv').textContent = formatCurrency(data.gmv_paise);
+                document.getElementById('stat-new-users').textContent = data.users.new_today;
+                document.getElementById('badge-new-users').textContent = `+${data.users.new_today} today`;
+                document.getElementById('stat-users-breakdown').textContent = `Total: ${data.users.total} (Buyers: ${data.users.buyers}, Sellers: ${data.users.sellers})`;
+                
+                document.getElementById('stat-products').textContent = data.products.total;
+                document.getElementById('stat-products-active').textContent = `${data.products.active} active listings`;
+                
+                document.getElementById('stat-orders').textContent = data.orders.total;
+                document.getElementById('stat-orders-breakdown').textContent = `${data.orders.pending} pending, ${data.orders.processing} processing, ${data.orders.shipped} shipped`;
+                
+                // Render Sparkline
+                window.sparklineDataCache = data.daily_new_users_7d;
+                renderSparkline(data.daily_new_users_7d);
+                
+                // Render Top Sellers
+                const sellersBody = document.getElementById('top-sellers-body');
+                sellersBody.innerHTML = '';
+                if (!data.top_sellers || data.top_sellers.length === 0) {
+                    sellersBody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-muted);">No sales recorded yet</td></tr>`;
+                } else {
+                    data.top_sellers.forEach(seller => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>
+                                <a href="sellers.html?search=${encodeURIComponent(seller.shop_name)}" class="shop-link">
+                                    ${seller.shop_name}
+                                </a>
+                            </td>
+                            <td>${seller.order_count}</td>
+                            <td style="font-weight: 500; color: var(--color-sage-dark);">${formatCurrency(seller.gmv_paise)}</td>
+                        `;
+                        sellersBody.appendChild(tr);
+                    });
+                }
+
+            } catch (err) {
+                console.error("Failed to load dashboard stats:", err);
+                showToast("Failed to reload latest dashboard stats.");
+            }
+        }
+
+        // On Page Load
+        document.addEventListener('DOMContentLoaded', async () => {
+            // 1. Authenticate immediately
+            await verifyAuth();
+            
+            // 2. Fetch stats
+            await fetchStats();
+            
+            // 3. Set interval to auto-refresh every 30 seconds
+            setInterval(fetchStats, 30000);
+
+            // Handle Logout
+            document.getElementById('logout-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                sessionStorage.removeItem('access_token');
+                sessionStorage.removeItem('refresh_token');
+                window.location.href = '../login.html';
+            });
+            
+            // Handle responsive resize for SVG
+            window.addEventListener('resize', () => {
+                // Throttle resize redrawing
+                if (window.sparklineDataCache) {
+                    renderSparkline(window.sparklineDataCache);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
