@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     
-    DATABASE_URL: str = "sqlite+aiosqlite:///./craftnest.db" if ENVIRONMENT == "development" else "postgresql+psycopg://postgres:postgres@localhost:5432/craftnest"
+    DATABASE_URL: str = "sqlite+aiosqlite:///./craftnest.db"
     TEST_DATABASE_URL: str = "sqlite+aiosqlite:///./test_craftnest.db"
     JWT_SECRET: str = "your-super-secret-key-change-in-production"
     JWT_REFRESH_SECRET: str = "your-super-refresh-secret-key-change-in-production"

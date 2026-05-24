@@ -246,11 +246,11 @@ _SECURITY_HEADERS: dict[str, str] = {
     "Permissions-Policy": "geolocation=(), microphone=(), camera=()",
     "Content-Security-Policy": (
         "default-src 'self'; "
-        "img-src 'self' data: https://picsum.photos; "
+        "img-src 'self' data: https://picsum.photos https://lh3.googleusercontent.com https://placehold.co; "
         "media-src 'self'; "
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
         "font-src 'self' https://fonts.gstatic.com; "
-        "script-src 'self'"
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com"
     ),
 }
 

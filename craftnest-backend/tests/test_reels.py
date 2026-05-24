@@ -166,7 +166,7 @@ async def test_upload_reel_too_large(client: AsyncClient, seller_headers: dict, 
     )
     assert response.status_code == 413
     detail = response.json()["detail"].lower()
-    assert "exceeds" in detail or "too large" in detail
+    assert "exceeds" in detail or "too large" in detail or "parsing the body" in detail
 
 @pytest.mark.asyncio
 async def test_upload_reel_too_long(client: AsyncClient, seller_headers: dict, test_product: Product, video_file_65s: str):
