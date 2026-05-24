@@ -3,7 +3,7 @@ from datetime import datetime
 from sqlalchemy import String, Integer, Numeric, Boolean, DateTime, ForeignKey, text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
-from app.core.database import Base, GUID, DialectArray, engine
+from app.core.database import Base, GUID, DialectArray, TSVECTOR, engine
 
 class Product(Base):
     __tablename__ = "products"
@@ -83,6 +83,10 @@ class Product(Base):
         server_default=func.now(),
         onupdate=func.now(),
         nullable=False,
+    )
+    search_vector: Mapped[any] = mapped_column(
+        TSVECTOR,
+        nullable=True,
     )
 
     # Relationships

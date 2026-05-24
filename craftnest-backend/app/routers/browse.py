@@ -19,9 +19,13 @@ async def get_categories(
 @rate_limit_by_user("60/minute")
 async def get_home(
     request: Request,
+    limit: int = Query(default=20, ge=1, le=100),
+    cursor: str | None = Query(None),
+    search: str | None = Query(None, min_length=2, max_length=50),
     db: AsyncSession = Depends(get_db),
 ):
-    return await browse_service.get_home_products(db=db)
+    return await browse_service.get_home_products(db=db, limit=limit, cursor=cursor, search=search)
+
 
 @router.get("/category/{slug}", response_model=list[ProductBrowseResponse])
 @rate_limit_by_user("60/minute")

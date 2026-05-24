@@ -12,3 +12,4 @@ from app.models.reel import Reel, ReelLike, ReelSave, ReelComment, ReelView  # n
 from app.models.follow import Follow  # noqa
 from app.models.order import Order, OrderItem  # noqa
 from app.models.review import Review  # noqa
+from app.models.notification import Notification  # noqa

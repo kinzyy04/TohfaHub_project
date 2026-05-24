@@ -7,8 +7,10 @@ from sqlalchemy import text, func
 
 from app.models.review import Review
 from app.models.order import Order, OrderItem
+from app.models.product import Product
 from app.schemas.review import ReviewCreate
 from app.services.audit_service import log_event
+from app.services.notification_service import create_notification
 
 
 async def create_review(
@@ -77,23 +79,30 @@ async def create_review(
         db.add(review)
         await db.flush()
 
-        # 4. Atomically update avg_rating and review_count
+        # 4. Recompute avg_rating and review_count exactly from source-of-truth rows.
+        #    This is slightly slower than the incremental formula but is exact and
+        #    idempotent (running it again "heals" any drift).
+        #    ROUND(CAST(AVG(...) AS REAL), 2) works on both PostgreSQL and SQLite.
+        #    On PostgreSQL we additionally cast to numeric(3,2) for precision.
         update_stmt = text(
             """
             UPDATE products
             SET
-                review_count = review_count + 1,
-                avg_rating   = CASE
-                    WHEN avg_rating IS NULL THEN :new_rating
-                    ELSE (avg_rating * review_count + :new_rating) / (review_count + 1)
-                END
+                avg_rating   = (
+                    SELECT ROUND(CAST(AVG(rating) AS REAL), 2)
+                    FROM   reviews
+                    WHERE  product_id = :pid
+                ),
+                review_count = (
+                    SELECT COUNT(*)
+                    FROM   reviews
+                    WHERE  product_id = :pid
+                )
             WHERE id = :pid
             """
         )
-        await db.execute(
-            update_stmt,
-            {"new_rating": float(review_in.rating), "pid": str(product_id)},
-        )
+        await db.execute(update_stmt, {"pid": str(product_id)})
+
 
         # 5. Audit log
         await log_event(
@@ -109,6 +118,20 @@ async def create_review(
             },
         )
         await db.flush()
+
+        # 6. Notify the product's seller
+        product_q = select(Product.seller_id).where(Product.id == product_id)
+        seller_id = (await db.execute(product_q)).scalar_one_or_none()
+        if seller_id is not None:
+            await create_notification(
+                db=db,
+                user_id=seller_id,
+                type="review.received",
+                title="New review!",
+                body=f"Someone rated your product {review_in.rating}/5.",
+                related_id=product_id,
+            )
+            await db.flush()
 
     return review
 

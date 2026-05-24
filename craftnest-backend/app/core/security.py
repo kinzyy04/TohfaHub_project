@@ -1,3 +1,4 @@
+import sys
 import uuid
 import secrets
 import hashlib
@@ -10,13 +11,22 @@ from sqlalchemy.future import select
 from app.core.config import settings
 
 # Password hashing configuration using Argon2id with recommended parameters
-pwd_context = CryptContext(
-    schemes=["argon2"],
-    deprecated="auto",
-    argon2__time_cost=3,
-    argon2__memory_cost=65536,
-    argon2__parallelism=2
-)
+if "pytest" in sys.modules:
+    pwd_context = CryptContext(
+        schemes=["argon2"],
+        deprecated="auto",
+        argon2__time_cost=1,
+        argon2__memory_cost=512,
+        argon2__parallelism=1
+    )
+else:
+    pwd_context = CryptContext(
+        schemes=["argon2"],
+        deprecated="auto",
+        argon2__time_cost=3,
+        argon2__memory_cost=65536,
+        argon2__parallelism=2
+    )
 
 def hash_password(plain_password: str) -> str:
     """Generate a hash from a plain text password using Argon2."""

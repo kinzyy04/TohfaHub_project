@@ -64,6 +64,8 @@ async def test_upload_image_too_large(client: AsyncClient, seller_headers: dict)
         headers=seller_headers
     )
     assert response.status_code == 413
+    detail = response.json()["detail"].lower()
+    assert "exceeds" in detail or "too large" in detail or "limit" in detail or "exceeded" in detail
 
 @pytest.mark.asyncio
 async def test_upload_fake_image_payload_sniffing(client: AsyncClient, seller_headers: dict):
@@ -118,3 +120,19 @@ async def test_media_path_traversal_protection(client: AsyncClient):
     # Test encoded dot-dot-slash path
     response_encoded = await client.get("/media/%2e%2e/app/core/config.py")
     assert response_encoded.status_code in [404, 403]
+
+@pytest.mark.asyncio
+async def test_upload_text_field_too_large(client: AsyncClient, seller_headers: dict):
+    # Send a text field that is 2 MB (exceeds default max_part_size of 1 MB)
+    large_text = "x" * (2 * 1024 * 1024)
+    data = {"caption": large_text}
+    # We send dummy file to trigger multipart parsing
+    files = {"file": ("test.png", b"dummy", "image/png")}
+    response = await client.post(
+        "/api/v1/uploads/product-image",
+        data=data,
+        files=files,
+        headers=seller_headers
+    )
+    assert response.status_code == 413
+    assert "part exceeded maximum size" in response.json()["detail"].lower()

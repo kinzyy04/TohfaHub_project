@@ -10,6 +10,7 @@ from app.models.product import Product
 from app.models.order import Order, OrderItem
 from app.schemas.order import OrderCreate, OrderStatusUpdate
 from app.services.audit_service import log_event
+from app.services.notification_service import create_notification
 
 # ---------------------------------------------------------------------------
 # Seller state-machine definition
@@ -127,6 +128,21 @@ async def create_order(
                 user_agent=user_agent,
                 details={"target_id": str(order.id)}
             )
+            await db.flush()
+
+            # 8. Notify each unique seller that has items in this order
+            seen_sellers: set[uuid.UUID] = set()
+            for oi in order_items:
+                if oi.seller_id not in seen_sellers:
+                    seen_sellers.add(oi.seller_id)
+                    await create_notification(
+                        db=db,
+                        user_id=oi.seller_id,
+                        type="order.received",
+                        title="New order!",
+                        body=f"Someone just ordered your {oi.title_snapshot}.",
+                        related_id=order.id,
+                    )
             await db.flush()
 
         # Load order with items loaded eagerly
@@ -326,6 +342,28 @@ async def update_order_status(
             },
         )
         await db.flush()
+
+        # Notify buyer on shipped / delivered
+        if update_in.status == "shipped":
+            await create_notification(
+                db=db,
+                user_id=order.buyer_id,
+                type="order.shipped",
+                title="Your order is on the way",
+                body=f"Tracking: {order.tracking_code}.",
+                related_id=order.id,
+            )
+            await db.flush()
+        elif update_in.status == "delivered":
+            await create_notification(
+                db=db,
+                user_id=order.buyer_id,
+                type="order.delivered",
+                title="Order delivered!",
+                body="Leave a review to help others.",
+                related_id=order.id,
+            )
+            await db.flush()
 
     # Reload with items for return value
     await db.refresh(order)

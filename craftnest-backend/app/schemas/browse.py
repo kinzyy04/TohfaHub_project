@@ -47,3 +47,4 @@ class ProductBrowseResponse(BaseModel):
 class HomeBrowseResponse(BaseModel):
     sponsored: list[ProductBrowseResponse]
     recent: list[ProductBrowseResponse]
+    next_cursor: str | None = None

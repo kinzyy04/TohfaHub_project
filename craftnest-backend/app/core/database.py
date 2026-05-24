@@ -141,7 +141,7 @@ class JSONB(TypeDecorator):
             return dialect.type_descriptor(JSON)
 
 
-from sqlalchemy.dialects.postgresql import ARRAY as PG_ARRAY
+from sqlalchemy.dialects.postgresql import ARRAY as PG_ARRAY, TSVECTOR as PG_TSVECTOR
 
 class DialectArray(TypeDecorator):
     """Platform-independent ARRAY type.
@@ -159,4 +159,19 @@ class DialectArray(TypeDecorator):
             return dialect.type_descriptor(PG_ARRAY(self.item_type))
         else:
             return dialect.type_descriptor(JSON)
+
+
+class TSVECTOR(TypeDecorator):
+    """Platform-independent TSVECTOR type.
+    Uses PostgreSQL's TSVECTOR type, or String in SQLite.
+    """
+    impl = String
+    cache_ok = True
+
+    def load_dialect_impl(self, dialect):
+        if dialect.name == 'postgresql':
+            return dialect.type_descriptor(PG_TSVECTOR)
+        else:
+            return dialect.type_descriptor(String)
+
 

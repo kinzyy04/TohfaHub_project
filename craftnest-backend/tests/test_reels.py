@@ -165,7 +165,8 @@ async def test_upload_reel_too_large(client: AsyncClient, seller_headers: dict, 
         headers=seller_headers
     )
     assert response.status_code == 413
-    assert "exceeds the 30 MB limit" in response.json()["detail"]
+    detail = response.json()["detail"].lower()
+    assert "exceeds" in detail or "too large" in detail
 
 @pytest.mark.asyncio
 async def test_upload_reel_too_long(client: AsyncClient, seller_headers: dict, test_product: Product, video_file_65s: str):

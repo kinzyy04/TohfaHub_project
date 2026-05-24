@@ -38,6 +38,11 @@ class Category(Base):
         server_default=text("0"),
         nullable=False,
     )
+    is_active: Mapped[bool] = mapped_column(
+        default=True,
+        server_default=text("true"),
+        nullable=False,
+    )
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         server_default=func.now(),
