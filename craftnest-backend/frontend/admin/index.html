@@ -522,7 +522,7 @@
 
     <!-- Script Block -->
     <script>
-        const API_BASE_URL = 'https://localhost:8443';
+        const API_BASE_URL = window.location.origin;
 
         // Check Session Authentication
         async function verifyAuth() {

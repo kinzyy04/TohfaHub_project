@@ -46,7 +46,7 @@ async def lifespan(app: FastAPI):
                 result = await session.execute(text("SELECT current_user;"))
                 current_user = result.scalar()
                 
-                if current_user and ("postgres" in current_user.lower() or "superuser" in current_user.lower()):
+                if not settings.BYPASS_SUPERUSER_CHECK and current_user and ("postgres" in current_user.lower() or "superuser" in current_user.lower()):
                     logger.critical(
                         "Security risk: Application connected to DB as highly privileged user. Refusing to start.",
                         current_user=current_user

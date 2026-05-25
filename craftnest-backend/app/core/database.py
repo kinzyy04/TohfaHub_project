@@ -29,6 +29,11 @@ from app.core.config import settings
 import socket
 
 db_url = settings.DATABASE_URL
+if db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql+psycopg://", 1)
+elif db_url.startswith("postgresql://"):
+    db_url = db_url.replace("postgresql://", "postgresql+psycopg://", 1)
+
 if db_url.startswith("postgresql"):
     if "localhost" in db_url or "127.0.0.1" in db_url:
         try:

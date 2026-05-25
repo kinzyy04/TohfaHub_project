@@ -23,6 +23,8 @@ class Settings(BaseSettings):
         "http://localhost:5173"
     ]
     TRUSTED_PROXY: bool = False
+    BYPASS_SUPERUSER_CHECK: bool = False
+
 
 
     model_config = SettingsConfigDict(
