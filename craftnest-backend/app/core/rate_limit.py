@@ -12,8 +12,8 @@ def get_client_ip(request: Request) -> str:
             return forwarded.split(",")[0].strip()
     return request.client.host if request.client else "127.0.0.1"
 
-# Initialize Limiter with our custom proxy-aware key function, disabled in development/testing
-limiter = Limiter(key_func=get_client_ip, enabled=settings.ENVIRONMENT not in ("development", "testing"))
+# Initialize Limiter with our custom proxy-aware key function, disabled in development
+limiter = Limiter(key_func=get_client_ip, enabled=settings.ENVIRONMENT != "development")
 
 def user_or_ip_key_func(request: Request) -> str:
     """Returns a rate-limit key based on authenticated user ID, or falls back to client IP."""

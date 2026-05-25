@@ -1,0 +1,117 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.14.5, pytest-9.0.3, pluggy-1.6.0
+rootdir: C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.13.0, asyncio-1.3.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 163 items / 2 errors
+
+=================================== ERRORS ====================================
+__________________ ERROR collecting tests/test_reel_feed.py ___________________
+ImportError while importing test module 'C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\tests\test_reel_feed.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\ACER\AppData\Local\Programs\Python\Python314\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_reel_feed.py:6: in <module>
+    from app.core.database import async_session
+E   ImportError: cannot import name 'async_session' from 'app.core.database' (C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\app\core\database.py)
+______________ ERROR collecting tests/test_reel_interactions.py _______________
+ImportError while importing test module 'C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\tests\test_reel_interactions.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\ACER\AppData\Local\Programs\Python\Python314\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_reel_interactions.py:6: in <module>
+    from app.core.database import async_session
+E   ImportError: cannot import name 'async_session' from 'app.core.database' (C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\app\core\database.py)
+============================== warnings summary ===============================
+app\core\database.py:22
+  C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\app\core\database.py:22: DeprecationWarning: 'asyncio.WindowsSelectorEventLoopPolicy' is deprecated and slated for removal in Python 3.16
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+app\core\database.py:22
+  C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\app\core\database.py:22: DeprecationWarning: 'asyncio.set_event_loop_policy' is deprecated and slated for removal in Python 3.16
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+app\main.py:6
+  C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\app\main.py:6: DeprecationWarning: 'asyncio.WindowsSelectorEventLoopPolicy' is deprecated and slated for removal in Python 3.16
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+app\main.py:6
+  C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\app\main.py:6: DeprecationWarning: 'asyncio.set_event_loop_policy' is deprecated and slated for removal in Python 3.16
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+.venv\Lib\site-packages\slowapi\extension.py:717: 43 warnings
+  C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\.venv\Lib\site-packages\slowapi\extension.py:717: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    if asyncio.iscoroutinefunction(func):
+
+app\schemas\profile.py:5
+  C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\app\schemas\profile.py:5: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class BuyerProfileResponse(BaseModel):
+
+app\schemas\profile.py:21
+  C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\app\schemas\profile.py:21: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class SellerProfileResponse(BaseModel):
+
+app\schemas\product.py:22
+  C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\app\schemas\product.py:22: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class ProductRead(BaseModel):
+
+app\schemas\browse.py:4
+  C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\app\schemas\browse.py:4: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class CategoryBrowseResponse(BaseModel):
+
+app\schemas\browse.py:15
+  C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\app\schemas\browse.py:15: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class ProductBrowseResponse(BaseModel):
+
+app\schemas\reel.py:5
+  C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\app\schemas\reel.py:5: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class ReelRead(BaseModel):
+
+app\schemas\reel.py:22
+  C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\app\schemas\reel.py:22: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class ProductSummary(BaseModel):
+
+app\schemas\reel.py:32
+  C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\app\schemas\reel.py:32: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class SellerSummary(BaseModel):
+
+app\schemas\reel.py:39
+  C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\app\schemas\reel.py:39: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class ReelFeedItem(BaseModel):
+
+app\schemas\reel.py:64
+  C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\app\schemas\reel.py:64: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class ReelCommentRead(BaseModel):
+
+app\schemas\order.py:14
+  C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\app\schemas\order.py:14: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class OrderItemRead(BaseModel):
+
+app\schemas\order.py:27
+  C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\app\schemas\order.py:27: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class OrderRead(BaseModel):
+
+app\schemas\review.py:11
+  C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\app\schemas\review.py:11: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class ReviewRead(BaseModel):
+
+tests\conftest.py:14
+  C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\tests\conftest.py:14: DeprecationWarning: 'asyncio.WindowsSelectorEventLoopPolicy' is deprecated and slated for removal in Python 3.16
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+tests\conftest.py:14
+  C:\Users\ACER\OneDrive\Desktop\antigravity_workspace\TohfaHub_project-2\craftnest-backend\tests\conftest.py:14: DeprecationWarning: 'asyncio.set_event_loop_policy' is deprecated and slated for removal in Python 3.16
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+ERROR tests/test_reel_feed.py
+ERROR tests/test_reel_interactions.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!
+======================= 62 warnings, 2 errors in 0.90s ========================

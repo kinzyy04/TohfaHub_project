@@ -1,386 +1,899 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en"><head>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Flora &amp; Craft - Reels Discovery</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&amp;family=Quicksand:wght@500;700&amp;family=Lora:ital,wght@0,400..700;1,400..700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
     <link href="/frontend/styles.css" rel="stylesheet">
     
-    
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Flora &amp; Craft - Reels Discovery</title>
-<!-- Material Symbols -->
-
-<!-- Google Fonts -->
-
-
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
         theme: {
           extend: {
             "colors": {
-                    "error": "#ba1a1a",
-                    "primary-container": "#8fa382",
-                    "inverse-surface": "#343029",
-                    "secondary-fixed-dim": "#cac6bd",
-                    "inverse-primary": "#b8cdaa",
-                    "on-surface": "#2D2420",
-                    "on-tertiary-fixed-variant": "#593d5d",
-                    "on-secondary-fixed-variant": "#484740",
-                    "on-tertiary": "#ffffff",
-                    "primary": "#B8456A",
-                    "surface-tint": "#516447",
-                    "tertiary-fixed": "#fcd6ff",
-                    "tertiary-container": "#b492b7",
-                    "on-primary-fixed-variant": "#3a4c31",
-                    "on-tertiary-container": "#452b4a",
-                    "inverse-on-surface": "#f8efe5",
-                    "on-secondary": "#ffffff",
-                    "surface-variant": "#eae1d7",
-                    "tertiary": "#C9974A",
-                    "surface-container-lowest": "#ffffff",
-                    "surface-container-low": "#fbf2e8",
-                    "on-error": "#ffffff",
-                    "on-surface-variant": "#444840",
-                    "outline": "#74786f",
-                    "tertiary-fixed-dim": "#dfbbe2",
-                    "on-error-container": "#93000a",
-                    "secondary-container": "#e6e2d8",
-                    "secondary-fixed": "#e6e2d8",
-                    "primary-fixed-dim": "#b8cdaa",
-                    "secondary": "#7A8C6E",
-                    "on-secondary-fixed": "#1c1c16",
-                    "background": "#FAF7F2",
-                    "surface-dim": "#e1d9cf",
-                    "primary-fixed": "#d4e9c4",
-                    "outline-variant": "#c4c8bd",
-                    "on-primary": "#ffffff",
-                    "surface-container-high": "#f0e7dd",
-                    "surface-bright": "#fff8f3",
-                    "on-primary-fixed": "#101f09",
-                    "on-background": "#2D2420",
-                    "on-secondary-container": "#66645d",
-                    "surface-container": "#f6ece3",
-                    "on-primary-container": "#283920",
-                    "surface": "#FAF7F2",
-                    "surface-container-highest": "#eae1d7",
-                    "error-container": "#ffdad6",
-                    "on-tertiary-fixed": "#2a122f"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "margin-desktop": "64px",
-                    "unit": "8px",
-                    "margin-mobile": "20px",
-                    "container-max": "1280px",
-                    "gutter": "24px"
+              "primary": "#7b5455",
+              "primary-container": "#d4a5a5",
+              "secondary": "#635f40",
+              "secondary-container": "#e8e0ba",
+              "tertiary": "#71585b",
+              "tertiary-container": "#c7a9ac",
+              "background": "#fefccf",
+              "surface": "#fefccf",
+              "surface-dim": "#dedcb1",
+              "surface-bright": "#fefccf",
+              "on-primary": "#ffffff",
+              "on-secondary": "#ffffff",
+              "on-surface": "#1d1d03",
+              "on-background": "#1d1d03",
+              "outline": "#827473",
+              "outline-variant": "#d4c2c2",
+              "error": "#ba1a1a"
             },
             "fontFamily": {
-                    "headline-lg-mobile": ["Fraunces"],
-                    "body-lg": ["Lora"],
-                    "body-sm": ["Lora"],
-                    "headline-lg": ["Fraunces"],
-                    "title-md": ["Lora"],
-                    "label-caps": ["Lora"],
-                    "display-lg": ["Fraunces"]
-            },
-            "fontSize": {
-                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "500"}],
-                    "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
-                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
-                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "500"}],
-                    "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
-                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}],
-                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "500"}]
+              "headline": ["Bricolage Grotesque", "serif"],
+              "body": ["Quicksand", "sans-serif"]
             }
-          },
-        },
+          }
+        }
       }
     </script>
-<style>
+    <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-        .video-overlay-gradient {
-            background: linear-gradient(to top, rgba(31, 27, 21, 0.8) 0%, rgba(31, 27, 21, 0) 30%, rgba(31, 27, 21, 0) 70%, rgba(31, 27, 21, 0.4) 100%);
+        /* Hide scrollbars */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
         }
-        .botanical-watermark {
-            mask-image: radial-gradient(circle, black, transparent 80%);
-            opacity: 0.1;
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .reel-gradient-overlay {
+            background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.6) 100%);
+        }
+        .noise-overlay {
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDiey5EfOVVQaRftMr0e2azWlHHFXakft2YfZ4kqtkTJn3vX2PqvkKi_kMXeZ906Y4cw8uaTzMBaAkazU8QxmVDyeHSbHZXf6I7YVYlcONPo7DgAzHjnjMPs6lm9fOIMiPHXDkDBn91H9b_K47_Dq320mHFbXaeU2Ird-5JZJKVhz57dHkuyNmrk2lOBornuRul-0VK7dm-wd8XaGnWrfD9Ypp8aimas5ANUNAcfrtRrMSv0UlqTY-qlw5N3OOk12YI7glw-cGeXk8);
+            opacity: 0.03;
             pointer-events: none;
         }
-    </style>
-
-    
-
-
-    <style>
-        :root {
-            --color-cream: #FAF7F2;
-            --color-ink: #2D2420;
-            --color-rose: #B8456A;
-            --color-gold: #C9974A;
-            --color-sage: #7A8C6E;
+        /* Custom Bottom Sheet Transition classes */
+        .translate-y-full {
+            transform: translateY(100%);
         }
-        body {
-            font-family: 'Lora', Georgia, serif;
-            background-color: var(--color-cream);
-            color: var(--color-ink);
-        }
-        h1, h2, h3, h4, h5, h6, .font-headline {
-            font-family: 'Fraunces', 'Times New Roman', serif;
+        .translate-y-0 {
+            transform: translateY(0);
         }
     </style>
-
 </head>
-<body class="bg-background text-on-surface font-body-lg overflow-hidden h-screen flex flex-col">
-    <!-- TopNavBar -->
-    <header class="bg-background/80 backdrop-blur-md sticky top-0 z-50 transition-all duration-300 ease-in-out border-b border-outline-variant/10">
-        <nav class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-20">
+<body class="bg-black text-white font-body overflow-hidden h-screen flex flex-col relative select-none">
+
+    <!-- TopNavBar (Overlaid) -->
+    <header class="absolute top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out bg-gradient-to-b from-black/80 via-black/30 to-transparent pointer-events-none">
+        <nav class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-20 pointer-events-auto">
             <div class="flex items-center gap-unit cursor-pointer" onclick="window.location.href='home.html'">
-                <span class="material-symbols-outlined text-primary text-3xl">filter_vintage</span>
-                <h1 class="font-headline-lg text-headline-lg text-primary select-none">Flora &amp; Craft</h1>
+                <span class="material-symbols-outlined text-primary-container text-3xl">filter_vintage</span>
+                <h1 class="font-headline text-2xl text-white select-none ml-2">Flora &amp; Craft</h1>
             </div>
             
             <!-- Center Navigation Links -->
-            <div class="flex items-center gap-8">
-    <a class="text-secondary hover:text-primary transition-colors font-body-lg text-body-lg" href="shop.html">Shop</a>
-    <a class="text-secondary hover:text-primary transition-colors font-body-lg text-body-lg" href="about.html">About</a>
-    <a class="text-secondary hover:text-primary transition-colors font-body-lg text-body-lg" href="contact.html">Contact</a>
-    <a class="text-secondary hover:text-primary transition-colors font-body-lg text-body-lg" href="home.html">Home</a>
-    <a class="text-secondary hover:text-primary transition-colors font-body-lg text-body-lg" href="category.html">Category</a>
-    <a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-lg text-body-lg" href="reels.html">Reels</a>
-    <a class="text-secondary hover:text-primary transition-colors font-body-lg text-body-lg" href="profile.html">Profile</a>
-</div>
+            <div class="hidden md:flex items-center gap-8">
+                <a class="text-white/80 hover:text-white transition-colors font-semibold" href="shop.html">Shop</a>
+                <a class="text-white/80 hover:text-white transition-colors font-semibold" href="about.html">About</a>
+                <a class="text-white/80 hover:text-white transition-colors font-semibold" href="contact.html">Contact</a>
+                <a class="text-white/80 hover:text-white transition-colors font-semibold" href="home.html">Home</a>
+                <a class="text-white/80 hover:text-white transition-colors font-semibold" href="category.html">Category</a>
+                <a class="text-primary-container font-bold border-b-2 border-primary-container pb-1" href="reels.html">Reels</a>
+                <a class="text-white/80 hover:text-white transition-colors font-semibold" href="profile.html">Profile</a>
+            </div>
 
             <!-- Right Action Icons / Auth State -->
             <div class="flex items-center gap-6">
                 <!-- Search Icon with input -->
                 <div class="relative hidden sm:flex items-center">
-                    <input type="text" id="global-search-input" placeholder="Search products..." class="bg-surface-container-low border border-outline-variant/30 rounded-full px-4 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-primary w-48 transition-all"/>
-                    <button onclick="triggerSearch()" class="absolute right-2 text-secondary hover:text-primary flex items-center">
+                    <input type="text" id="global-search-input" placeholder="Search products..." class="bg-white/10 border border-white/20 rounded-full px-4 py-1 text-sm text-white focus:outline-none focus:ring-1 focus:ring-primary-container w-48 transition-all placeholder-white/50"/>
+                    <button onclick="triggerSearch()" class="absolute right-2 text-white/70 hover:text-white flex items-center">
                         <span class="material-symbols-outlined text-[20px]">search</span>
                     </button>
                 </div>
                 
-                <button onclick="window.location.href='wishlist.html'" class="text-secondary hover:text-primary transition-colors flex items-center relative">
-    <span class="material-symbols-outlined">favorite</span>
-    <span id="wishlist-count-badge" class="hidden absolute -top-1.5 -right-1.5 bg-error text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
-</button>
-<button onclick="window.location.href='cart.html'" class="text-secondary hover:text-primary transition-colors flex items-center ml-2">
-    <span class="material-symbols-outlined">shopping_bag</span>
-</button>
-<div id="auth-buttons" class="flex items-center gap-2"></div>
+                <button onclick="window.location.href='wishlist.html'" class="text-white/80 hover:text-white transition-colors flex items-center relative">
                     <span class="material-symbols-outlined">favorite</span>
                     <span id="wishlist-count-badge" class="hidden absolute -top-1.5 -right-1.5 bg-error text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
                 </button>
-                
+                <button onclick="window.location.href='cart.html'" class="text-white/80 hover:text-white transition-colors flex items-center">
+                    <span class="material-symbols-outlined">shopping_bag</span>
+                </button>
                 <div id="auth-buttons" class="flex items-center gap-2"></div>
                 
-                <button class="md:hidden text-secondary" id="mobile-menu-btn">
+                <button class="md:hidden text-white/80" id="mobile-menu-btn">
                     <span class="material-symbols-outlined">menu</span>
                 </button>
             </div>
         </nav>
     </header>
-<!-- Main Reels Content Canvas -->
-<main class="relative flex-1 w-full bg-inverse-surface overflow-hidden">
-<!-- Background Video Placeholder -->
-<div class="absolute inset-0 z-0">
-<img alt="Crafting video" class="w-full h-full object-cover" data-alt="A highly detailed cinematic shot of artisan hands meticulously crocheting a small, vibrant yellow and black bumblebee. The setting is a sun-drenched, rustic workshop with soft morning light streaming through a window, highlighting the fine textures of the wool. The background is a soft-focus blur of botanical sketches and spools of natural thread, creating a warm, artisanal atmosphere. The overall mood is peaceful and focuses on the high-end craft process." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcZS_YsG76n0DdA2V4RJ5bhdkaivWJ4nCbWSqLhe5PhnguddomNJZUkZt33uy4dkeahrMK9blYX2BfflEn23ZE5jD6enFK7gwLldlwKnr80z1v-kUxx10OwsQrTP0hEDtxLPiqGf37gRE2r7z_1nHgaOveuP9llIxyIWu4yKgnEA0K3d3mX7JttNy6HlRfeyZXt73inBJ7d3tJ_3Lyf821dv4M-_PGpIU4lKFnxlI5nC65IUfs8CpmYKtYQFTymKDhIys16MaGl3I"/>
-<div class="absolute inset-0 video-overlay-gradient"></div>
-</div>
-<!-- Butterfly & Botanical Decorative Flourishes -->
-<div class="absolute top-10 right-10 z-10 opacity-20 pointer-events-none">
-<span class="material-symbols-outlined text-[120px] text-primary-fixed">flutter_dash</span>
-</div>
-<!-- Reel Content Overlay -->
-<div class="absolute inset-0 z-20 flex flex-col justify-end px-margin-mobile pb-[100px] md:px-margin-desktop md:pb-24">
-<!-- Side Interaction Menu -->
-<div class="absolute right-6 bottom-40 flex flex-col items-center gap-6 z-30">
-<div class="flex flex-col items-center gap-1 group cursor-pointer">
-<div class="w-12 h-12 rounded-full bg-surface-container-low/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-primary/40 transition-all">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
-</div>
-<span class="text-white text-xs font-label-caps">2.4k</span>
-</div>
-<div class="flex flex-col items-center gap-1 group cursor-pointer">
-<div class="w-12 h-12 rounded-full bg-surface-container-low/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-primary/40 transition-all">
-<span class="material-symbols-outlined">chat_bubble</span>
-</div>
-<span class="text-white text-xs font-label-caps">128</span>
-</div>
-<div class="flex flex-col items-center gap-1 group cursor-pointer">
-<div class="w-12 h-12 rounded-full bg-surface-container-low/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-primary/40 transition-all">
-<span class="material-symbols-outlined">share</span>
-</div>
-<span class="text-white text-xs font-label-caps">Share</span>
-</div>
-<div class="flex flex-col items-center gap-1 group cursor-pointer">
-<div class="w-12 h-12 rounded-full bg-surface-container-low/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-primary/40 transition-all">
-<span class="material-symbols-outlined">bookmark</span>
-</div>
-</div>
-</div>
-<!-- Header Text for Reel -->
-<div class="mb-6 max-w-lg">
-<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-white drop-shadow-md">
-                    Making tiny bees for tiny people 🐝... more
-                </h1>
-</div>
-<!-- Product Detail Box (Floating Card) -->
-<div class="bg-surface-container-low/95 dark:bg-inverse-surface backdrop-blur-md p-4 rounded-xl border border-outline-variant/20 shadow-[0_4px_16px_rgba(74,69,62,0.12)] max-w-sm flex items-center gap-4 group hover:bg-surface-bright transition-colors cursor-pointer">
-<div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-<img alt="Handmade Crochet Bee" class="w-full h-full object-cover" data-alt="A macro studio photograph of a finished handmade crochet bee resting on a light wooden surface. The bee features a soft, textured body with bright yellow and deep black stripes, tiny white wings, and a cute embroidered face. The lighting is soft and directional, casting a gentle shadow. The background is a creamy, warm tone that matches the artisan design system's aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgiId_AmMNrnNwewYD-d8RKvIr3O3hnoZDdgkDggXBa-I27ljtyqgqAJPbez8ACbZ1zgI6sYwiLc2H8ywSXycjrhCtbw7L26hW62STKHDS7U5m05koyM9lkBVLiQdCrmoQ1SdVI3MLRu9_fPuUI4ycKKA1tVMlHcTsxB2TTHVrOPMGZPpAK58YAQGOnYedGhDFzWpPG4ku4gGHdOF2MVlUzW0YvPBkCPiSnSCF8k6axROdMsnCyI3iV_FA_8DUhevEW-hZiNr1TjI"/>
-</div>
-<div class="flex-1">
-<div class="flex justify-between items-start">
-<h3 class="font-title-md text-title-md text-on-surface leading-tight">Handmade Crochet Bee</h3>
-<span class="material-symbols-outlined text-primary">add_shopping_cart</span>
-</div>
-<div class="flex items-baseline gap-2 mt-1">
-<span class="font-bold text-primary">₹379</span>
-<span class="text-sm text-secondary line-through opacity-60">₹417</span>
-</div>
-<div class="flex items-center gap-3 mt-2">
-<div class="flex items-center gap-1 bg-primary-container/20 px-2 py-0.5 rounded-full">
-<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="font-label-caps text-label-caps text-primary">4.1</span>
-</div>
-<span class="font-label-caps text-label-caps text-secondary">47 bought this</span>
-</div>
-</div>
-</div>
-</div>
-</main>
-<!-- Bottom Navigation Bar (Mobile Only as per protocol) -->
-<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface-container-low/95 backdrop-blur-md border-t border-outline-variant/10 shadow-[0_-4px_16px_rgba(74,69,62,0.08)]">
-    <div onclick="window.location.href='home.html'" class="flex flex-col items-center justify-center text-secondary px-4 py-1.5 hover:bg-secondary-container/30 transition-colors cursor-pointer">
-        <span class="material-symbols-outlined">home</span>
-        <span class="font-label-caps text-label-caps text-[10px] mt-0.5">Home</span>
-    </div>
-    <div onclick="window.location.href='category.html'" class="flex flex-col items-center justify-center text-secondary px-4 py-1.5 hover:bg-secondary-container/30 transition-colors cursor-pointer">
-        <span class="material-symbols-outlined">category</span>
-        <span class="font-label-caps text-label-caps text-[10px] mt-0.5">Category</span>
-    </div>
-    <div onclick="window.location.href='reels.html'" class="flex flex-col items-center justify-center bg-primary-container/20 text-primary rounded-xl px-4 py-1.5 transition-transform duration-200 active:scale-95 cursor-pointer">
-        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_circle</span>
-        <span class="font-label-caps text-label-caps text-[10px] mt-0.5">Reels</span>
-    </div>
-    <div onclick="window.location.href='profile.html'" class="flex flex-col items-center justify-center text-secondary px-4 py-1.5 hover:bg-secondary-container/30 transition-colors cursor-pointer">
-        <span class="material-symbols-outlined">person</span>
-        <span class="font-label-caps text-label-caps text-[10px] mt-0.5">Profile</span>
-    </div>
-</nav>
 
-<script>
-    const API_BASE_URL = window.location.origin;
-    let isLoggedIn = false;
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-40 bg-black/95 flex flex-col justify-center items-center gap-6 text-xl">
+        <button id="close-mobile-menu-btn" class="absolute top-6 right-6 text-white">
+            <span class="material-symbols-outlined text-3xl">close</span>
+        </button>
+        <a class="text-white/85 hover:text-white" href="shop.html">Shop</a>
+        <a class="text-white/85 hover:text-white" href="about.html">About</a>
+        <a class="text-white/85 hover:text-white" href="contact.html">Contact</a>
+        <a class="text-white/85 hover:text-white" href="home.html">Home</a>
+        <a class="text-white/85 hover:text-white" href="category.html">Category</a>
+        <a class="text-primary-container font-bold" href="reels.html">Reels</a>
+        <a class="text-white/85 hover:text-white" href="profile.html">Profile</a>
+    </div>
 
-    function checkAuthState() {
-        const token = sessionStorage.getItem('access_token');
-        const authContainer = document.getElementById('auth-buttons');
-        const dashboardLink = document.getElementById('navbar-dashboard-link');
+    <!-- Main Reels Scroll Snap Container -->
+    <div id="reels-container" class="w-full h-screen overflow-y-scroll snap-y snap-mandatory no-scrollbar bg-black scroll-smooth">
+        <!-- Loader / Initial message -->
+        <div id="feed-loader" class="w-full h-full flex flex-col items-center justify-center text-white/70 gap-3">
+            <span class="material-symbols-outlined text-4xl animate-spin">progress_activity</span>
+            <p class="font-semibold">Curating the finest crafts for you...</p>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation Bar (Overlay) -->
+    <nav class="md:hidden fixed bottom-0 left-0 w-full z-45 flex justify-around items-center px-4 py-3 pb-safe bg-gradient-to-t from-black/90 to-transparent pointer-events-auto">
+        <div onclick="window.location.href='home.html'" class="flex flex-col items-center justify-center text-white/70 hover:text-white cursor-pointer px-4 py-1">
+            <span class="material-symbols-outlined">home</span>
+            <span class="text-[10px] font-semibold mt-0.5">Home</span>
+        </div>
+        <div onclick="window.location.href='category.html'" class="flex flex-col items-center justify-center text-white/70 hover:text-white cursor-pointer px-4 py-1">
+            <span class="material-symbols-outlined">category</span>
+            <span class="text-[10px] font-semibold mt-0.5">Category</span>
+        </div>
+        <div onclick="window.location.href='reels.html'" class="flex flex-col items-center justify-center bg-white/10 text-primary-container rounded-xl px-4 py-1 border border-white/10 cursor-pointer">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+            <span class="text-[10px] font-semibold mt-0.5">Reels</span>
+        </div>
+        <div onclick="window.location.href='profile.html'" class="flex flex-col items-center justify-center text-white/70 hover:text-white cursor-pointer px-4 py-1">
+            <span class="material-symbols-outlined">person</span>
+            <span class="text-[10px] font-semibold mt-0.5">Profile</span>
+        </div>
+    </nav>
+
+    <!-- Comments Bottom Sheet Modal -->
+    <div id="comments-sheet" class="fixed inset-x-0 bottom-0 z-50 transform translate-y-full transition-transform duration-300 ease-out bg-[#FAF7F2] rounded-t-3xl shadow-[0_-8px_32px_rgba(0,0,0,0.3)] flex flex-col h-[65vh] max-w-lg mx-auto text-[#2D2420]">
+        <!-- Sheet Handle / Header -->
+        <div class="flex items-center justify-between px-6 py-4 border-b border-outline-variant/30 flex-shrink-0 bg-white rounded-t-3xl">
+            <h2 class="font-headline text-lg font-bold flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">chat_bubble</span>
+                Comments (<span id="sheet-comment-count">0</span>)
+            </h2>
+            <button id="close-comments-btn" class="w-8 h-8 rounded-full flex items-center justify-center bg-[#f2f0c4]/40 hover:bg-[#e8e0ba]/60 transition-colors">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+        </div>
         
-        if (token) {
-            isLoggedIn = true;
-            try {
-                const base64Url = token.split('.')[1];
-                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-                const payload = JSON.parse(window.atob(base64));
-                
-                if (payload.role === 'seller') {
-                    if (dashboardLink) {
-                        dashboardLink.innerText = 'Seller Dashboard';
-                        dashboardLink.href = 'seller-dashboard.html';
+        <!-- Comments List -->
+        <div id="comments-list" class="flex-1 overflow-y-auto px-6 py-4 space-y-4 no-scrollbar">
+            <!-- Loading indicator/comments loaded dynamically -->
+        </div>
+        
+        <!-- Comments Input -->
+        <form id="comment-form" class="p-4 border-t border-outline-variant/30 bg-[#fefccf] flex gap-3 items-center flex-shrink-0">
+            <input type="text" id="comment-input" placeholder="Share your appreciation..." class="flex-1 bg-white border border-[#827473]/30 rounded-full px-4 py-2 text-sm text-[#2D2420] focus:outline-none focus:ring-2 focus:ring-[#7b5455]" required />
+            <button type="submit" class="w-10 h-10 rounded-full bg-[#7b5455] text-white flex items-center justify-center hover:bg-[#603d3e] transition-colors active:scale-95">
+                <span class="material-symbols-outlined">send</span>
+            </button>
+        </form>
+    </div>
+    
+    <!-- Bottom Sheet Backdrop -->
+    <div id="sheet-backdrop" class="fixed inset-0 z-40 bg-black/60 hidden opacity-0 transition-opacity duration-300"></div>
+
+    <!-- Main Logic Script -->
+    <script>
+        const API_BASE_URL = window.location.origin;
+        let isLoggedIn = false;
+        let reelsData = [];
+        let activeReelIndex = -1;
+        let nextCursor = null;
+        let isLoadingMore = false;
+        let globalMuted = true;
+        
+        let currentUserId = null;
+        let currentUserRole = null;
+        
+        let viewedReels = new Set();
+        let viewTimer = null;
+        let activeCommentsReelId = null;
+
+        // Parse token and check auth
+        function checkAuthState() {
+            const token = sessionStorage.getItem('access_token');
+            const authContainer = document.getElementById('auth-buttons');
+            
+            if (token) {
+                isLoggedIn = true;
+                try {
+                    const base64Url = token.split('.')[1];
+                    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                    const payload = JSON.parse(window.atob(base64));
+                    currentUserId = payload.sub;
+                    currentUserRole = payload.role;
+                    
+                    if (payload.role === 'seller') {
+                        if (authContainer) {
+                            authContainer.innerHTML = `
+                                <button onclick="window.location.href='seller-dashboard.html'" class="bg-primary-container/20 text-white border border-primary-container/40 px-4 py-1.5 text-xs font-semibold rounded-full hover:bg-primary-container/40 transition-all uppercase">Dashboard</button>
+                                <button onclick="logout()" class="text-white/80 hover:text-white text-xs font-semibold uppercase pointer-events-auto">Logout</button>
+                            `;
+                        }
+                    } else {
+                        if (authContainer) {
+                            authContainer.innerHTML = `
+                                <button onclick="window.location.href='profile.html'" class="bg-primary-container/20 text-white border border-primary-container/40 px-4 py-1.5 text-xs font-semibold rounded-full hover:bg-primary-container/40 transition-all uppercase">Profile</button>
+                                <button onclick="logout()" class="text-white/80 hover:text-white text-xs font-semibold uppercase pointer-events-auto">Logout</button>
+                            `;
+                        }
                     }
-                    if (authContainer) {
-                        authContainer.innerHTML = `
-                            <button onclick="window.location.href='seller-dashboard.html'" class="bg-primary/10 text-primary border border-primary/20 px-4 py-1.5 text-xs font-semibold rounded-full hover:bg-primary/20 transition-all uppercase">Dashboard</button>
-                            <button onclick="logout()" class="text-secondary hover:text-primary text-xs font-semibold uppercase">Logout</button>
+                    fetchWishlistCount();
+                } catch(e) {
+                    logout();
+                }
+            } else {
+                isLoggedIn = false;
+                if (authContainer) {
+                    authContainer.innerHTML = `
+                        <a href="login.html" class="text-white/80 hover:text-white text-xs font-semibold uppercase mr-2 pointer-events-auto">Login</a>
+                        <a href="signup-buyer.html" class="bg-primary-container text-white px-4 py-1.5 text-xs font-semibold rounded-full hover:bg-primary transition-all uppercase pointer-events-auto">Register</a>
+                    `;
+                }
+            }
+        }
+
+        async function fetchWishlistCount() {
+            const token = sessionStorage.getItem('access_token');
+            if (!token) return;
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/v1/wishlist`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    const badge = document.getElementById('wishlist-count-badge');
+                    if (badge) {
+                        if (data.length > 0) {
+                            badge.innerText = data.length;
+                            badge.classList.remove('hidden');
+                        } else {
+                            badge.classList.add('hidden');
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        function logout() {
+            sessionStorage.clear();
+            window.location.reload();
+        }
+
+        function triggerSearch() {
+            const input = document.getElementById('global-search-input');
+            const query = input.value.trim();
+            if (query.length >= 2) {
+                window.location.href = `category.html?search=${encodeURIComponent(query)}`;
+            }
+        }
+
+        document.getElementById('global-search-input')?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                triggerSearch();
+            }
+        });
+
+        // Mobile Menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenuBtn = document.getElementById('close-mobile-menu-btn');
+        mobileMenuBtn?.addEventListener('click', () => mobileMenu.classList.remove('hidden'));
+        closeMobileMenuBtn?.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+
+        // Load feed
+        async function fetchFeed(cursor = null) {
+            if (cursor) {
+                isLoadingMore = true;
+            }
+            const token = sessionStorage.getItem('access_token');
+            const headers = {};
+            if (token) {
+                headers['Authorization'] = `Bearer ${token}`;
+            }
+
+            let url = `/api/v1/reels/feed?limit=10`;
+            if (cursor) {
+                url += `&cursor=${encodeURIComponent(cursor)}`;
+            }
+
+            try {
+                const res = await fetch(url, { headers });
+                if (!res.ok) throw new Error("Failed to fetch feed");
+                const data = await res.json();
+                nextCursor = data.next_cursor;
+                
+                if (cursor) {
+                    const oldLen = reelsData.length;
+                    reelsData = reelsData.concat(data.items);
+                    renderReels(data.items, true, oldLen);
+                    isLoadingMore = false;
+                } else {
+                    reelsData = data.items;
+                    document.getElementById('reels-container').innerHTML = '';
+                    if (reelsData.length === 0) {
+                        document.getElementById('reels-container').innerHTML = `
+                            <div class="w-full h-full flex flex-col items-center justify-center text-white/60 gap-3">
+                                <span class="material-symbols-outlined text-4xl">movie_filter</span>
+                                <p class="font-semibold">No reels available right now.</p>
+                            </div>
                         `;
+                    } else {
+                        renderReels(reelsData, false, 0);
+                        // Trigger active status for first reel
+                        setTimeout(() => onReelActive(0), 100);
+                    }
+                }
+            } catch (e) {
+                console.error("Error loading reels feed:", e);
+                if (!cursor) {
+                    document.getElementById('reels-container').innerHTML = `
+                        <div class="w-full h-full flex flex-col items-center justify-center text-[#ba1a1a] gap-3">
+                            <span class="material-symbols-outlined text-4xl">error</span>
+                            <p class="font-semibold">Failed to load feed. Please refresh the page.</p>
+                        </div>
+                    `;
+                }
+                isLoadingMore = false;
+            }
+        }
+
+        // Render reels elements
+        function renderReels(items, append = false, startIndex = 0) {
+            const container = document.getElementById('reels-container');
+            
+            items.forEach((reel, i) => {
+                const index = startIndex + i;
+                const shouldPreload = index <= 5;
+                
+                const section = document.createElement('section');
+                section.className = 'reel-section relative w-full h-screen snap-start snap-always overflow-hidden flex flex-col justify-end';
+                section.dataset.id = reel.id;
+                section.dataset.index = index;
+                
+                // Set inner HTML template
+                section.innerHTML = `
+                    <!-- Video tag -->
+                    <div class="absolute inset-0 z-0 bg-black flex items-center justify-center video-wrapper cursor-pointer">
+                        <video class="w-full h-full object-cover" loop muted playsinline 
+                            ${shouldPreload ? `src="${reel.video_url}"` : ''} 
+                            ${shouldPreload ? 'preload="auto"' : 'preload="none"'}>
+                        </video>
+                        <div class="absolute inset-0 noise-overlay"></div>
+                        <div class="absolute inset-0 reel-gradient-overlay pointer-events-none"></div>
+                    </div>
+                    
+                    <!-- Side Action Buttons -->
+                    <div class="absolute right-4 bottom-24 md:bottom-28 flex flex-col items-center gap-6 z-30 pointer-events-auto">
+                        <!-- Like -->
+                        <div class="flex flex-col items-center gap-1 group">
+                            <button class="like-btn w-12 h-12 rounded-full flex items-center justify-center bg-white/20 backdrop-blur-lg border border-white/10 text-white transition-all duration-300 hover:scale-110 active:scale-90 ${reel.has_liked ? 'text-[#B8456A]' : ''}">
+                                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' ${reel.has_liked ? 1 : 0}, 'wght' 400;">favorite</span>
+                            </button>
+                            <span class="like-count font-label-md text-sm text-white font-bold drop-shadow-md">${formatCount(reel.like_count)}</span>
+                        </div>
+                        
+                        <!-- Comment -->
+                        <div class="flex flex-col items-center gap-1 group">
+                            <button class="comment-btn w-12 h-12 rounded-full flex items-center justify-center bg-white/20 backdrop-blur-lg border border-white/10 text-white transition-all duration-300 hover:scale-110 active:scale-90">
+                                <span class="material-symbols-outlined" style="font-variation-settings: 'wght' 400;">chat_bubble</span>
+                            </button>
+                            <span class="comment-count font-label-md text-sm text-white font-bold drop-shadow-md">${formatCount(reel.comment_count)}</span>
+                        </div>
+                        
+                        <!-- Save -->
+                        <div class="flex flex-col items-center gap-1">
+                            <button class="save-btn w-12 h-12 rounded-full flex items-center justify-center bg-white/20 backdrop-blur-lg border border-white/10 text-white transition-all duration-300 hover:scale-110 active:scale-90 ${reel.has_saved ? 'text-[#C9974A]' : ''}">
+                                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' ${reel.has_saved ? 1 : 0}, 'wght' 400;">bookmark</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Bottom Left Details -->
+                    <div class="absolute bottom-6 md:bottom-10 left-0 w-[calc(100%-80px)] px-6 z-30 space-y-4 pointer-events-auto">
+                        <!-- Creator Shop info -->
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-3">
+                                <span class="font-bold text-white drop-shadow-md font-headline text-lg">${reel.seller.shop_name || 'Artisan Crafter'}</span>
+                                <button class="follow-btn px-3 py-1 bg-[#7b5455] text-white text-[12px] font-bold rounded-full transition-all hover:bg-[#603d3e] active:scale-95" data-seller-id="${reel.seller.user_id}">Follow</button>
+                            </div>
+                            <p class="text-sm text-white/95 leading-tight drop-shadow-md max-w-md line-clamp-3">
+                                ${reel.caption || ''}
+                            </p>
+                        </div>
+                        
+                        <!-- Floating Product Card -->
+                        <div class="bg-white/95 backdrop-blur-md rounded-xl p-3 shadow-lg flex items-center gap-3 border border-white/20 max-w-[340px] cursor-pointer hover:bg-white transition-all duration-300 transform hover:-translate-y-0.5" onclick="window.location.href='product.html?id=${reel.product.id}'">
+                            <div class="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
+                                <img alt="${reel.product.title}" class="w-full h-full object-cover" src="${reel.product.image_urls[0] || ''}"/>
+                            </div>
+                            <div class="flex flex-col min-w-0 justify-center text-[#2D2420]">
+                                <h3 class="font-semibold text-sm truncate">${reel.product.title}</h3>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <span class="font-bold text-[#7b5455]">₹${(reel.product.price_paise / 100).toFixed(2)}</span>
+                                </div>
+                            </div>
+                            <button class="ml-auto w-8 h-8 rounded-full bg-[#e8e0ba] text-[#635f40] flex items-center justify-center transition-transform hover:scale-105 active:scale-95">
+                                <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(section);
+                
+                // Set up interaction listeners on the section
+                setupReelInteractions(section, reel);
+                
+                // Observe for scroll entry
+                observer.observe(section);
+            });
+        }
+
+        // Setup individual reel interactive event listeners
+        function setupReelInteractions(section, reel) {
+            const video = section.querySelector('video');
+            const likeBtn = section.querySelector('.like-btn');
+            const saveBtn = section.querySelector('.save-btn');
+            const commentBtn = section.querySelector('.comment-btn');
+            const followBtn = section.querySelector('.follow-btn');
+            const likeCount = section.querySelector('.like-count');
+            
+            // Playback controls on click/tap of the video wrapper
+            section.querySelector('.video-wrapper').addEventListener('click', () => {
+                toggleMute(video);
+            });
+            
+            // Like click
+            likeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleLike(reel.id, likeBtn, likeCount);
+            });
+            
+            // Save click
+            saveBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleSave(reel.id, saveBtn);
+            });
+            
+            // Comments list sheet trigger
+            commentBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openComments(reel.id);
+            });
+            
+            // Follow click
+            followBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleFollow(reel.seller.user_id, followBtn);
+            });
+        }
+
+        // Intersection Observer configuration
+        const observerOptions = {
+            root: document.getElementById('reels-container'),
+            threshold: 0.6
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const index = parseInt(entry.target.dataset.index);
+                    if (index !== activeReelIndex) {
+                        onReelActive(index);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Core activation logic when a reel is scrolled to
+        function onReelActive(index) {
+            activeReelIndex = index;
+            const sections = document.querySelectorAll('.reel-section');
+            
+            sections.forEach((sec, idx) => {
+                const video = sec.querySelector('video');
+                if (!video) return;
+                
+                if (idx === index) {
+                    // Try to play active video
+                    video.muted = globalMuted;
+                    video.currentTime = 0;
+                    video.play().catch(e => console.log("Auto-play blocked by browser, click to play with sound."));
+                    
+                    // Increment views count via timer
+                    if (viewTimer) clearTimeout(viewTimer);
+                    const reelId = reelsData[index].id;
+                    viewTimer = setTimeout(() => {
+                        recordView(reelId);
+                    }, 1000);
+                    
+                    // Prefetch index + 2
+                    if (index + 2 < reelsData.length) {
+                        prefetchVideo(reelsData[index + 2].video_url);
+                    }
+                    
+                    // Trigger dynamic loading of resources ahead
+                    updatePreloadStates(index);
+                    
+                    // Check if infinite scroll trigger is met
+                    if (index >= reelsData.length - 3 && nextCursor && !isLoadingMore) {
+                        fetchFeed(nextCursor);
                     }
                 } else {
-                    if (dashboardLink) {
-                        dashboardLink.innerText = 'Profile';
-                        dashboardLink.href = 'profile.html';
-                    }
-                    if (authContainer) {
-                        authContainer.innerHTML = `
-                            <button onclick="window.location.href='profile.html'" class="bg-primary/10 text-primary border border-primary/20 px-4 py-1.5 text-xs font-semibold rounded-full hover:bg-primary/20 transition-all uppercase">Profile</button>
-                            <button onclick="logout()" class="text-secondary hover:text-primary text-xs font-semibold uppercase">Logout</button>
-                        `;
-                    }
+                    video.pause();
                 }
-                fetchWishlistCount();
-            } catch(e) {
-                logout();
-            }
-        } else {
-            isLoggedIn = false;
-            if (authContainer) {
-                authContainer.innerHTML = `
-                    <a href="login.html" class="text-secondary hover:text-primary text-xs font-semibold uppercase mr-2">Login</a>
-                    <a href="signup-buyer.html" class="bg-primary text-background px-4 py-1.5 text-xs font-semibold rounded-full hover:bg-primary-fixed-dim transition-all uppercase">Register</a>
-                `;
-            }
-        }
-    }
-
-    async function fetchWishlistCount() {
-        const token = sessionStorage.getItem('access_token');
-        if (!token) return;
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/v1/wishlist`, {
-                headers: { 'Authorization': `Bearer ${token}` }
             });
-            if (response.ok) {
-                const data = await response.json();
-                const badge = document.getElementById('wishlist-count-badge');
-                if (badge) {
-                    if (data.length > 0) {
-                        badge.innerText = data.length;
-                        badge.classList.remove('hidden');
-                    } else {
-                        badge.classList.add('hidden');
+        }
+
+        // Play/mute controls indicator helper
+        function toggleMute(video) {
+            globalMuted = !globalMuted;
+            
+            // Synchronize all videos mute state
+            document.querySelectorAll('video').forEach(v => {
+                v.muted = globalMuted;
+            });
+            
+            // Show volume overlay indicator
+            const wrapper = video.closest('.video-wrapper');
+            if (wrapper) {
+                createVolumeIndicator(wrapper, globalMuted);
+            }
+        }
+
+        function createVolumeIndicator(wrapper, isMuted) {
+            const existing = wrapper.querySelector('.volume-indicator');
+            if (existing) existing.remove();
+            
+            const indicator = document.createElement('div');
+            indicator.className = 'volume-indicator absolute inset-0 m-auto w-16 h-16 rounded-full bg-black/60 flex items-center justify-center text-white pointer-events-none z-20 transition-opacity duration-300';
+            indicator.style.animation = 'ping 0.8s cubic-bezier(0, 0, 0.2, 1) infinite';
+            indicator.innerHTML = `<span class="material-symbols-outlined text-3xl">${isMuted ? 'volume_off' : 'volume_up'}</span>`;
+            wrapper.appendChild(indicator);
+            
+            setTimeout(() => {
+                indicator.style.opacity = '0';
+                setTimeout(() => indicator.remove(), 300);
+            }, 600);
+        }
+
+        // Lazy-loading upcoming videos
+        function updatePreloadStates(currentIndex) {
+            const sections = document.querySelectorAll('.reel-section');
+            for (let i = 0; i < sections.length; i++) {
+                if (i <= currentIndex + 5) {
+                    const video = sections[i].querySelector('video');
+                    if (video && !video.src) {
+                        const url = reelsData[i].video_url;
+                        video.src = url;
+                        video.preload = 'auto';
+                        video.load();
+                        console.log(`Lazy-loaded video source index: ${i}`);
                     }
                 }
             }
-        } catch (e) {
-            console.error(e);
         }
-    }
 
-    function logout() {
-        sessionStorage.clear();
-        window.location.reload();
-    }
-
-    function triggerSearch() {
-        const input = document.getElementById('global-search-input');
-        const query = input.value.trim();
-        if (query.length >= 2) {
-            window.location.href = `category.html?search=${encodeURIComponent(query)}`;
+        // Prefetch video source URL
+        function prefetchVideo(url) {
+            if (!url) return;
+            if (document.querySelector(`link[href="${url}"]`)) return;
+            
+            const link = document.createElement('link');
+            link.rel = 'prefetch';
+            link.as = 'video';
+            link.href = url;
+            document.head.appendChild(link);
+            console.log(`Prefetched video hint: ${url}`);
         }
-    }
 
-    document.getElementById('global-search-input')?.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            triggerSearch();
+        // Record views
+        async function recordView(reelId) {
+            if (viewedReels.has(reelId)) return;
+            try {
+                const res = await fetch(`/api/v1/reels/${reelId}/view`, { method: 'POST' });
+                if (res.ok) {
+                    viewedReels.add(reelId);
+                }
+            } catch (e) {
+                console.error("Failed to record view:", e);
+            }
         }
-    });
 
-    window.addEventListener('DOMContentLoaded', () => {
-        checkAuthState();
-    });
-</script>
+        // Like toggle
+        async function toggleLike(reelId, buttonEl, countEl) {
+            const token = sessionStorage.getItem('access_token');
+            if (!token) {
+                alert("Please login to interact with reels.");
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            try {
+                const res = await fetch(`/api/v1/reels/${reelId}/like`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    const icon = buttonEl.querySelector('.material-symbols-outlined');
+                    if (data.liked) {
+                        icon.style.fontVariationSettings = "'FILL' 1, 'wght' 400";
+                        buttonEl.classList.add('text-[#B8456A]');
+                    } else {
+                        icon.style.fontVariationSettings = "'FILL' 0, 'wght' 400";
+                        buttonEl.classList.remove('text-[#B8456A]');
+                    }
+                    countEl.innerText = formatCount(data.like_count);
+                }
+            } catch (e) {
+                console.error("Like error:", e);
+            }
+        }
+
+        // Save toggle
+        async function toggleSave(reelId, buttonEl) {
+            const token = sessionStorage.getItem('access_token');
+            if (!token) {
+                alert("Please login to save reels.");
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            try {
+                const res = await fetch(`/api/v1/reels/${reelId}/save`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    const icon = buttonEl.querySelector('.material-symbols-outlined');
+                    if (data.saved) {
+                        icon.style.fontVariationSettings = "'FILL' 1, 'wght' 400";
+                        buttonEl.classList.add('text-[#C9974A]');
+                    } else {
+                        icon.style.fontVariationSettings = "'FILL' 0, 'wght' 400";
+                        buttonEl.classList.remove('text-[#C9974A]');
+                    }
+                }
+            } catch (e) {
+                console.error("Save error:", e);
+            }
+        }
+
+        // Follow toggle
+        async function toggleFollow(sellerId, buttonEl) {
+            const token = sessionStorage.getItem('access_token');
+            if (!token) {
+                alert("Please login to follow creators.");
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            const isFollowing = buttonEl.dataset.following === 'true';
+            const method = isFollowing ? 'DELETE' : 'POST';
+            
+            try {
+                const res = await fetch(`/api/v1/users/${sellerId}/follow`, {
+                    method: method,
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (res.ok) {
+                    if (isFollowing) {
+                        buttonEl.dataset.following = 'false';
+                        buttonEl.innerText = 'Follow';
+                        buttonEl.className = 'follow-btn px-3 py-1 bg-[#7b5455] text-white text-[12px] font-bold rounded-full transition-all hover:bg-[#603d3e] active:scale-95';
+                    } else {
+                        buttonEl.dataset.following = 'true';
+                        buttonEl.innerText = 'Following';
+                        buttonEl.className = 'follow-btn px-3 py-1 bg-transparent border border-white/50 text-white/90 text-[12px] font-bold rounded-full transition-all active:scale-95';
+                    }
+                }
+            } catch (e) {
+                console.error("Follow error:", e);
+            }
+        }
+
+        // Bottom Sheet Comments modal opening
+        async function openComments(reelId) {
+            activeCommentsReelId = reelId;
+            const sheet = document.getElementById('comments-sheet');
+            const backdrop = document.getElementById('sheet-backdrop');
+            
+            sheet.classList.remove('translate-y-full');
+            sheet.classList.add('translate-y-0');
+            backdrop.classList.remove('hidden');
+            setTimeout(() => backdrop.classList.add('opacity-100'), 10);
+            
+            loadComments(reelId);
+        }
+
+        function closeComments() {
+            const sheet = document.getElementById('comments-sheet');
+            const backdrop = document.getElementById('sheet-backdrop');
+            
+            sheet.classList.remove('translate-y-0');
+            sheet.classList.add('translate-y-full');
+            backdrop.classList.remove('opacity-100');
+            setTimeout(() => {
+                backdrop.classList.add('hidden');
+            }, 300);
+            activeCommentsReelId = null;
+        }
+
+        document.getElementById('close-comments-btn').addEventListener('click', closeComments);
+        document.getElementById('sheet-backdrop').addEventListener('click', closeComments);
+
+        // Load comments list
+        async function loadComments(reelId) {
+            const list = document.getElementById('comments-list');
+            list.innerHTML = '<div class="text-center py-8 text-outline animate-pulse">Gathering comments...</div>';
+            
+            try {
+                const res = await fetch(`/api/v1/reels/${reelId}/comments?limit=50`);
+                if (!res.ok) throw new Error("Failed to load comments");
+                const data = await res.json();
+                
+                list.innerHTML = '';
+                document.getElementById('sheet-comment-count').innerText = data.total;
+                
+                if (data.items.length === 0) {
+                    list.innerHTML = '<div class="text-center py-10 text-outline">No comments yet. Write a sweet comment below!</div>';
+                } else {
+                    data.items.forEach(comment => {
+                        const item = document.createElement('div');
+                        item.className = 'flex gap-3 items-start border-b border-outline-variant/20 pb-3 last:border-b-0';
+                        
+                        const isAuthorOrAdmin = (comment.author_id === currentUserId || currentUserRole === 'admin');
+                        
+                        item.innerHTML = `
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-baseline">
+                                    <span class="text-xs font-bold text-[#7b5455]">User #${comment.author_id.slice(0, 8)}</span>
+                                    <span class="text-[10px] text-outline">${new Date(comment.created_at).toLocaleDateString()}</span>
+                                </div>
+                                <p class="text-sm text-on-surface mt-1 leading-relaxed">${escapeHtml(comment.body)}</p>
+                            </div>
+                            ${isAuthorOrAdmin ? `
+                                <button class="delete-btn text-[#827473] hover:text-[#ba1a1a] transition-colors" onclick="deleteComment('${comment.id}', event)">
+                                    <span class="material-symbols-outlined text-[18px]">delete</span>
+                                </button>
+                            ` : ''}
+                        `;
+                        list.appendChild(item);
+                    });
+                }
+            } catch (e) {
+                list.innerHTML = '<div class="text-center py-8 text-[#ba1a1a]">Failed to display comments.</div>';
+            }
+        }
+
+        // Post a new comment
+        document.getElementById('comment-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const input = document.getElementById('comment-input');
+            const commentText = input.value.trim();
+            if (!commentText || !activeCommentsReelId) return;
+            
+            const token = sessionStorage.getItem('access_token');
+            if (!token) {
+                alert("Please log in to submit a comment.");
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            try {
+                const res = await fetch(`/api/v1/reels/${activeCommentsReelId}/comment`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ comment: commentText })
+                });
+                
+                if (res.ok) {
+                    input.value = '';
+                    loadComments(activeCommentsReelId);
+                    
+                    // Increment count in feed UI dynamically
+                    const reelEl = document.querySelector(`.reel-section[data-id="${activeCommentsReelId}"]`);
+                    if (reelEl) {
+                        const countEl = reelEl.querySelector('.comment-count');
+                        if (countEl) {
+                            let currentCount = parseInt(countEl.innerText) || 0;
+                            countEl.innerText = formatCount(currentCount + 1);
+                        }
+                    }
+                } else {
+                    const err = await res.json();
+                    alert(err.detail || "Unable to submit comment.");
+                }
+            } catch (e) {
+                console.error("Comment submission failed:", e);
+            }
+        });
+
+        // Delete a comment
+        async function deleteComment(commentId, e) {
+            e.stopPropagation();
+            if (!confirm("Remove this comment permanently?")) return;
+            
+            const token = sessionStorage.getItem('access_token');
+            if (!token || !activeCommentsReelId) return;
+            
+            try {
+                const res = await fetch(`/api/v1/reels/${activeCommentsReelId}/comments/${commentId}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (res.ok) {
+                    loadComments(activeCommentsReelId);
+                    
+                    // Decrement count in feed UI dynamically
+                    const reelEl = document.querySelector(`.reel-section[data-id="${activeCommentsReelId}"]`);
+                    if (reelEl) {
+                        const countEl = reelEl.querySelector('.comment-count');
+                        if (countEl) {
+                            let currentCount = parseInt(countEl.innerText) || 0;
+                            countEl.innerText = formatCount(Math.max(0, currentCount - 1));
+                        }
+                    }
+                } else {
+                    alert("Unauthorized to delete comment.");
+                }
+            } catch (e) {
+                console.error("Comment deletion failed:", e);
+            }
+        }
+
+        // Helpers
+        function formatCount(num) {
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num;
+        }
+
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+
+        // Setup on window load
+        window.addEventListener('DOMContentLoaded', () => {
+            checkAuthState();
+            fetchFeed();
+        });
+    </script>
 </body>
 </html>
