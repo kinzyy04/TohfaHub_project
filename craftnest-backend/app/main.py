@@ -86,8 +86,8 @@ from app.routers.notifications import router as notifications_router
 
 
 app = FastAPI(
-    title="CraftNest API",
-    description="Backend API for CraftNest marketplace",
+    title="Tohfa API",
+    description="Backend API for Tohfa marketplace",
     version="0.1.0",
     lifespan=lifespan,
 )

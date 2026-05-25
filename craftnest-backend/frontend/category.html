@@ -8,7 +8,7 @@
     
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Browse Collection | Flora &amp; Craft</title>
+    <title>Browse Collection | Tohfa</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     
     
@@ -140,13 +140,13 @@
         <nav class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-20">
             <div class="flex items-center gap-unit cursor-pointer" onclick="window.location.href='home.html'">
                 <span class="material-symbols-outlined text-primary text-3xl">filter_vintage</span>
-                <h1 class="font-headline-lg text-headline-lg text-primary select-none">Flora &amp; Craft</h1>
+                <h1 class="font-headline-lg text-headline-lg text-primary select-none">Tohfa</h1>
             </div>
             
             <div class="hidden md:flex items-center gap-8">
                 <a class="text-secondary hover:text-primary transition-colors font-body-lg text-body-lg" href="home.html">Home</a>
                 <a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-lg text-body-lg" href="category.html">Category</a>
-                <a class="text-secondary hover:text-primary transition-colors font-body-lg text-body-lg" href="reels.html">reels</a>
+                <a class="text-secondary hover:text-primary transition-colors font-body-lg text-body-lg" href="reels.html">Reels</a>
                 <a class="text-secondary hover:text-primary transition-colors font-body-lg text-body-lg" id="navbar-dashboard-link" href="profile.html">Profile</a>
             </div>
 
@@ -186,65 +186,111 @@
                 <p class="text-secondary max-w-2xl mx-auto text-base md:text-lg">Discover the artistry behind every piece. Explore our curated collections of handmade treasures, each telling a unique story of craftsmanship and botanical inspiration.</p>
             </section>
 
-            <!-- Category Grid (Bento Style Layout) -->
-            <section class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-3 gap-6 h-auto md:h-[900px] mb-24">
-                <!-- Crochet - Feature Large -->
-                <div onclick="selectCategory('knitting')" class="md:col-span-2 md:row-span-2 group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer">
+            <!-- Category Grid (Clean Responsive Card Layout) -->
+            <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-24">
+                <!-- Customised Gifts -->
+                <div onclick="selectCategory('customised-gifts')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-64">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=600&auto=format&fit=crop" alt="Customised Gifts"/>
+                    <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition-colors flex items-center justify-center">
+                        <h3 class="text-white text-xl font-bold tracking-tight text-center px-4">Customised Gifts</h3>
+                    </div>
+                </div>
+                <!-- Hampers -->
+                <div onclick="selectCategory('hampers')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-64">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://images.unsplash.com/photo-1513201099705-a9746e1e201f?q=80&w=600&auto=format&fit=crop" alt="Hampers"/>
+                    <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition-colors flex items-center justify-center">
+                        <h3 class="text-white text-xl font-bold tracking-tight text-center px-4">Hampers</h3>
+                    </div>
+                </div>
+                <!-- Couple -->
+                <div onclick="selectCategory('couple')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-64">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=600&auto=format&fit=crop" alt="Couple"/>
+                    <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition-colors flex items-center justify-center">
+                        <h3 class="text-white text-xl font-bold tracking-tight text-center px-4">Couple</h3>
+                    </div>
+                </div>
+                <!-- Festivals -->
+                <div onclick="selectCategory('festivals')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-64">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://images.unsplash.com/photo-1605809792019-9069d3000b21?q=80&w=600&auto=format&fit=crop" alt="Festivals"/>
+                    <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition-colors flex items-center justify-center">
+                        <h3 class="text-white text-xl font-bold tracking-tight text-center px-4">Festivals</h3>
+                    </div>
+                </div>
+                <!-- Wedding & Rituals -->
+                <div onclick="selectCategory('wedding-rituals')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-64">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop" alt="Wedding & Rituals"/>
+                    <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition-colors flex items-center justify-center">
+                        <h3 class="text-white text-xl font-bold tracking-tight text-center px-4">Wedding &amp; Rituals</h3>
+                    </div>
+                </div>
+                <!-- Handmade Letters -->
+                <div onclick="selectCategory('handmade-letters')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-64">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=600&auto=format&fit=crop" alt="Handmade Letters"/>
+                    <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition-colors flex items-center justify-center">
+                        <h3 class="text-white text-xl font-bold tracking-tight text-center px-4">Handmade Letters</h3>
+                    </div>
+                </div>
+                <!-- Art & Paintings -->
+                <div onclick="selectCategory('art-paintings')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-64">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcdcclf3UkDxobY1FyffIYZkIuPBIOwqM68_c6boQadkb7F3jGJO1dajAVHxHdbK8VEHQacdvmWo-z2bItqs3dPNHzvJ-DYMnoTg8RV0u8KAjxLEIZxtMTz5ZkmZYjpLZr7S-2t3peS6V5wRHCQwd79lri2M9XseyAdopf5zWKXDh3bZjj0UqDEccR4BUiQcQBpf75TLJeOcLXEbtPZWpzhH9ZQ9VqO5KWGnMg1YugB4gKF1D8TR3mWzex8pg5wGYaPKs7a0VdPKw" alt="Art & Paintings"/>
+                    <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition-colors flex items-center justify-center">
+                        <h3 class="text-white text-xl font-bold tracking-tight text-center px-4">Art &amp; Paintings</h3>
+                    </div>
+                </div>
+                <!-- Frames -->
+                <div onclick="selectCategory('frames')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-64">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7iTSdGuzZigGuF_giQ44sJ2TRwkcDKVoIixbQNlSJ4TakpnfzQ1VoRHjn1_ATaeYlE1lk7WW2f0gyrMPsI6AewqdmNxQXwVI3alpR8EsQLdn5L3kA1iEVO6D2mscunhiErRw8OBa-otyifX-YA9cBKqJM0i25aA4zhfwXCLTrAZ5ilUpY_zh-2w_BEPMXOJSt-3H9QakVgLcZizt3fJn_VhrUMNu4avgS4QKjh5sJggmDAhHoLk3AqivMY97YpeRllJS7hKx1cTc" alt="Frames"/>
+                    <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition-colors flex items-center justify-center">
+                        <h3 class="text-white text-xl font-bold tracking-tight text-center px-4">Frames</h3>
+                    </div>
+                </div>
+                <!-- Home Decor -->
+                <div onclick="selectCategory('home-decor')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-64">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=600&auto=format&fit=crop" alt="Home Décor"/>
+                    <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition-colors flex items-center justify-center">
+                        <h3 class="text-white text-xl font-bold tracking-tight text-center px-4">Home Décor</h3>
+                    </div>
+                </div>
+                <!-- Candles -->
+                <div onclick="selectCategory('candles')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-64">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=600&auto=format&fit=crop" alt="Candles"/>
+                    <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition-colors flex items-center justify-center">
+                        <h3 class="text-white text-xl font-bold tracking-tight text-center px-4">Candles</h3>
+                    </div>
+                </div>
+                <!-- Jewellery -->
+                <div onclick="selectCategory('jewellery')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-64">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeJNG4g7zflqMyn7WkuQSO9QQfGcVEFgeG-_Q0vueOcwACo9wB_3n47LGCGJVjJyD5sfvTVuMxlSNq3ugTNodbWaf8Rgn8A7cyCh0QaXHy8sfqpicQEvtRzXgzJIJOONq4Su4fxZb7lnoTQHb_u6bb5vManpfJP_NRwCt10DBpdAVLjND6X5aH2zsasex4krU07RHdXNpLrcY1FHuhwPOp0OnqIUuCIM1socL7oGiZsOBNfwaKnQRVUDO4lv_gQ3tIv8Gakdbld2g" alt="Jewellery"/>
+                    <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition-colors flex items-center justify-center">
+                        <h3 class="text-white text-xl font-bold tracking-tight text-center px-4">Jewellery</h3>
+                    </div>
+                </div>
+                <!-- Nail Art -->
+                <div onclick="selectCategory('nail-art')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-64">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://images.unsplash.com/photo-1604654894610-df63bc536371?q=80&w=600&auto=format&fit=crop" alt="Nail Art"/>
+                    <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition-colors flex items-center justify-center">
+                        <h3 class="text-white text-xl font-bold tracking-tight text-center px-4">Nail Art</h3>
+                    </div>
+                </div>
+                <!-- Crochet -->
+                <div onclick="selectCategory('crochet')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-64">
                     <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCObPUeWdtf941R11tkq5y_ZFB4OcF-w6C_XgD9woyFYwfzIQkHfvVRirx-Kdqu5bZ2M5PGu3oafACFLMrtqaif_H4peiWwv50buCtNdXW6eR0Vse00piA9wXeKALg_dtLlLwRnGJ-5013BMEaN-uUbys0VBMH6JQ7N5jrgTWuhj_xHzeNq5Sl5DFmyk8-BS-QFn5bfRuzjrrsoRAKVfF3RzfDlVI8W3rGnXyrgug2jIpiyUu9hSV8w3sxTwVxM5d0KFvdwWBkZ3PM" alt="Crochet"/>
-                    <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent flex flex-col justify-end p-8">
-                        <span class="text-white/70 text-sm font-bold uppercase tracking-widest mb-1">Textile Arts</span>
-                        <h3 class="text-white text-3xl font-bold mb-4">Crochet</h3>
-                        <button class="bg-white/20 backdrop-blur-md text-white border border-white/30 px-6 py-2 rounded-full w-fit hover:bg-white hover:text-primary transition-all">Explore Collection</button>
+                    <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition-colors flex items-center justify-center">
+                        <h3 class="text-white text-xl font-bold tracking-tight text-center px-4">Crochet</h3>
                     </div>
                 </div>
-                <!-- Jewelry -->
-                <div onclick="selectCategory('jewellery')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-60 md:h-auto">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeJNG4g7zflqMyn7WkuQSO9QQfGcVEFgeG-_Q0vueOcwACo9wB_3n47LGCGJVjJyD5sfvTVuMxlSNq3ugTNodbWaf8Rgn8A7cyCh0QaXHy8sfqpicQEvtRzXgzJIJOONq4Su4fxZb7lnoTQHb_u6bb5vManpfJP_NRwCt10DBpdAVLjND6X5aH2zsasex4krU07RHdXNpLrcY1FHuhwPOp0OnqIUuCIM1socL7oGiZsOBNfwaKnQRVUDO4lv_gQ3tIv8Gakdbld2g" alt="Jewelry"/>
-                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
-                        <h3 class="text-white text-xl font-bold tracking-tight">Jewelry</h3>
+                <!-- Fabric Crafts -->
+                <div onclick="selectCategory('fabric-crafts')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-64">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=600&auto=format&fit=crop" alt="Fabric Crafts"/>
+                    <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition-colors flex items-center justify-center">
+                        <h3 class="text-white text-xl font-bold tracking-tight text-center px-4">Fabric Crafts</h3>
                     </div>
                 </div>
-                <!-- Ceramics -->
-                <div onclick="selectCategory('pottery')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-60 md:h-auto">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYhjlpVVO-eSNQ3YGmsjZmdeDamckzLFtmNl9KV9wUxhHlEwCWHQ7xDRR2_92d2CpxSRtKBLdTbrbFgx8zaZdUrvSomQK5Dp8AtJQO7FycjVs7w96kYI_cKy7dhu8BAyp9LLP69hsx8lyycHGELDFdlFcl9uvgE4S1dcF7Ikvegf1PnkoHIMwdLsWHLeeZUd5u3NVg9KdZPn10apJPTjMa6qBah1Um6ynCsWZcgTEt_ILERIAlmYHL5DJGXgfQvL0BhIbJo6sc8gQ" alt="Ceramics"/>
-                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
-                        <h3 class="text-white text-xl font-bold tracking-tight">Ceramics</h3>
-                    </div>
-                </div>
-                <!-- Stationery -->
-                <div onclick="selectCategory('journals')" class="md:col-span-2 group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-60 md:h-auto">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuuYPSTSnwuj49ojGB3jUWP8o3aCtui_OzxC7KspxVpHZcoxAD-C8UJ0VpQB6-eFitKYYOrdCQbsEM99UiMDcG-i8c9D6QoHkCXX7VgrHyGDOklhImJYUkUKC3J9gTveZKlebOt1YoFS9OslaDMyNmb3Wk2yOxw-SFSuYXJhtPLB0liNytfa2V_QVgwCekO_poXPWyFZag5zAlMkwymWBqetUnVrbUwcGJkDYvFnvfqtiKcWd5FfADUlsy1yWsEvOEs6Tm2HSzqK8" alt="Stationery"/>
-                    <div class="absolute inset-0 bg-gradient-to-r from-secondary/80 to-transparent flex flex-col justify-center p-8">
-                        <h3 class="text-white text-2xl font-bold">Stationery</h3>
-                        <p class="text-white/80 text-sm max-w-xs mt-2">Notebook covers, journals, and hand-pressed cards.</p>
-                    </div>
-                </div>
-                <!-- Paintings -->
-                <div onclick="selectCategory('prints')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-60 md:h-auto">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcdcclf3UkDxobY1FyffIYZkIuPBIOwqM68_c6boQadkb7F3jGJO1dajAVHxHdbK8VEHQacdvmWo-z2bItqs3dPNHzvJ-DYMnoTg8RV0u8KAjxLEIZxtMTz5ZkmZYjpLZr7S-2t3peS6V5wRHCQwd79lri2M9XseyAdopf5zWKXDh3bZjj0UqDEccR4BUiQcQBpf75TLJeOcLXEbtPZWpzhH9ZQ9VqO5KWGnMg1YugB4gKF1D8TR3mWzex8pg5wGYaPKs7a0VdPKw" alt="Paintings"/>
-                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
-                        <h3 class="text-white text-xl font-bold tracking-tight">Paintings</h3>
-                    </div>
-                </div>
-                <!-- Photo Frames -->
-                <div onclick="selectCategory('woodwork')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-60 md:h-auto">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7iTSdGuzZigGuF_giQ44sJ2TRwkcDKVoIixbQNlSJ4TakpnfzQ1VoRHjn1_ATaeYlE1lk7WW2f0gyrMPsI6AewqdmNxQXwVI3alpR8EsQLdn5L3kA1iEVO6D2mscunhiErRw8OBa-otyifX-YA9cBKqJM0i25aA4zhfwXCLTrAZ5ilUpY_zh-2w_BEPMXOJSt-3H9QakVgLcZizt3fJn_VhrUMNu4avgS4QKjh5sJggmDAhHoLk3AqivMY97YpeRllJS7hKx1cTc" alt="Photo Frames"/>
-                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
-                        <h3 class="text-white text-xl font-bold tracking-tight">Photo Frames</h3>
-                    </div>
-                </div>
-                <!-- Keychains -->
-                <div onclick="selectCategory('mixed')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-60 md:h-auto">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsZ9fmteUvkxB7X4pnviv0wh7vWZFZssqKASBn720geG3Tby6dei76wxICNjySDGD9KO5sCf-bQmxn3dHYKRN1GCkGoQ3TyA2aexIp4wfZ-J9wG8r22miCnW1xI90sQaV4fDed1jMyfJsCixmdR_eM50_hp627WKttdoPFcCMvJL9qkTLg8EaVwlMu3ubYUkS7Mu-DwURAyTx34WmI1BuKLRz-YRYtHaN9oDMYAcGl-wnUvjsxFxRXbDOSaIimntvnBPe2WhmuVpY" alt="Keychains"/>
-                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
-                        <h3 class="text-white text-xl font-bold tracking-tight">Keychains</h3>
-                    </div>
-                </div>
-                <!-- Textiles -->
-                <div onclick="selectCategory('clothing')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-60 md:h-auto">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLho-RnXqI5Tg2ffVG1uOPsQTavqPBz_N1kvNlkFkUUdUfqXeF4bQmTcvIss-slOULqnatqsxAG5ZNrJ4u21EtEr4Jsdf5m4oc_fkSopRm_MoMneDJwcAjJrXf0fTRMzRhQFtXD90Sf41OdIsoDsA_gJ5QaW_zo09wi7mkswMW9Fvy4nxE9FkA2gpBBbb_geIWJ4dfjkyyYOAzn7RGlAgkm7loiGCgTs2Kqj7udGV3zTA-69z_NxJON2TnXXmzSIiSkhyCVXOudiY" alt="Textiles"/>
-                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
-                        <h3 class="text-white text-xl font-bold tracking-tight">Textiles</h3>
+                <!-- Assignments -->
+                <div onclick="selectCategory('assignments')" class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer h-64">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=600&auto=format&fit=crop" alt="Assignments"/>
+                    <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition-colors flex items-center justify-center">
+                        <h3 class="text-white text-xl font-bold tracking-tight text-center px-4">Assignments</h3>
                     </div>
                 </div>
             </section>
@@ -309,7 +355,7 @@
             <div class="col-span-1 md:col-span-2 space-y-6">
                 <div class="flex items-center gap-unit">
                     <span class="material-symbols-outlined text-inverse-primary text-3xl">filter_vintage</span>
-                    <h1 class="font-headline-lg text-headline-lg text-inverse-primary">Flora &amp; Craft</h1>
+                    <h1 class="font-headline-lg text-headline-lg text-inverse-primary">Tohfa</h1>
                 </div>
                 <p class="text-secondary-fixed-dim max-w-sm text-sm">Cultivating a community of makers and dreamers. Our boutique curates the finest handmade goods from across the globe, prioritizing sustainability and craftsmanship.</p>
             </div>
@@ -322,7 +368,7 @@
             </div>
         </div>
         <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-outline">
-            <p>© 2026 Flora &amp; Craft Studio. All rights reserved.</p>
+            <p>© 2026 Tohfa Studio. All rights reserved.</p>
         </div>
     </footer>
 
@@ -617,7 +663,7 @@
                         return `
                             <div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant/10 hover:shadow-xl transition-all group relative flex flex-col">
                                 <div class="relative mb-4 overflow-hidden rounded-lg">
-                                    <img class="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer" onclick="window.location.href='product.html?id=${p.id}'" src="https://placehold.co/800x500?text=Flora+%26+Craft+-+ptitle" alt="${p.title}">
+                                    <img class="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer" onclick="window.location.href='product.html?id=${p.id}'" src="https://placehold.co/800x500?text=Tohfa+-+ptitle" alt="${p.title}">
                                     
                                     <button onclick="toggleWishlist('${p.id}', this)" class="absolute top-4 right-4 bg-white/85 p-2 rounded-full hover:bg-white hover:scale-110 transition-all shadow-md z-10 flex items-center justify-center">
                                         <span class="material-symbols-outlined text-[20px] transition-colors duration-200" style="font-variation-settings: 'FILL' ${isWishlisted ? 1 : 0}; color: ${isWishlisted ? '#ba1a1a' : '#74786f'};">favorite</span>
