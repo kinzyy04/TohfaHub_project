@@ -14,6 +14,7 @@ from app.core.config import settings
 from app.core.database import Base
 # Import all models to ensure they are registered on Base.metadata
 import app.models  # noqa
+import app.models.seller  # noqa
 
 # This is the Alembic Config object
 config = context.config

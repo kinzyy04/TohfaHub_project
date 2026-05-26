@@ -65,6 +65,7 @@ async def lifespan(app: FastAPI):
     logger.info("DB engine disposed cleanly")
 
 import app.models  # Ensure all models are loaded before routers
+import app.models.seller
 from app.routers.auth import router as auth_router
 from app.routers.items import router as items_router
 from app.routers.profiles import router as profiles_router
@@ -78,6 +79,8 @@ from app.routers.orders import router as orders_router
 from app.routers.reviews import router as reviews_router
 from app.routers.admin import router as admin_router
 from app.routers.notifications import router as notifications_router
+from app.routers.seller_onboard import router as seller_onboard_router
+from app.routers.seller_studio import router as seller_studio_router
 
 
 
@@ -160,6 +163,8 @@ app.include_router(orders_router)
 app.include_router(reviews_router)
 app.include_router(admin_router)
 app.include_router(notifications_router)
+app.include_router(seller_onboard_router, prefix="/api/v1")
+app.include_router(seller_studio_router, prefix="/api/v1")
 
 
 
